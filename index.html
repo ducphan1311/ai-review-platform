@@ -39,7 +39,7 @@
               <span class="sm:hidden">AI Review</span>
             </span>
             <span class="hidden md:inline-flex items-center px-2 py-0.5 text-[10px] sm:text-xs font-bold bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200 whitespace-nowrap shrink-0">
-              <i class="fa-solid fa-server mr-1 text-[9px] text-indigo-500"></i>Enterprise On-Premise
+              <i class="fa-solid fa-server mr-1 text-[9px] text-indigo-500"></i><span data-i18n="nav_brand_badge">Enterprise On-Premise</span>
             </span>
           </div>
         </div>
@@ -147,7 +147,7 @@
       <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto" data-i18n="hero_title">
         Hệ Thống Tự Động Review Kiến Trúc & Code Quality Cho Doanh Nghiệp
       </h1>
-      <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+      <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed" data-i18n="hero_subtitle">
         Kết hợp <b>Bộ phân tích tĩnh tất định (Deterministic AST Scanner)</b> để khóa quyền Merge khi vi phạm kiến trúc, 
         và <b>AI Review Agent</b> đóng vai trò Senior Architect hướng dẫn lập trình viên sửa code trực tiếp trên Pull Request.
       </p>
@@ -167,23 +167,23 @@
       <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
         <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
           <div class="text-indigo-600 font-extrabold text-2xl mb-1">0%</div>
-          <div class="text-xs font-bold text-slate-900">Ảo Giác (Zero Hallucination)</div>
-          <div class="text-xs text-slate-500 mt-0.5">Phát hiện lỗi bằng AST cứng, AI không can thiệp phán quyết.</div>
+          <div class="text-xs font-bold text-slate-900" data-i18n="stat_zero_hal_title">Ảo Giác (Zero Hallucination)</div>
+          <div class="text-xs text-slate-500 mt-0.5" data-i18n="stat_zero_hal_desc">Phát hiện lỗi bằng AST cứng, AI không can thiệp phán quyết.</div>
         </div>
         <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
           <div class="text-emerald-600 font-extrabold text-2xl mb-1">100%</div>
-          <div class="text-xs font-bold text-slate-900">On-Premise Private</div>
-          <div class="text-xs text-slate-500 mt-0.5">Mã nguồn chạy nội bộ, không bao giờ gửi ra cloud ngoài.</div>
+          <div class="text-xs font-bold text-slate-900" data-i18n="stat_onprem_title">On-Premise Private</div>
+          <div class="text-xs text-slate-500 mt-0.5" data-i18n="stat_onprem_desc">Mã nguồn chạy nội bộ, không bao giờ gửi ra cloud ngoài.</div>
         </div>
         <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
           <div class="text-violet-600 font-extrabold text-2xl mb-1">5+</div>
-          <div class="text-xs font-bold text-slate-900">Cơ Chế Custom Rule</div>
-          <div class="text-xs text-slate-500 mt-0.5">Tự định nghĩa rule qua YAML không cần đụng đến code core.</div>
+          <div class="text-xs font-bold text-slate-900" data-i18n="stat_rules_title">Cơ Chế Custom Rule</div>
+          <div class="text-xs text-slate-500 mt-0.5" data-i18n="stat_rules_desc">Tự định nghĩa rule qua YAML không cần đụng đến code core.</div>
         </div>
         <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
           <div class="text-amber-600 font-extrabold text-2xl mb-1">Clean</div>
-          <div class="text-xs font-bold text-slate-900">As You Code (Baseline)</div>
-          <div class="text-xs text-slate-500 mt-0.5">Không chặn nợ kỹ thuật cũ, chỉ bắt lỗi mới trên PR.</div>
+          <div class="text-xs font-bold text-slate-900" data-i18n="stat_baseline_title">As You Code (Baseline)</div>
+          <div class="text-xs text-slate-500 mt-0.5" data-i18n="stat_baseline_desc">Không chặn nợ kỹ thuật cũ, chỉ bắt lỗi mới trên PR.</div>
         </div>
       </div>
     </div>
@@ -193,9 +193,9 @@
   <section id="architecture" class="py-16 bg-white border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Modular System Design</span>
-        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Mô Hình Kiến Trúc 3 Tầng Độc Lập</h2>
-        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600" data-i18n="sec_arch_badge">Modular System Design</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-2" data-i18n="sec_arch_title">Mô Hình Kiến Trúc 3 Tầng Độc Lập</h2>
+        <p class="text-slate-600 text-sm mt-3 leading-relaxed" data-i18n="sec_arch_desc">
           Được phân tách theo nguyên tắc <i>Separation of Concerns</i> chặt chẽ: Máy quét tất định giữ cổng chất lượng, AI đóng vai trò cố vấn, và Gateway phụ trách kiểm soát CI/CD.
         </p>
       </div>
@@ -207,18 +207,18 @@
             <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-5">
               <i class="fa-solid fa-microchip"></i>
             </div>
-            <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">Project 1 • Hard Gate</div>
+            <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1" data-i18n="arch_p1_badge">Project 1 • Hard Gate</div>
             <h3 class="text-xl font-bold text-slate-900 mb-3">arch-rules-engine</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="arch_p1_desc">
               Động cơ phân tích tĩnh lõi (AST Engine). Phân tích đồ thị phụ thuộc (Import Graph), duyệt AST syntax tree để phát hiện vi phạm phân tầng Clean Architecture, các lệnh cấm, và anti-pattern vi mô.
             </p>
             <ul class="text-xs text-slate-700 space-y-2">
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Xử lý Git Diff (Delta Mode) siêu tốc</span></li>
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Hỗ trợ file nợ kỹ thuật <code>baseline.json</code></span></li>
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Quyết định kết quả Pass / Fail tất định</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p1_f1">Xử lý Git Diff (Delta Mode) siêu tốc</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p1_f2">Hỗ trợ file nợ kỹ thuật <code>baseline.json</code></span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p1_f3">Quyết định kết quả Pass / Fail tất định</span></li>
             </ul>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500">
+          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500" data-i18n="arch_p1_output">
             Output: ScanReport.json (Exit 0 / 1 / 2)
           </div>
         </div>
@@ -229,18 +229,18 @@
             <div class="w-12 h-12 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center text-xl mb-5">
               <i class="fa-solid fa-brain"></i>
             </div>
-            <div class="text-xs font-bold uppercase tracking-wider text-violet-600 mb-1">Project 2 • Soft Layer</div>
+            <div class="text-xs font-bold uppercase tracking-wider text-violet-600 mb-1" data-i18n="arch_p2_badge">Project 2 • Soft Layer</div>
             <h3 class="text-xl font-bold text-slate-900 mb-3">review-agent-service</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="arch_p2_desc">
               AI Review Agent cố vấn (Advisory Layer). Nhận báo cáo vi phạm từ Project 1, đóng gói bối cảnh code và kích hoạt LLM phân tích nguyên nhân cốt lõi và viết sẵn code refactor gợi ý.
             </p>
             <ul class="text-xs text-slate-700 space-y-2">
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Hỗ trợ mọi LLM (OpenAI, Gemini, Local Ollama)</span></li>
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Tuyệt đối không thể đảo ngược Hard Gate</span></li>
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Giải thích dễ hiểu theo văn phong tiếng Việt</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p2_f1">Hỗ trợ mọi LLM (OpenAI, Gemini, Local Ollama)</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p2_f2">Tuyệt đối không thể đảo ngược Hard Gate</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p2_f3">Giải thích dễ hiểu theo văn phong tiếng Việt</span></li>
             </ul>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500">
+          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500" data-i18n="arch_p2_output">
             Output: ReviewResult (Summary & Advisory Diff)
           </div>
         </div>
@@ -251,18 +251,18 @@
             <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-5">
               <i class="fa-solid fa-network-wired"></i>
             </div>
-            <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Project 3 • Gatekeeper</div>
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1" data-i18n="arch_p3_badge">Project 3 • Gatekeeper</div>
             <h3 class="text-xl font-bold text-slate-900 mb-3">integrations-gateway</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+            <p class="text-xs text-slate-600 leading-relaxed mb-4" data-i18n="arch_p3_desc">
               Cổng giao tiếp CI/CD bảo mật. Tiếp nhận Webhook từ GitHub / GitLab, xác thực License Key Ed25519, điều phối thực thi và đăng tải bình luận kết quả lên Pull Request.
             </p>
             <ul class="text-xs text-slate-700 space-y-2">
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Xác thực HMAC SHA-256 Webhook</span></li>
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Xác thực chữ ký số bản quyền Ed25519</span></li>
-              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Khóa Merge PR nếu vi phạm BLOCKER</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p3_f1">Xác thực HMAC SHA-256 Webhook</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p3_f2">Xác thực chữ ký số bản quyền Ed25519</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span data-i18n="arch_p3_f3">Khóa Merge PR nếu vi phạm BLOCKER</span></li>
             </ul>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500">
+          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500" data-i18n="arch_p3_output">
             Action: Lock Merge Button & Post PR Comment
           </div>
         </div>
@@ -274,35 +274,35 @@
   <section id="how-it-works" class="py-16 bg-slate-900 text-white border-b border-slate-800">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Execution Pipeline</span>
-        <h2 class="text-3xl font-extrabold mt-2">Luồng Code Chạy Step-by-Step Khi Kiểm Tra PR</h2>
-        <p class="text-slate-400 text-sm mt-3">Mỗi khi lập trình viên tạo hoặc cập nhật Pull Request, chuỗi xử lý diễn ra tự động qua 4 bước:</p>
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-400" data-i18n="sec_flow_badge">Execution Pipeline</span>
+        <h2 class="text-3xl font-extrabold mt-2" data-i18n="sec_flow_title">Luồng Code Chạy Step-by-Step Khi Kiểm Tra PR</h2>
+        <p class="text-slate-400 text-sm mt-3" data-i18n="sec_flow_desc">Mỗi khi lập trình viên tạo hoặc cập nhật Pull Request, chuỗi xử lý diễn ra tự động qua 4 bước:</p>
       </div>
 
       <!-- Flow Diagram Card -->
       <div class="p-6 sm:p-8 rounded-2xl bg-slate-950 border border-slate-800 mb-12 shadow-2xl">
         <div class="font-mono text-xs sm:text-sm text-slate-300 leading-relaxed overflow-x-auto">
-          <div class="text-indigo-400 font-bold mb-3">// SƠ ĐỒ ĐIỀU PHỐI TỔNG QUAN</div>
-          <div class="text-slate-400">[ Developer tạo Pull Request trên GitHub / GitLab ]</div>
+          <div class="text-indigo-400 font-bold mb-3" data-i18n="flow_diag_title">// SƠ ĐỒ ĐIỀU PHỐI TỔNG QUAN</div>
+          <div class="text-slate-400" data-i18n="flow_diag_dev">[ Developer tạo Pull Request trên GitHub / GitLab ]</div>
           <div class="text-slate-500">  │</div>
           <div class="text-slate-500">  ▼</div>
-          <div class="text-amber-400 font-semibold">[ 1. HARD GATE: arch-rules-engine ]</div>
-          <div class="text-slate-400">    ├─ Lấy Git Diff (Delta Mode) & quét import AST cây mã nguồn</div>
-          <div class="text-slate-400">    └─ So sánh với quy tắc kiến trúc architecture_rules.yaml</div>
+          <div class="text-amber-400 font-semibold" data-i18n="flow_diag_hard">[ 1. HARD GATE: arch-rules-engine ]</div>
+          <div class="text-slate-400" data-i18n="flow_diag_hard_1">    ├─ Lấy Git Diff (Delta Mode) & quét import AST cây mã nguồn</div>
+          <div class="text-slate-400" data-i18n="flow_diag_hard_2">    └─ So sánh với quy tắc kiến trúc architecture_rules.yaml</div>
           <div class="text-slate-500">  │</div>
-          <div class="text-slate-500">  ├── <span class="text-emerald-400 font-bold">[ KHÔNG CÓ LỖI ]</span> ──────► <span class="text-emerald-400 font-bold">[ Quality Gate: PASSED ✅ ]</span> ──► Mở Cổng Cho Phép Merge</div>
+          <div class="text-slate-500">  ├── <span class="text-emerald-400 font-bold" data-i18n="flow_diag_pass">[ KHÔNG CÓ LỖI ]</span> ──────► <span class="text-emerald-400 font-bold" data-i18n="flow_diag_pass_gate">[ Quality Gate: PASSED ✅ ] ──► Mở Cổng Cho Phép Merge</span></div>
           <div class="text-slate-500">  │</div>
-          <div class="text-slate-500">  └── <span class="text-rose-400 font-bold">[ CÓ LỖI BLOCKER / WARNING ]</span></div>
+          <div class="text-slate-500">  └── <span class="text-rose-400 font-bold" data-i18n="flow_diag_fail">[ CÓ LỖI BLOCKER / WARNING ]</span></div>
           <div class="text-slate-500">        │</div>
           <div class="text-slate-500">        ▼</div>
-          <div class="text-violet-400 font-semibold">      [ 2. AI ADVISORY AGENT: review-agent-service ]</div>
-          <div class="text-slate-400">          ├─ Tổng hợp bằng chứng lỗi vi phạm (File, Dòng, Tên luật)</div>
-          <div class="text-slate-400">          └─ Gọi LLM phân tích nguyên nhân kiến trúc & sinh Code Refactor đề xuất</div>
+          <div class="text-violet-400 font-semibold" data-i18n="flow_diag_ai">      [ 2. AI ADVISORY AGENT: review-agent-service ]</div>
+          <div class="text-slate-400" data-i18n="flow_diag_ai_1">          ├─ Tổng hợp bằng chứng lỗi vi phạm (File, Dòng, Tên luật)</div>
+          <div class="text-slate-400" data-i18n="flow_diag_ai_2">          └─ Gọi LLM phân tích nguyên nhân kiến trúc & sinh Code Refactor đề xuất</div>
           <div class="text-slate-500">        │</div>
           <div class="text-slate-500">        ▼</div>
-          <div class="text-rose-400 font-semibold">      [ 3. GATEWAY PHÁN QUYẾT: integrations-gateway ]</div>
-          <div class="text-slate-400">          ├─ Đóng cổng Merge (Quality Gate: FAILED ❌)</div>
-          <div class="text-slate-400">          └─ Đăng báo cáo phân tích chi tiết & code diff lên bình luận PR</div>
+          <div class="text-rose-400 font-semibold" data-i18n="flow_diag_gw">      [ 3. GATEWAY PHÁN QUYẾT: integrations-gateway ]</div>
+          <div class="text-slate-400" data-i18n="flow_diag_gw_1">          ├─ Đóng cổng Merge (Quality Gate: FAILED ❌)</div>
+          <div class="text-slate-400" data-i18n="flow_diag_gw_2">          └─ Đăng báo cáo phân tích chi tiết & code diff lên bình luận PR</div>
         </div>
       </div>
 
@@ -311,9 +311,9 @@
         <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
           <div class="flex items-center space-x-3 mb-3">
             <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">1</span>
-            <h4 class="font-bold text-base text-white">Lấy Git Diff (Chế Độ Delta Checker)</h4>
+            <h4 class="font-bold text-base text-white" data-i18n="flow_step1_title">Lấy Git Diff (Chế Độ Delta Checker)</h4>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
+          <p class="text-xs text-slate-300 leading-relaxed" data-i18n="flow_step1_desc">
             Thay vì quét lại toàn bộ hàng nghìn file từ đầu gây chậm trễ CI/CD, hệ thống thực thi lệnh <code>git diff --name-only origin/main</code> để lấy chính xác danh sách các file được thêm mới hoặc chỉnh sửa trong PR này.
           </p>
         </div>
@@ -321,9 +321,9 @@
         <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
           <div class="flex items-center space-x-3 mb-3">
             <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">2</span>
-            <h4 class="font-bold text-base text-white">Phân Tích Cú Pháp AST & Xây Dựng Đồ Thị</h4>
+            <h4 class="font-bold text-base text-white" data-i18n="flow_step2_title">Phân Tích Cú Pháp AST & Xây Dựng Đồ Thị</h4>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
+          <p class="text-xs text-slate-300 leading-relaxed" data-i18n="flow_step2_desc">
             Bộ phân tích cú pháp quét từng dòng mã nguồn, trích xuất tất cả các câu lệnh <code>import</code>, xác định: file nguồn thuộc layer nào, file đích được import thuộc layer nào. Đối chiếu với cấu hình luật để phát hiện ngay các vi phạm phân tầng.
           </p>
         </div>
@@ -331,9 +331,9 @@
         <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
           <div class="flex items-center space-x-3 mb-3">
             <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">3</span>
-            <h4 class="font-bold text-base text-white">Kích Hoạt AI Review Agent</h4>
+            <h4 class="font-bold text-base text-white" data-i18n="flow_step3_title">Kích Hoạt AI Review Agent</h4>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
+          <p class="text-xs text-slate-300 leading-relaxed" data-i18n="flow_step3_desc">
             Review Agent đóng gói dữ liệu vi phạm (tên file, số dòng, đoạn code sai, tên luật) gửi sang LLM (OpenAI / Gemini / Ollama). AI phân tích chuyên sâu tại sao lại sai theo góc nhìn kiến trúc phần mềm và viết sẵn code refactor đề xuất bằng tiếng Việt.
           </p>
         </div>
@@ -341,9 +341,9 @@
         <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
           <div class="flex items-center space-x-3 mb-3">
             <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">4</span>
-            <h4 class="font-bold text-base text-white">Integrations Gateway Phán Quyết & Đăng Báo Cáo</h4>
+            <h4 class="font-bold text-base text-white" data-i18n="flow_step4_title">Integrations Gateway Phán Quyết & Đăng Báo Cáo</h4>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
+          <p class="text-xs text-slate-300 leading-relaxed" data-i18n="flow_step4_desc">
             Gateway tổng hợp phán quyết: Nếu dính lỗi BLOCKER, tự động set Check Run Conclusion = FAILURE, chặn nút Merge trên GitHub/GitLab, đồng thời đăng tải toàn bộ báo cáo phân tích kèm gợi ý code lên bình luận của PR.
           </p>
         </div>
@@ -356,9 +356,9 @@
   <section id="rule-mechanisms" class="py-16 bg-white border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Extensible Architecture-as-Code</span>
-        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">5 Cơ Chế Tự Định Nghĩa Quy Tắc Kiểm Tra</h2>
-        <p class="text-slate-600 text-sm mt-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600" data-i18n="sec_rules_badge">Extensible Architecture-as-Code</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-2" data-i18n="sec_rules_title">5 Cơ Chế Tự Định Nghĩa Quy Tắc Kiểm Tra</h2>
+        <p class="text-slate-600 text-sm mt-3" data-i18n="sec_rules_desc">
           Bạn có thể tự do mở rộng và thêm các quy tắc mới trong file <code>config/architecture_rules.yaml</code> tại repo mục tiêu mà <b>không cần chỉnh sửa bất kỳ dòng mã nguồn nào của engine</b>.
         </p>
       </div>
@@ -368,42 +368,42 @@
         <table class="w-full text-left text-xs sm:text-sm text-slate-700 min-w-[540px]">
           <thead class="bg-slate-100 text-slate-900 font-bold border-b border-slate-200">
             <tr>
-              <th class="px-4 py-3.5">Cơ chế</th>
-              <th class="px-4 py-3.5">Giá trị <code>type</code></th>
-              <th class="px-4 py-3.5">Cơ chế thực thi</th>
-              <th class="px-4 py-3.5">Bài toán giải quyết</th>
+              <th class="px-4 py-3.5" data-i18n="rule_th_mech">Cơ chế</th>
+              <th class="px-4 py-3.5" data-i18n="rule_th_type">Giá trị <code>type</code></th>
+              <th class="px-4 py-3.5" data-i18n="rule_th_exec">Cơ chế thực thi</th>
+              <th class="px-4 py-3.5" data-i18n="rule_th_solve">Bài toán giải quyết</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3.5 font-bold text-slate-900">1. Phân Tầng Kiến Trúc</td>
+              <td class="px-4 py-3.5 font-bold text-slate-900" data-i18n="rule_r1_name">1. Phân Tầng Kiến Trúc</td>
               <td class="px-4 py-3.5 font-mono text-xs text-indigo-600">layer_boundary</td>
-              <td class="px-4 py-3.5">Đồ thị Import Graph & Đường dẫn</td>
-              <td class="px-4 py-3.5">Clean Architecture, cô lập Domain, chống phụ thuộc vòng lặp (Circular Dependency).</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r1_exec">Đồ thị Import Graph & Đường dẫn</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r1_solve">Clean Architecture, cô lập Domain, chống phụ thuộc vòng lặp (Circular Dependency).</td>
             </tr>
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3.5 font-bold text-slate-900">2. Cấm Gọi Hàm Bất Kỳ</td>
+              <td class="px-4 py-3.5 font-bold text-slate-900" data-i18n="rule_r2_name">2. Cấm Gọi Hàm Bất Kỳ</td>
               <td class="px-4 py-3.5 font-mono text-xs text-rose-600">forbidden_calls</td>
-              <td class="px-4 py-3.5">AST Visitor duyệt tên phương thức</td>
-              <td class="px-4 py-3.5">Cấm <code>print</code>, <code>debugPrint</code>, <code>eval()</code>, cấm gọi trực tiếp DB/API trong UI.</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r2_exec">AST Visitor duyệt tên phương thức</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r2_solve">Cấm <code>print</code>, <code>debugPrint</code>, <code>eval()</code>, cấm gọi trực tiếp DB/API trong UI.</td>
             </tr>
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3.5 font-bold text-slate-900">3. Bắt Cú Pháp AST Có Sẵn</td>
+              <td class="px-4 py-3.5 font-bold text-slate-900" data-i18n="rule_r3_name">3. Bắt Cú Pháp AST Có Sẵn</td>
               <td class="px-4 py-3.5 font-mono text-xs text-amber-600">ast_pattern</td>
-              <td class="px-4 py-3.5">Bộ phân tích cú pháp AST dựng sẵn</td>
-              <td class="px-4 py-3.5">Chống Anti-pattern vi mô: <code>empty_catch_block</code>, <code>await_before_setstate</code>.</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r3_exec">Bộ phân tích cú pháp AST dựng sẵn</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r3_solve">Chống Anti-pattern vi mô: <code>empty_catch_block</code>, <code>await_before_setstate</code>.</td>
             </tr>
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3.5 font-bold text-slate-900">4. Mẫu Tự Do Meta-Variable</td>
+              <td class="px-4 py-3.5 font-bold text-slate-900" data-i18n="rule_r4_name">4. Mẫu Tự Do Meta-Variable</td>
               <td class="px-4 py-3.5 font-mono text-xs text-violet-600">meta_pattern</td>
-              <td class="px-4 py-3.5">Động cơ Semgrep AST Engine</td>
-              <td class="px-4 py-3.5">Tự viết mẫu AST bất kỳ bằng ký hiệu <code>$X</code>, <code>$E</code>, <code>...</code> không cần code.</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r4_exec">Động cơ Semgrep AST Engine</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r4_solve">Tự viết mẫu AST bất kỳ bằng ký hiệu <code>$X</code>, <code>$E</code>, <code>...</code> không cần code.</td>
             </tr>
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3.5 font-bold text-slate-900">5. Plugin Script Tự Nạp</td>
+              <td class="px-4 py-3.5 font-bold text-slate-900" data-i18n="rule_r5_name">5. Plugin Script Tự Nạp</td>
               <td class="px-4 py-3.5 font-mono text-xs text-emerald-600">custom_script</td>
-              <td class="px-4 py-3.5">Thực thi Process độc lập</td>
-              <td class="px-4 py-3.5">Quy tắc riêng của từng cty: Quy ước đặt tên file (<code>_view.dart</code>), kích thước asset, linter nội bộ.</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r5_exec">Thực thi Process độc lập</td>
+              <td class="px-4 py-3.5" data-i18n="rule_r5_solve">Quy tắc riêng của từng cty: Quy ước đặt tên file (<code>_view.dart</code>), kích thước asset, linter nội bộ.</td>
             </tr>
           </tbody>
         </table>
@@ -415,9 +415,9 @@
         <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
           <div class="text-xs font-bold text-indigo-700 uppercase mb-2 flex items-center space-x-1.5">
             <i class="fa-solid fa-code"></i>
-            <span>Mẫu Cấu Hình: 1. layer_boundary</span>
+            <span data-i18n="rule_card1_title">Mẫu Cấu Hình: 1. layer_boundary</span>
           </div>
-          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "RULE_CLEAN_DOMAIN"
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code data-i18n="rule_card1_code">- id: "RULE_CLEAN_DOMAIN"
   type: "layer_boundary"
   source_layer: "domain"
   forbidden_target_layers: ["presentation", "data"]
@@ -429,9 +429,9 @@
         <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
           <div class="text-xs font-bold text-rose-700 uppercase mb-2 flex items-center space-x-1.5">
             <i class="fa-solid fa-code"></i>
-            <span>Mẫu Cấu Hình: 2. forbidden_calls</span>
+            <span data-i18n="rule_card2_title">Mẫu Cấu Hình: 2. forbidden_calls</span>
           </div>
-          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "BAN_PRINT_ON_PROD"
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code data-i18n="rule_card2_code">- id: "BAN_PRINT_ON_PROD"
   type: "forbidden_calls"
   calls: ["print", "debugPrint"]
   scope: ["lib/**/*.dart"]
@@ -443,9 +443,9 @@
         <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
           <div class="text-xs font-bold text-amber-700 uppercase mb-2 flex items-center space-x-1.5">
             <i class="fa-solid fa-code"></i>
-            <span>Mẫu Cấu Hình: 3. ast_pattern</span>
+            <span data-i18n="rule_card3_title">Mẫu Cấu Hình: 3. ast_pattern</span>
           </div>
-          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "ASYNC_MOUNTED_GUARD"
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code data-i18n="rule_card3_code">- id: "ASYNC_MOUNTED_GUARD"
   type: "ast_pattern"
   pattern_name: "await_before_setstate"
   severity: "CRITICAL"
@@ -458,16 +458,16 @@
             <div class="flex items-center justify-between mb-2">
               <div class="text-xs font-bold text-violet-700 uppercase flex items-center space-x-1.5">
                 <i class="fa-solid fa-code"></i>
-                <span>Mẫu Cấu Hình: 4. meta_pattern</span>
+                <span data-i18n="rule_card4_title">Mẫu Cấu Hình: 4. meta_pattern</span>
               </div>
               <a href="docs/meta-variables.html" class="text-xs font-bold text-violet-600 hover:text-violet-800 flex items-center space-x-1">
-                <span>Cẩm nang cú pháp $X</span>
+                <span data-i18n="rule_card4_doc">Cẩm nang cú pháp $X</span>
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </a>
             </div>
-            <p class="text-xs text-slate-500 mb-2">Mẫu định nghĩa AST thông qua Semgrep Metavariables:</p>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="rule_card4_desc">Mẫu định nghĩa AST thông qua Semgrep Metavariables:</p>
           </div>
-          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "NO_SILENT_EMPTY_CATCH"
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code data-i18n="rule_card4_code">- id: "NO_SILENT_EMPTY_CATCH"
   type: "meta_pattern"
   pattern: "catch ($E) { }"
   severity: "BLOCKER"
@@ -485,7 +485,7 @@
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="text-xs font-bold uppercase tracking-widest text-indigo-600" data-i18n="sec_live_badge">Production Test Run</span>
         <h2 class="text-3xl font-extrabold text-slate-900 mt-1" data-i18n="sec_live_title">Minh Chứng Thực Tế Trên Repository Kiểm Thử</h2>
-        <p class="text-sm text-slate-600 mt-2">
+        <p class="text-sm text-slate-600 mt-2" data-i18n="sec_live_desc">
           Dưới đây là hình ảnh chụp màn hình trực tiếp từ Pull Request thực tế: Hệ thống phát hiện toàn bộ vi phạm kiến trúc, khóa quyền merge và đăng tải bình luận phân tích.
         </p>
       </div>
@@ -500,7 +500,7 @@
             <span class="font-mono text-slate-400 ml-2">GitHub PR #12 • Verified Live Bot Comment</span>
           </div>
           <a href="assets/images/real_pr_evidence.png" target="_blank" class="text-indigo-400 hover:text-indigo-300 flex items-center space-x-1">
-            <span>Mở ảnh gốc Full-HD</span>
+            <span data-i18n="live_open_img">Mở ảnh gốc Full-HD</span>
             <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
@@ -517,12 +517,12 @@
             </div>
             <div>
               <span class="text-sm font-bold text-slate-900">ai-architecture-bot</span>
-              <span class="text-xs text-slate-500 ml-2">vừa bình luận trên Pull Request</span>
+              <span class="text-xs text-slate-500 ml-2" data-i18n="live_bot_time">vừa bình luận trên Pull Request</span>
             </div>
           </div>
           <span class="px-2.5 py-1 rounded-full text-xs font-extrabold bg-rose-100 text-rose-700 border border-rose-200 flex items-center space-x-1">
             <i class="fa-solid fa-ban text-xs"></i>
-            <span>Quality Gate: FAILED ❌ (Khóa Merge PR)</span>
+            <span data-i18n="live_bot_gate">Quality Gate: FAILED ❌ (Khóa Merge PR)</span>
           </span>
         </div>
 
@@ -532,7 +532,7 @@
           <div>
             <h4 class="font-bold text-slate-900 text-base mb-3 flex items-center space-x-2">
               <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
-              <span>Danh Sách Vi Phạm Phát Hiện Trực Tiếp Trên PR:</span>
+              <span data-i18n="live_bot_list_title">Danh Sách Vi Phạm Phát Hiện Trực Tiếp Trên PR:</span>
             </h4>
             <div class="space-y-2.5">
               <div class="p-3 rounded-lg bg-rose-50 border border-rose-200 flex items-start space-x-3">
@@ -542,7 +542,7 @@
                     <code class="text-xs font-bold text-rose-800">RULE_CLEAN_DOMAIN</code>
                     <span class="text-xs font-mono text-slate-500 break-all">lib/config/app_config.dart:3</span>
                   </div>
-                  <p class="text-xs text-slate-700 leading-relaxed">Tầng 'domain' không được phép import từ tầng 'presentation' (<code class="break-all">package:fluffychat/pages/chat/chat_view.dart</code>).</p>
+                  <p class="text-xs text-slate-700 leading-relaxed" data-i18n="live_v1_desc">Tầng 'domain' không được phép import từ tầng 'presentation' (<code>package:fluffychat/pages/chat/chat_view.dart</code>).</p>
                 </div>
               </div>
 
@@ -553,7 +553,7 @@
                     <code class="text-xs font-bold text-rose-800">BAN_PRINT_ON_PROD</code>
                     <span class="text-xs font-mono text-slate-500 break-all">lib/pages/demo_showcase/profile_demo_page.dart:21</span>
                   </div>
-                  <p class="text-xs text-slate-700 leading-relaxed">Cấm in log <code>print()</code> trực tiếp trên Production gây rò rỉ token PII (<code>secret_token_xyz</code>) và giật UI.</p>
+                  <p class="text-xs text-slate-700 leading-relaxed" data-i18n="live_v2_desc">Cấm in log <code>print()</code> trực tiếp trên Production gây rò rỉ token PII (<code>secret_token_xyz</code>) và giật UI.</p>
                 </div>
               </div>
 
@@ -564,7 +564,7 @@
                     <code class="text-xs font-bold text-rose-800">NO_SILENT_EMPTY_CATCH</code>
                     <span class="text-xs font-mono text-slate-500 break-all">lib/pages/demo_showcase/profile_demo_page.dart:24</span>
                   </div>
-                  <p class="text-xs text-slate-700 leading-relaxed">Bắt được biến ngoại lệ <code>$E</code> nhưng bỏ trống khối catch (nuốt exception ngầm gây mất dấu telemetry).</p>
+                  <p class="text-xs text-slate-700 leading-relaxed" data-i18n="live_v3_desc">Bắt được biến ngoại lệ <code>$E</code> nhưng bỏ trống khối catch (nuốt exception ngầm gây mất dấu telemetry).</p>
                 </div>
               </div>
 
@@ -575,7 +575,7 @@
                     <code class="text-xs font-bold text-amber-800">ASYNC_MOUNTED_GUARD</code>
                     <span class="text-xs font-mono text-slate-500 break-all">lib/pages/demo_showcase/profile_demo_page.dart:31</span>
                   </div>
-                  <p class="text-xs text-slate-700 leading-relaxed">Bắt buộc có guard clause <code>if (!mounted) return;</code> sau lệnh <code>await</code> trước khi gọi <code>setState()</code>.</p>
+                  <p class="text-xs text-slate-700 leading-relaxed" data-i18n="live_v4_desc">Bắt buộc có guard clause <code>if (!mounted) return;</code> sau lệnh <code>await</code> trước khi gọi <code>setState()</code>.</p>
                 </div>
               </div>
 
@@ -586,7 +586,7 @@
                     <code class="text-xs font-bold text-slate-800">CHECK_VIEW_FILE_NAMING</code>
                     <span class="text-xs font-mono text-slate-500 break-all">lib/pages/demo_showcase/profile_demo_page.dart:1</span>
                   </div>
-                  <p class="text-xs text-slate-700 leading-relaxed">File vi phạm naming convention: widget màn hình phải kết thúc bằng <code>_view.dart</code> thay vì <code>_page.dart</code>.</p>
+                  <p class="text-xs text-slate-700 leading-relaxed" data-i18n="live_v5_desc">File vi phạm naming convention: widget màn hình phải kết thúc bằng <code>_view.dart</code> thay vì <code>_page.dart</code>.</p>
                 </div>
               </div>
             </div>
@@ -596,12 +596,12 @@
           <div class="pt-4 border-t border-slate-200">
             <h4 class="font-bold text-slate-900 text-base mb-3 flex items-center space-x-2">
               <i class="fa-solid fa-wand-magic-sparkles text-violet-600"></i>
-              <span>Hướng Dẫn Sửa Lỗi Chi Tiết (Remediation Diff):</span>
+              <span data-i18n="live_bot_diff_title">Hướng Dẫn Sửa Lỗi Chi Tiết (Remediation Diff):</span>
             </h4>
             <div class="p-4 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs overflow-x-auto space-y-2 border border-slate-800">
-              <div class="text-slate-400">// Khắc phục ASYNC_MOUNTED_GUARD:</div>
+              <div class="text-slate-400" data-i18n="live_bot_diff_comment">// Khắc phục ASYNC_MOUNTED_GUARD:</div>
               <div class="text-rose-400 bg-rose-950/50 p-1.5 rounded">- await Future.delayed(Duration(seconds: 2));<br>- setState(() { status = "completed"; });</div>
-              <div class="text-emerald-400 bg-emerald-950/50 p-1.5 rounded">+ await Future.delayed(Duration(seconds: 2));<br>+ if (!mounted) return; // Bảo vệ widget không unmounted<br>+ setState(() { status = "completed"; });</div>
+              <div class="text-emerald-400 bg-emerald-950/50 p-1.5 rounded" data-i18n="live_bot_diff_code">+ await Future.delayed(Duration(seconds: 2));<br>+ if (!mounted) return; // Bảo vệ widget không unmounted<br>+ setState(() { status = "completed"; });</div>
             </div>
           </div>
 
@@ -616,7 +616,7 @@
       <div class="text-center mb-12">
         <span class="text-xs font-bold uppercase tracking-widest text-indigo-600" data-i18n="sec_setup_badge">Deployment Guide</span>
         <h2 class="text-3xl font-extrabold text-slate-900 mt-2" data-i18n="sec_setup_title">Hướng Dẫn Thiết Lập Cho Repository Mới</h2>
-        <p class="text-slate-600 text-sm mt-2">Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:</p>
+        <p class="text-slate-600 text-sm mt-2" data-i18n="sec_setup_desc">Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:</p>
       </div>
 
       <div class="space-y-8">
@@ -626,15 +626,15 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <div class="flex items-center space-x-3">
               <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center shrink-0">1</span>
-              <h4 class="font-bold text-base sm:text-lg text-slate-900">Khai báo cấu hình <code>architecture_rules.yaml</code> tại thư mục gốc</h4>
+              <h4 class="font-bold text-base sm:text-lg text-slate-900" data-i18n="setup_step1_title">Khai báo cấu hình <code>architecture_rules.yaml</code> tại thư mục gốc</h4>
             </div>
             <a href="docs/rule-authoring.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center space-x-1 shrink-0 self-start sm:self-auto">
-              <span>Xem tài liệu viết rule chi tiết</span>
+              <span data-i18n="setup_step1_link">Xem tài liệu viết rule chi tiết</span>
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </a>
           </div>
-          <p class="text-slate-600 text-xs mb-3">Tạo file <code>config/architecture_rules.yaml</code> trong repository của bạn:</p>
-          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code>version: "1.0.0"
+          <p class="text-slate-600 text-xs mb-3" data-i18n="setup_step1_desc">Tạo file <code>config/architecture_rules.yaml</code> trong repository của bạn:</p>
+          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="setup_step1_code">version: "1.0.0"
 monorepo:
   package_dirs: ["lib"]
 
@@ -674,14 +674,14 @@ rules:
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <div class="flex items-center space-x-3">
               <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center shrink-0">2</span>
-              <h4 class="font-bold text-base sm:text-lg text-slate-900">Khởi chạy Docker Container với License Key Ed25519</h4>
+              <h4 class="font-bold text-base sm:text-lg text-slate-900" data-i18n="setup_step2_title">Khởi chạy Docker Container với License Key Ed25519</h4>
             </div>
             <a href="docs/setup-guide.html" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center space-x-1 shrink-0 self-start sm:self-auto">
-              <span>Xem tài liệu triển khai chi tiết</span>
+              <span data-i18n="setup_step2_link">Xem tài liệu triển khai chi tiết</span>
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </a>
           </div>
-          <p class="text-slate-600 text-xs mb-3">Chạy container trên server nội bộ (On-Premise VM). Container tự động xác thực chữ ký bản quyền số:</p>
+          <p class="text-slate-600 text-xs mb-3" data-i18n="setup_step2_desc">Chạy container trên server nội bộ (On-Premise VM). Container tự động xác thực chữ ký bản quyền số:</p>
           <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code>docker run -d --name ai-review-service \
   -p 8080:8080 \
   -v /opt/ai-review/license.lic:/app/license.lic:ro \
@@ -695,14 +695,14 @@ rules:
         <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
           <div class="flex items-center space-x-3 mb-3">
             <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">3</span>
-            <h4 class="font-bold text-lg text-slate-900">Kích hoạt Webhook trên GitHub hoặc GitLab Monorepo</h4>
+            <h4 class="font-bold text-lg text-slate-900" data-i18n="setup_step3_title">Kích hoạt Webhook trên GitHub hoặc GitLab Monorepo</h4>
           </div>
-          <p class="text-slate-600 text-xs mb-2">Vào mục <b>Settings > Webhooks > Add Webhook</b> của repository:</p>
+          <p class="text-slate-600 text-xs mb-2" data-i18n="setup_step3_desc">Vào mục <b>Settings > Webhooks > Add Webhook</b> của repository:</p>
           <div class="bg-slate-100 p-4 rounded-xl text-xs font-mono text-slate-800 space-y-1.5 border border-slate-200">
-            <div>• <b>Payload URL:</b> <code>http://your-server-ip:8080/</code></div>
-            <div>• <b>Content type:</b> <code>application/json</code></div>
-            <div>• <b>Secret:</b> (Khớp với <code>GITHUB_WEBHOOK_SECRET</code> ở Bước 2)</div>
-            <div>• <b>Trigger Events:</b> Tích chọn <code>Pull requests / Merge requests</code></div>
+            <div data-i18n="setup_step3_url">• <b>Payload URL:</b> <code>http://your-server-ip:8080/</code></div>
+            <div data-i18n="setup_step3_type">• <b>Content type:</b> <code>application/json</code></div>
+            <div data-i18n="setup_step3_secret">• <b>Secret:</b> (Khớp với <code>GITHUB_WEBHOOK_SECRET</code> ở Bước 2)</div>
+            <div data-i18n="setup_step3_events">• <b>Trigger Events:</b> Tích chọn <code>Pull requests / Merge requests</code></div>
           </div>
         </div>
 
@@ -710,9 +710,9 @@ rules:
         <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
           <div class="flex items-center space-x-3 mb-3">
             <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">4</span>
-            <h4 class="font-bold text-lg text-slate-900">Cơ Chế Baseline Quản Lý Nợ Kỹ Thuật (Clean-As-You-Code)</h4>
+            <h4 class="font-bold text-lg text-slate-900" data-i18n="setup_step4_title">Cơ Chế Baseline Quản Lý Nợ Kỹ Thuật (Clean-As-You-Code)</h4>
           </div>
-          <p class="text-slate-600 text-xs leading-relaxed">
+          <p class="text-slate-600 text-xs leading-relaxed" data-i18n="setup_step4_desc">
             Hệ thống hỗ trợ file <code>baseline.json</code>. Đối với các dự án lớn đã có sẵn nhiều code cũ (legacy), các lỗi kiến trúc cũ sẽ được ghi nhận vào baseline và <b>không chặn merge PR</b>. Hệ thống chỉ chặn các lỗi MỚI xuất hiện trong Git Diff của PR hiện tại!
           </p>
         </div>
@@ -729,50 +729,50 @@ rules:
           <div class="inline-flex p-3 rounded-2xl bg-indigo-50 text-indigo-600 mb-3">
             <i class="fa-solid fa-file-signature text-xl"></i>
           </div>
-          <h2 class="text-2xl font-bold text-slate-900">Đăng Ký Cấp License Sử Dụng</h2>
-          <p class="text-sm text-slate-600 mt-2">Đăng ký dùng thử miễn phí 30 ngày đầy đủ tính năng cho toàn bộ repository của công ty bạn.</p>
+          <h2 class="text-2xl font-bold text-slate-900" data-i18n="reg_title">Đăng Ký Cấp License Sử Dụng</h2>
+          <p class="text-sm text-slate-600 mt-2" data-i18n="reg_subtitle">Đăng ký dùng thử miễn phí 30 ngày đầy đủ tính năng cho toàn bộ repository của công ty bạn.</p>
         </div>
 
         <form id="licenseRequestForm" onsubmit="submitLicenseRequest(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tên Doanh Nghiệp / Tổ Chức *</label>
-            <input type="text" id="req_company" required placeholder="Ví dụ: Công ty Cổ Phần ABC..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="reg_lbl_company">Tên Doanh Nghiệp / Tổ Chức *</label>
+            <input type="text" id="req_company" required placeholder="Ví dụ: Công ty Cổ Phần ABC..." data-i18n-placeholder="reg_ph_company" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Người Liên Hệ *</label>
-              <input type="text" id="req_name" required placeholder="Họ và tên bạn" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="reg_lbl_name">Người Liên Hệ *</label>
+              <input type="text" id="req_name" required placeholder="Họ và tên bạn" data-i18n-placeholder="reg_ph_name" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Email Doanh Nghiệp *</label>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="reg_lbl_email">Email Doanh Nghiệp *</label>
               <input type="email" id="req_email" required placeholder="name@company.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Gói Bản Quyền</label>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="reg_lbl_plan">Gói Bản Quyền</label>
               <select id="req_plan" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm bg-white">
-                <option value="trial">Dùng thử 30 ngày (Free Trial)</option>
-                <option value="professional">Professional (Dưới 10 Repositories)</option>
-                <option value="enterprise">Enterprise (Unlimited Repositories)</option>
+                <option value="trial" data-i18n="reg_plan_trial">Dùng thử 30 ngày (Free Trial)</option>
+                <option value="professional" data-i18n="reg_plan_pro">Professional (Dưới 10 Repositories)</option>
+                <option value="enterprise" data-i18n="reg_plan_ent">Enterprise (Unlimited Repositories)</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Machine ID (Nếu có)</label>
-              <input type="text" id="req_machine" placeholder="Để trống nếu chưa có" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm font-mono text-xs" />
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="reg_lbl_machine">Machine ID (Nếu có)</label>
+              <input type="text" id="req_machine" placeholder="Để trống nếu chưa có" data-i18n-placeholder="reg_ph_machine" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm font-mono text-xs" />
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mô Tả Nhu Cầu</label>
-            <textarea id="req_notes" rows="2" placeholder="Ví dụ: Cần kiểm soát Clean Architecture cho dự án Flutter và React Native..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"></textarea>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1" data-i18n="reg_lbl_notes">Mô Tả Nhu Cầu</label>
+            <textarea id="req_notes" rows="2" placeholder="Ví dụ: Cần kiểm soát Clean Architecture cho dự án Flutter và React Native..." data-i18n-placeholder="reg_ph_notes" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"></textarea>
           </div>
 
           <div id="formMsg" class="hidden text-sm p-3.5 rounded-xl"></div>
 
-          <button type="submit" id="btnSubmitReq" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-md shadow-indigo-200 transition">
+          <button type="submit" id="btnSubmitReq" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-md shadow-indigo-200 transition" data-i18n="reg_btn_submit">
             Gửi Yêu Cầu Cấp License
           </button>
         </form>
@@ -843,7 +843,7 @@ rules:
             </div>
             <div>
               <label class="block text-[11px] font-bold text-slate-600 mb-1" data-i18n="adm_label_days">Thời Hạn (Ngày)</label>
-              <input type="number" id="adm_days" value="30" placeholder="Số ngày" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <input type="number" id="adm_days" value="30" placeholder="Số ngày" data-i18n-placeholder="adm_ph_days" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             </div>
             <div class="flex items-end">
               <button onclick="generateManualLicense()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-sm">
@@ -881,7 +881,7 @@ rules:
               </thead>
               <tbody id="requestTableBody" class="divide-y divide-slate-100 font-normal">
                 <tr>
-                  <td colspan="6" class="px-4 py-8 text-center text-slate-400">Đang tải dữ liệu từ Supabase...</td>
+                  <td colspan="6" class="px-4 py-8 text-center text-slate-400" data-i18n="adm_table_loading">Đang tải dữ liệu từ Supabase...</td>
                 </tr>
               </tbody>
             </table>
@@ -902,163 +902,359 @@ rules:
   <script>
     // Translation Dictionary (VI / EN)
     const translations = {
-      vi: {
-        // Nav
-        nav_arch: "Kiến Trúc 3 Tầng",
-        nav_flow: "Luồng Xử Lý PR",
-        nav_rules: "5 Cơ Chế Rule",
-        nav_live: "Minh Chứng Thực Tế",
-        nav_docs: "Tài Liệu Chi Tiết",
-        nav_doc_setup: "Hướng Dẫn Cài Đặt Chi Tiết",
-        nav_doc_rules: "Hướng Dẫn Tự Viết Rule Mới",
-        nav_doc_meta: "Cẩm Nang Meta-Variables AST",
-        nav_register: "Đăng Ký License",
-        nav_portal: "Portal Quản Trị",
-        badge_onprem: "Enterprise On-Premise",
-
-        // Hero
-        hero_badge: "Bảo vệ Clean Architecture • 100% On-Premise Không Rò Rỉ Mã Nguồn",
-        hero_title: "Hệ Thống Tự Động Review Kiến Trúc & Code Quality Cho Doanh Nghiệp",
-        hero_subtitle: "Kết hợp <b>Bộ phân tích tĩnh tất định (Deterministic AST Scanner)</b> để khóa quyền Merge khi vi phạm kiến trúc, và <b>AI Review Agent</b> đóng vai trò Senior Architect hướng dẫn lập trình viên sửa code trực tiếp trên Pull Request.",
-        hero_btn_trial: "Nhận License Kích Hoạt 30 Ngày",
-        hero_btn_flow: "Xem Luồng Vận Hành Chi Tiết",
-
-        // Stats
-        stat_zero_hal_title: "0% Ảo Giác (Zero Hallucination)",
-        stat_zero_hal_desc: "Phát hiện lỗi bằng AST cứng, AI không can thiệp phán quyết.",
-        stat_onprem_title: "100% On-Premise Private",
-        stat_onprem_desc: "Mã nguồn chạy nội bộ, không bao giờ gửi ra cloud ngoài.",
-        stat_rules_title: "5+ Cơ Chế Custom Rule",
-        stat_rules_desc: "Tự định nghĩa rule qua YAML không cần đụng đến code core.",
-        stat_baseline_title: "Clean As You Code (Baseline)",
-        stat_baseline_desc: "Không chặn nợ kỹ thuật cũ, chỉ bắt lỗi mới trên PR.",
-
-        // Section Headers
-        sec_arch_badge: "Core Architecture",
-        sec_arch_title: "Mô Hình Kiến Trúc 3 Tầng Phân Lập Tuyệt Đối",
-        sec_arch_desc: "Tách bạch triệt để giữa Kiểm tra tĩnh (Gatekeeper), Trợ lý AI (Senior Mentor) và Cổng kết nối CI/CD.",
-
-        sec_flow_badge: "Execution Pipeline",
-        sec_flow_title: "Luồng Kiểm Soát Mã Nguồn Tự Động 5 Giai Đoạn",
-        sec_flow_desc: "Bảo đảm mọi commit gửi lên đều được quét tĩnh trong vài giây và nhận phản hồi chi tiết từ AI.",
-
-        sec_rules_badge: "Extensibility & Custom Rules",
-        sec_rules_title: "5 Cơ Chế Định Nghĩa Rule Kiến Trúc & Chất Lượng",
-        sec_rules_desc: "Linh hoạt đáp ứng mọi tiêu chuẩn nội bộ của doanh nghiệp mà không cần chỉnh sửa mã nguồn lõi.",
-
-        sec_live_badge: "Production Test Run",
-        sec_live_title: "Minh Chứng Thực Tế Trên Repository Kiểm Thử",
-        sec_live_desc: "Dưới đây là hình ảnh chụp màn hình trực tiếp từ Pull Request thực tế: Hệ thống phát hiện toàn bộ vi phạm kiến trúc, khóa quyền merge và đăng tải bình luận phân tích.",
-
-        sec_setup_badge: "Deployment Guide",
-        sec_setup_title: "Hướng Dẫn Thiết Lập Cho Repository Mới",
-        sec_setup_desc: "Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:",
-
-        sec_pricing_badge: "Enterprise Licensing",
-        sec_pricing_title: "Đăng Ký Bản Quyền Thử Nghiệm 30 Ngày",
-        sec_pricing_desc: "Điền thông tin doanh nghiệp để nhận tệp license.lic mã hóa Ed25519 kích hoạt hệ thống on-premise.",
-
-        // Admin Modal
-        adm_title: "Portal Quản Trị & Cấp Phép Bản Quyền (Admin Center)",
-        adm_subtitle: "Dành cho System Owner (Tech Lead / Architect / DevOps Lead)",
-        adm_guide_title: "Portal này dùng làm gì và dành cho ai?",
-        adm_guide_desc: "<b>Đối tượng sử dụng:</b> Quản trị viên hệ thống (System Owner / Tech Lead / DevOps Architect) quản lý bản quyền phần mềm on-premise.<br><b>Mục đích:</b> Toàn bộ hệ thống kiểm duyệt kiến trúc chạy On-Premise nội bộ độc lập. Khi các dự án trong nội bộ công ty hoặc khách hàng Enterprise muốn kích hoạt bộ scanner trên GitHub Actions / GitLab CI, họ cần 1 file <code>license.lic</code> đã được ký số bằng thuật toán Ed25519 từ Quản trị viên.",
-        adm_step1: "Dự án gửi đăng ký qua form bên dưới.",
-        adm_step2: "Admin duyệt thông tin & cấu hình số ngày, số repo.",
-        adm_step3: "Hệ thống ký số tải file license.lic bàn giao cho team.",
-        adm_gen_title: "Bộ Sinh License Key Offline (Ed25519 Signature)",
-        adm_gen_desc: "Tự động tạo chữ ký mật mã an toàn, quy định hạn dùng và số repository được bảo vệ.",
-        adm_label_customer: "Tên Khách Hàng / Dự Án",
-        adm_label_days: "Thời Hạn (Ngày)",
-        adm_btn_sign: "Ký & Tải license.lic",
-        adm_table_title: "Hàng Đợi Yêu Cầu Đăng Ký License (Live Database)",
-        adm_btn_refresh: "Làm mới dữ liệu",
-        adm_th_company: "Công ty / Dự án",
-        adm_th_contact: "Người liên hệ",
-        adm_th_email: "Email",
-        adm_th_plan: "Gói License",
-        adm_th_status: "Trạng thái",
-        adm_th_action: "Thao tác phê duyệt"
-      },
-      en: {
-        // Nav
-        nav_arch: "3-Tier Architecture",
-        nav_flow: "PR Workflow",
-        nav_rules: "5 Rule Engines",
-        nav_live: "Live Evidence",
-        nav_docs: "Detailed Docs",
-        nav_doc_setup: "Detailed Setup Runbook",
-        nav_doc_rules: "Custom Rule Authoring Guide",
-        nav_doc_meta: "AST Meta-Variables Guide",
-        nav_register: "Register License",
-        nav_portal: "Admin Portal",
-        badge_onprem: "Enterprise On-Premise",
-
-        // Hero
-        hero_badge: "Clean Architecture Defense • 100% On-Premise Zero Source Leak",
-        hero_title: "Automated Enterprise Architecture Review & Code Quality Engine",
-        hero_subtitle: "Combines a <b>Deterministic AST Static Scanner</b> to block Pull Request merges on architectural violations, and an <b>AI Review Agent</b> acting as a Senior Architect to guide developers directly on GitHub/GitLab PRs.",
-        hero_btn_trial: "Claim 30-Day Evaluation License",
-        hero_btn_flow: "Explore Operational Pipeline",
-
-        // Stats
-        stat_zero_hal_title: "0% Hallucination",
-        stat_zero_hal_desc: "Violations flagged via rigid AST parsing, AI never makes gate decisions.",
-        stat_onprem_title: "100% Private On-Premise",
-        stat_onprem_desc: "Source code executes strictly inside your VPC/private runners, never exfiltrated.",
-        stat_rules_title: "5+ Custom Rule Mechanisms",
-        stat_rules_desc: "Define custom rules via declarative YAML without touching core engine code.",
-        stat_baseline_title: "Clean As You Code (Baseline)",
-        stat_baseline_desc: "Never blocks legacy technical debt; only enforces standards on new PR diffs.",
-
-        // Section Headers
-        sec_arch_badge: "Core Architecture",
-        sec_arch_title: "Strictly Isolated 3-Tier Enterprise Architecture",
-        sec_arch_desc: "Clear separation between Static Analysis (Gatekeeper), AI Assistant (Senior Mentor), and CI/CD Integrations.",
-
-        sec_flow_badge: "Execution Pipeline",
-        sec_flow_title: "5-Stage Automated Code Governance Flow",
-        sec_flow_desc: "Ensures every submitted PR is statically scanned within seconds and receives actionable guidance from AI.",
-
-        sec_rules_badge: "Extensibility & Custom Rules",
-        sec_rules_title: "5 Expressive Rule Authoring Mechanisms",
-        sec_rules_desc: "Adapt to any enterprise engineering standards without modifying engine source code.",
-
-        sec_live_badge: "Production Test Run",
-        sec_live_title: "Verified Live Evidence on Real Test Repository",
-        sec_live_desc: "Live screenshot from Pull Request #12: The system detects architectural violations, locks the merge gate, and posts formatted remediation diffs.",
-
-        sec_setup_badge: "Deployment Guide",
-        sec_setup_title: "Step-by-Step Setup Guide for Any Repository",
-        sec_setup_desc: "Deploy into any codebase (Flutter, iOS, Android, React Native...) in 3 simple steps:",
-
-        sec_pricing_badge: "Enterprise Licensing",
-        sec_pricing_title: "Register for 30-Day Evaluation License",
-        sec_pricing_desc: "Submit your team info to receive an Ed25519 cryptographically signed license.lic file for private on-premise activation.",
-
-        // Admin Modal
-        adm_title: "Admin License & Compliance Center",
-        adm_subtitle: "For System Owners (Tech Lead / Enterprise Architect / DevOps Lead)",
-        adm_guide_title: "What is this Portal for and who can use it?",
-        adm_guide_desc: "<b>Target Audience:</b> System Owners, Tech Leads, and Platform Engineers managing enterprise on-premise licenses.<br><b>Purpose:</b> The review engine runs completely air-gapped on-premise. When internal development teams or enterprise clients deploy the scanner to GitHub Actions / GitLab CI, they require an Ed25519 cryptographically signed <code>license.lic</code> file issued by the Administrator.",
-        adm_step1: "Teams submit license requests via the registration form below.",
-        adm_step2: "Admin reviews request details, validity duration, and repo quota.",
-        adm_step3: "System cryptographically signs and downloads license.lic for the team.",
-        adm_gen_title: "Offline License Key Generator (Ed25519 Signature)",
-        adm_gen_desc: "Generates tamper-proof cryptographic signatures with expiration and repository limits.",
-        adm_label_customer: "Client / Project Identifier",
-        adm_label_days: "Validity Duration (Days)",
-        adm_btn_sign: "Sign & Download license.lic",
-        adm_table_title: "License Request Queue (Live Supabase DB)",
-        adm_btn_refresh: "Refresh Data",
-        adm_th_company: "Company / Project",
-        adm_th_contact: "Contact Person",
-        adm_th_email: "Email Address",
-        adm_th_plan: "License Plan",
-        adm_th_status: "Status",
-        adm_th_action: "Approval Action"
-      }
-    };
+  "vi": {
+    "nav_brand_badge": "Enterprise On-Premise",
+    "nav_arch": "Kiến Trúc 3 Tầng",
+    "nav_flow": "Luồng Xử Lý PR",
+    "nav_rules": "5 Cơ Chế Rule",
+    "nav_live": "Minh Chứng Thực Tế",
+    "nav_docs": "Tài Liệu Chi Tiết",
+    "nav_doc_setup": "Hướng Dẫn Cài Đặt Chi Tiết",
+    "nav_doc_rules": "Hướng Dẫn Tự Viết Rule Mới",
+    "nav_doc_meta": "Cẩm Nang Meta-Variables AST",
+    "nav_register": "Đăng Ký License",
+    "nav_portal": "Portal Quản Trị",
+    "hero_badge": "Bảo vệ Clean Architecture • 100% On-Premise Không Rò Rỉ Mã Nguồn",
+    "hero_title": "Hệ Thống Tự Động Review Kiến Trúc & Code Quality Cho Doanh Nghiệp",
+    "hero_subtitle": "Kết hợp <b>Bộ phân tích tĩnh tất định (Deterministic AST Scanner)</b> để khóa quyền Merge khi vi phạm kiến trúc, và <b>AI Review Agent</b> đóng vai trò Senior Architect hướng dẫn lập trình viên sửa code trực tiếp trên Pull Request.",
+    "hero_btn_trial": "Nhận License Kích Hoạt 30 Ngày",
+    "hero_btn_flow": "Xem Luồng Vận Hành Chi Tiết",
+    "stat_zero_hal_title": "Ảo Giác (Zero Hallucination)",
+    "stat_zero_hal_desc": "Phát hiện lỗi bằng AST cứng, AI không can thiệp phán quyết.",
+    "stat_onprem_title": "On-Premise Private",
+    "stat_onprem_desc": "Mã nguồn chạy nội bộ, không bao giờ gửi ra cloud ngoài.",
+    "stat_rules_title": "Cơ Chế Custom Rule",
+    "stat_rules_desc": "Tự định nghĩa rule qua YAML không cần đụng đến code core.",
+    "stat_baseline_title": "As You Code (Baseline)",
+    "stat_baseline_desc": "Không chặn nợ kỹ thuật cũ, chỉ bắt lỗi mới trên PR.",
+    "sec_arch_badge": "Modular System Design",
+    "sec_arch_title": "Mô Hình Kiến Trúc 3 Tầng Độc Lập",
+    "sec_arch_desc": "Được phân tách theo nguyên tắc <i>Separation of Concerns</i> chặt chẽ: Máy quét tất định giữ cổng chất lượng, AI đóng vai trò cố vấn, và Gateway phụ trách kiểm soát CI/CD.",
+    "arch_p1_badge": "Project 1 • Hard Gate",
+    "arch_p1_desc": "Động cơ phân tích tĩnh lõi (AST Engine). Phân tích đồ thị phụ thuộc (Import Graph), duyệt AST syntax tree để phát hiện vi phạm phân tầng Clean Architecture, các lệnh cấm, và anti-pattern vi mô.",
+    "arch_p1_f1": "Xử lý Git Diff (Delta Mode) siêu tốc",
+    "arch_p1_f2": "Hỗ trợ file nợ kỹ thuật <code>baseline.json</code>",
+    "arch_p1_f3": "Quyết định kết quả Pass / Fail tất định",
+    "arch_p1_output": "Output: ScanReport.json (Exit 0 / 1 / 2)",
+    "arch_p2_badge": "Project 2 • Soft Layer",
+    "arch_p2_desc": "AI Review Agent cố vấn (Advisory Layer). Nhận báo cáo vi phạm từ Project 1, đóng gói bối cảnh code và kích hoạt LLM phân tích nguyên nhân cốt lõi và viết sẵn code refactor gợi ý.",
+    "arch_p2_f1": "Hỗ trợ mọi LLM (OpenAI, Gemini, Local Ollama)",
+    "arch_p2_f2": "Tuyệt đối không thể đảo ngược Hard Gate",
+    "arch_p2_f3": "Giải thích dễ hiểu theo bối cảnh kỹ thuật",
+    "arch_p2_output": "Output: ReviewResult (Summary & Advisory Diff)",
+    "arch_p3_badge": "Project 3 • Gatekeeper",
+    "arch_p3_desc": "Cổng giao tiếp CI/CD bảo mật. Tiếp nhận Webhook từ GitHub / GitLab, xác thực License Key Ed25519, điều phối thực thi và đăng tải bình luận kết quả lên Pull Request.",
+    "arch_p3_f1": "Xác thực HMAC SHA-256 Webhook",
+    "arch_p3_f2": "Xác thực chữ ký số bản quyền Ed25519",
+    "arch_p3_f3": "Khóa Merge PR nếu vi phạm BLOCKER",
+    "arch_p3_output": "Action: Lock Merge Button & Post PR Comment",
+    "sec_flow_badge": "Execution Pipeline",
+    "sec_flow_title": "Luồng Code Chạy Step-by-Step Khi Kiểm Tra PR",
+    "sec_flow_desc": "Mỗi khi lập trình viên tạo hoặc cập nhật Pull Request, chuỗi xử lý diễn ra tự động qua 4 bước:",
+    "flow_diag_title": "// SƠ ĐỒ ĐIỀU PHỐI TỔNG QUAN",
+    "flow_diag_dev": "[ Developer tạo Pull Request trên GitHub / GitLab ]",
+    "flow_diag_hard": "[ 1. HARD GATE: arch-rules-engine ]",
+    "flow_diag_hard_1": "├─ Lấy Git Diff (Delta Mode) & quét import AST cây mã nguồn",
+    "flow_diag_hard_2": "└─ So sánh với quy tắc kiến trúc architecture_rules.yaml",
+    "flow_diag_pass": "[ KHÔNG CÓ LỖI ]",
+    "flow_diag_pass_gate": "[ Quality Gate: PASSED ✅ ] ──► Mở Cổng Cho Phép Merge",
+    "flow_diag_fail": "[ CÓ LỖI BLOCKER / WARNING ]",
+    "flow_diag_ai": "[ 2. AI ADVISORY AGENT: review-agent-service ]",
+    "flow_diag_ai_1": "├─ Tổng hợp bằng chứng lỗi vi phạm (File, Dòng, Tên luật)",
+    "flow_diag_ai_2": "└─ Gọi LLM phân tích nguyên nhân kiến trúc & sinh Code Refactor đề xuất",
+    "flow_diag_gw": "[ 3. GATEWAY PHÁN QUYẾT: integrations-gateway ]",
+    "flow_diag_gw_1": "├─ Đóng cổng Merge (Quality Gate: FAILED ❌)",
+    "flow_diag_gw_2": "└─ Đăng báo cáo phân tích chi tiết & code diff lên bình luận PR",
+    "flow_step1_title": "Lấy Git Diff (Chế Độ Delta Checker)",
+    "flow_step1_desc": "Thay vì quét lại toàn bộ hàng nghìn file từ đầu gây chậm trễ CI/CD, hệ thống thực thi lệnh <code>git diff --name-only origin/main</code> để lấy chính xác danh sách các file được thêm mới hoặc chỉnh sửa trong PR này.",
+    "flow_step2_title": "Phân Tích Cú Pháp AST & Xây Dựng Đồ Thị",
+    "flow_step2_desc": "Bộ phân tích cú pháp quét từng dòng mã nguồn, trích xuất tất cả các câu lệnh <code>import</code>, xác định: file nguồn thuộc layer nào, file đích được import thuộc layer nào. Đối chiếu với cấu hình luật để phát hiện ngay các vi phạm phân tầng.",
+    "flow_step3_title": "Kích Hoạt AI Review Agent",
+    "flow_step3_desc": "Review Agent đóng gói dữ liệu vi phạm (tên file, số dòng, đoạn code sai, tên luật) gửi sang LLM (OpenAI / Gemini / Ollama). AI phân tích chuyên sâu tại sao lại sai theo góc nhìn kiến trúc phần mềm và viết sẵn code refactor đề xuất bằng tiếng Việt.",
+    "flow_step4_title": "Integrations Gateway Phán Quyết & Đăng Báo Cáo",
+    "flow_step4_desc": "Gateway tổng hợp phán quyết: Nếu dính lỗi BLOCKER, tự động set Check Run Conclusion = FAILURE, chặn nút Merge trên GitHub/GitLab, đồng thời đăng tải toàn bộ báo cáo phân tích kèm gợi ý code lên bình luận của PR.",
+    "sec_rules_badge": "Extensible Architecture-as-Code",
+    "sec_rules_title": "5 Cơ Chế Tự Định Nghĩa Quy Tắc Kiểm Tra",
+    "sec_rules_desc": "Bạn có thể tự do mở rộng và thêm các quy tắc mới trong file <code>config/architecture_rules.yaml</code> tại repo mục tiêu mà <b>không cần chỉnh sửa bất kỳ dòng mã nguồn nào của engine</b>.",
+    "rule_th_mech": "Cơ chế",
+    "rule_th_type": "Giá trị <code>type</code>",
+    "rule_th_exec": "Cơ chế thực thi",
+    "rule_th_solve": "Bài toán giải quyết",
+    "rule_r1_name": "1. Phân Tầng Kiến Trúc",
+    "rule_r1_exec": "Đồ thị Import Graph & Đường dẫn",
+    "rule_r1_solve": "Clean Architecture, cô lập Domain, chống phụ thuộc vòng lặp (Circular Dependency).",
+    "rule_r2_name": "2. Cấm Gọi Hàm Bất Kỳ",
+    "rule_r2_exec": "AST Visitor duyệt tên phương thức",
+    "rule_r2_solve": "Cấm <code>print</code>, <code>debugPrint</code>, <code>eval()</code>, cấm gọi trực tiếp DB/API trong UI.",
+    "rule_r3_name": "3. Bắt Cú Pháp AST Có Sẵn",
+    "rule_r3_exec": "Bộ phân tích cú pháp AST dựng sẵn",
+    "rule_r3_solve": "Chống Anti-pattern vi mô: <code>empty_catch_block</code>, <code>await_before_setstate</code>.",
+    "rule_r4_name": "4. Mẫu Tự Do Meta-Variable",
+    "rule_r4_exec": "Động cơ Semgrep AST Engine",
+    "rule_r4_solve": "Tự viết mẫu AST bất kỳ bằng ký hiệu <code>$X</code>, <code>$E</code>, <code>...</code> không cần code.",
+    "rule_r5_name": "5. Plugin Script Tự Nạp",
+    "rule_r5_exec": "Thực thi Process độc lập",
+    "rule_r5_solve": "Quy tắc riêng của từng cty: Quy ước đặt tên file (<code>_view.dart</code>), kích thước asset, linter nội bộ.",
+    "rule_card1_title": "Mẫu Cấu Hình: 1. layer_boundary",
+    "rule_card2_title": "Mẫu Cấu Hình: 2. forbidden_calls",
+    "rule_card3_title": "Mẫu Cấu Hình: 3. ast_pattern",
+    "rule_card4_title": "Mẫu Cấu Hình: 4. meta_pattern",
+    "rule_card4_doc": "Cẩm nang cú pháp $X",
+    "rule_card4_desc": "Mẫu định nghĩa AST thông qua Semgrep Metavariables:",
+    "sec_live_badge": "Production Test Run",
+    "sec_live_title": "Minh Chứng Thực Tế Trên Repository Kiểm Thử",
+    "sec_live_desc": "Dưới đây là hình ảnh chụp màn hình trực tiếp từ Pull Request thực tế: Hệ thống phát hiện toàn bộ vi phạm kiến trúc, khóa quyền merge và đăng tải bình luận phân tích.",
+    "live_open_img": "Mở ảnh gốc Full-HD",
+    "live_bot_time": "vừa bình luận trên Pull Request",
+    "live_bot_gate": "Quality Gate: FAILED ❌ (Khóa Merge PR)",
+    "live_bot_list_title": "Danh Sách Vi Phạm Phát Hiện Trực Tiếp Trên PR:",
+    "live_v1_desc": "Tầng 'domain' không được phép import từ tầng 'presentation' (<code>package:fluffychat/pages/chat/chat_view.dart</code>).",
+    "live_v2_desc": "Cấm in log <code>print()</code> trực tiếp trên Production gây rò rỉ token PII (<code>secret_token_xyz</code>) và giật UI.",
+    "live_v3_desc": "Bắt được biến ngoại lệ <code>$E</code> nhưng bỏ trống khối catch (nuốt exception ngầm gây mất dấu telemetry).",
+    "live_v4_desc": "Bắt buộc có guard clause <code>if (!mounted) return;</code> sau lệnh <code>await</code> trước khi gọi <code>setState()</code>.",
+    "live_v5_desc": "File vi phạm naming convention: widget màn hình phải kết thúc bằng <code>_view.dart</code> thay vì <code>_page.dart</code>.",
+    "live_bot_diff_title": "Hướng Dẫn Sửa Lỗi Chi Tiết (Remediation Diff):",
+    "live_bot_diff_comment": "// Khắc phục ASYNC_MOUNTED_GUARD:",
+    "sec_setup_badge": "Deployment Guide",
+    "sec_setup_title": "Hướng Dẫn Thiết Lập Cho Repository Mới",
+    "sec_setup_desc": "Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:",
+    "setup_step1_title": "Khai báo cấu hình <code>architecture_rules.yaml</code> tại thư mục gốc",
+    "setup_step1_link": "Xem tài liệu viết rule chi tiết",
+    "setup_step1_desc": "Tạo file <code>config/architecture_rules.yaml</code> trong repository của bạn:",
+    "setup_step2_title": "Khởi chạy Docker Container với License Key Ed25519",
+    "setup_step2_link": "Xem tài liệu triển khai chi tiết",
+    "setup_step2_desc": "Chạy container trên server nội bộ (On-Premise VM). Container tự động xác thực chữ ký bản quyền số:",
+    "setup_step3_title": "Kích hoạt Webhook trên GitHub hoặc GitLab Monorepo",
+    "setup_step3_desc": "Vào mục <b>Settings > Webhooks > Add Webhook</b> của repository:",
+    "setup_step3_url": "• <b>Payload URL:</b> <code>http://your-server-ip:8080/</code>",
+    "setup_step3_type": "• <b>Content type:</b> <code>application/json</code>",
+    "setup_step3_secret": "• <b>Secret:</b> (Khớp với <code>GITHUB_WEBHOOK_SECRET</code> ở Bước 2)",
+    "setup_step3_events": "• <b>Trigger Events:</b> Tích chọn <code>Pull requests / Merge requests</code>",
+    "setup_step4_title": "Cơ Chế Baseline Quản Lý Nợ Kỹ Thuật (Clean-As-You-Code)",
+    "setup_step4_desc": "Hệ thống hỗ trợ file <code>baseline.json</code>. Đối với các dự án lớn đã có sẵn nhiều code cũ (legacy), các lỗi kiến trúc cũ sẽ được ghi nhận vào baseline và <b>không chặn merge PR</b>. Hệ thống chỉ chặn các lỗi MỚI xuất hiện trong Git Diff của PR hiện tại!",
+    "reg_title": "Đăng Ký Cấp License Sử Dụng",
+    "reg_subtitle": "Đăng ký dùng thử miễn phí 30 ngày đầy đủ tính năng cho toàn bộ repository của công ty bạn.",
+    "reg_lbl_company": "Tên Doanh Nghiệp / Tổ Chức *",
+    "reg_ph_company": "Ví dụ: Công ty Cổ Phần ABC...",
+    "reg_lbl_name": "Người Liên Hệ *",
+    "reg_ph_name": "Họ và tên bạn",
+    "reg_lbl_email": "Email Doanh Nghiệp *",
+    "reg_lbl_plan": "Gói Bản Quyền",
+    "reg_plan_trial": "Dùng thử 30 ngày (Free Trial)",
+    "reg_plan_pro": "Professional (Dưới 10 Repositories)",
+    "reg_plan_ent": "Enterprise (Unlimited Repositories)",
+    "reg_lbl_machine": "Machine ID (Nếu có)",
+    "reg_ph_machine": "Để trống nếu chưa có",
+    "reg_lbl_notes": "Mô Tả Nhu Cầu",
+    "reg_ph_notes": "Ví dụ: Cần kiểm soát Clean Architecture cho dự án Flutter và React Native...",
+    "reg_btn_submit": "Gửi Yêu Cầu Cấp License",
+    "adm_title": "Portal Quản Trị & Cấp Phép Bản Quyền (Admin Center)",
+    "adm_subtitle": "Dành cho System Owner (Tech Lead / Architect / DevOps Lead)",
+    "adm_guide_title": "Portal này dùng làm gì và dành cho ai?",
+    "adm_guide_desc": "<b>Đối tượng sử dụng:</b> Quản trị viên hệ thống (System Owner / Tech Lead / DevOps Architect) quản lý bản quyền phần mềm on-premise.<br><b>Mục đích:</b> Toàn bộ hệ thống kiểm duyệt kiến trúc chạy On-Premise nội bộ độc lập. Khi các dự án trong nội bộ công ty hoặc khách hàng Enterprise muốn kích hoạt bộ scanner trên GitHub Actions / GitLab CI, họ cần 1 file <code>license.lic</code> đã được ký số bằng thuật toán Ed25519 từ Quản trị viên.",
+    "adm_step1": "Dự án gửi đăng ký qua form bên dưới.",
+    "adm_step2": "Admin duyệt thông tin & cấu hình số ngày, số repo.",
+    "adm_step3": "Hệ thống ký số tải file <code>license.lic</code> bàn giao cho team.",
+    "adm_gen_title": "Bộ Sinh License Key Offline (Ed25519 Signature)",
+    "adm_gen_desc": "Tự động tạo chữ ký mật mã an toàn, quy định hạn dùng và số repository được bảo vệ.",
+    "adm_label_customer": "Tên Khách Hàng / Dự Án",
+    "adm_label_days": "Thời Hạn (Ngày)",
+    "adm_btn_sign": "Ký & Tải license.lic",
+    "adm_table_title": "Hàng Đợi Yêu Cầu Đăng Ký License (Live Database)",
+    "adm_btn_refresh": "Làm mới dữ liệu",
+    "adm_th_company": "Công ty / Dự án",
+    "adm_th_contact": "Người liên hệ",
+    "adm_th_email": "Email",
+    "adm_th_plan": "Gói License",
+    "adm_th_status": "Trạng thái",
+    "adm_th_action": "Thao tác phê duyệt",
+    "live_bot_diff_code": "+ await Future.delayed(Duration(seconds: 2));<br>+ if (!mounted) return; // Bảo vệ widget không unmounted<br>+ setState(() { status = \"completed\"; });",
+    "rule_card1_code": "- id: \"RULE_CLEAN_DOMAIN\"\n  type: \"layer_boundary\"\n  source_layer: \"domain\"\n  forbidden_target_layers: [\"presentation\", \"data\"]\n  severity: \"BLOCKER\"\n  description: \"Tầng Domain cấm import ngược UI hoặc Data.\"\n  remediation: \"Sử dụng Dependency Inversion định nghĩa interface tại Domain.\"",
+    "rule_card2_code": "- id: \"BAN_PRINT_ON_PROD\"\n  type: \"forbidden_calls\"\n  calls: [\"print\", \"debugPrint\"]\n  scope: [\"lib/**/*.dart\"]\n  severity: \"BLOCKER\"\n  description: \"Cấm in log trực tiếp gây rò rỉ token PII.\"\n  remediation: \"Sử dụng AppLogger hoặc Logs.d() thay thế.\"",
+    "rule_card3_code": "- id: \"ASYNC_MOUNTED_GUARD\"\n  type: \"ast_pattern\"\n  pattern_name: \"await_before_setstate\"\n  severity: \"CRITICAL\"\n  description: \"Bắt buộc có guard clause sau await trước setState.\"\n  remediation: \"Chèn 'if (!mounted) return;' ngay sau await.\"",
+    "rule_card4_code": "- id: \"NO_SILENT_EMPTY_CATCH\"\n  type: \"meta_pattern\"\n  pattern: \"catch ($E) { }\"\n  severity: \"BLOCKER\"\n  description: \"Bắt biến ngoại lệ nhưng bỏ trống khối catch.\"\n  remediation: \"Ghi log ngoại lệ hoặc xử lý fallback an toàn.\"",
+    "setup_step1_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"]\n\n# 1. Phân tầng kiến trúc Clean Architecture\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Tầng dữ liệu cốt lõi & logic nghiệp vụ\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"Tầng giao diện người dùng (UI)\"\n  - name: \"data\"\n    aliases: [\"repository\", \"network\", \"datasources\"]\n    description: \"Tầng hạ tầng kết nối DB / API\"\n\n# 2. Rào chắn quy tắc kiểm tra\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    name: \"Domain cấm import UI\"\n    severity: \"BLOCKER\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    name: \"Cấm print trên Production\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    name: \"Chống phụ thuộc vòng lặp\"\n    severity: \"BLOCKER\"",
+    "adm_ph_days": "Số ngày",
+    "adm_table_loading": "Đang tải dữ liệu từ Supabase...",
+    "page_title": "AI Architecture Review Engine — Hệ Thống Tự Động Kiểm Soát Kiến Trúc & Chất Lượng Mã Nguồn"
+  },
+  "en": {
+    "nav_brand_badge": "Enterprise On-Premise",
+    "nav_arch": "3-Tier Architecture",
+    "nav_flow": "PR Workflow",
+    "nav_rules": "5 Rule Engines",
+    "nav_live": "Live Evidence",
+    "nav_docs": "Detailed Docs",
+    "nav_doc_setup": "Detailed Setup Runbook",
+    "nav_doc_rules": "Custom Rule Authoring Guide",
+    "nav_doc_meta": "AST Meta-Variables Guide",
+    "nav_register": "Register License",
+    "nav_portal": "Admin Portal",
+    "hero_badge": "Clean Architecture Defense • 100% On-Premise Zero Source Leak",
+    "hero_title": "Automated Enterprise Architecture Review & Code Quality Engine",
+    "hero_subtitle": "Combines a <b>Deterministic AST Static Scanner</b> to block Pull Request merges on architectural violations, and an <b>AI Review Agent</b> acting as a Senior Architect to guide developers directly on GitHub/GitLab PRs.",
+    "hero_btn_trial": "Claim 30-Day Evaluation License",
+    "hero_btn_flow": "Explore Operational Pipeline",
+    "stat_zero_hal_title": "Zero Hallucination",
+    "stat_zero_hal_desc": "Violations flagged via rigid AST parsing, AI never makes gate decisions.",
+    "stat_onprem_title": "Private On-Premise",
+    "stat_onprem_desc": "Source code executes strictly inside your VPC/private runners, never exfiltrated.",
+    "stat_rules_title": "Custom Rule Mechanisms",
+    "stat_rules_desc": "Define custom rules via declarative YAML without touching core engine code.",
+    "stat_baseline_title": "As You Code (Baseline)",
+    "stat_baseline_desc": "Never blocks legacy technical debt; only enforces standards on new PR diffs.",
+    "sec_arch_badge": "Modular System Design",
+    "sec_arch_title": "Strictly Isolated 3-Tier Enterprise Architecture",
+    "sec_arch_desc": "Separated strictly by <i>Separation of Concerns</i>: Deterministic scanner acts as quality gatekeeper, AI serves as advisory mentor, and Gateway handles CI/CD orchestration.",
+    "arch_p1_badge": "Project 1 • Hard Gate",
+    "arch_p1_desc": "Core static analysis engine (AST Engine). Analyzes dependency import graphs and parses AST syntax trees to detect Clean Architecture layer violations, forbidden calls, and micro anti-patterns.",
+    "arch_p1_f1": "Blazing-fast Git Diff (Delta Mode) scanning",
+    "arch_p1_f2": "Technical debt baseline support (<code>baseline.json</code>)",
+    "arch_p1_f3": "Deterministic Pass / Fail gate decision",
+    "arch_p1_output": "Output: ScanReport.json (Exit 0 / 1 / 2)",
+    "arch_p2_badge": "Project 2 • Soft Layer",
+    "arch_p2_desc": "Advisory AI Review Agent (Advisory Layer). Ingests violation reports from Project 1, packages code context, and prompts LLMs to diagnose root architectural causes and draft suggested refactoring code.",
+    "arch_p2_f1": "Supports any LLM (OpenAI, Gemini, Local Ollama)",
+    "arch_p2_f2": "Strictly cannot override Hard Gate decisions",
+    "arch_p2_f3": "Clear technical explanations & actionable remediation",
+    "arch_p2_output": "Output: ReviewResult (Summary & Advisory Diff)",
+    "arch_p3_badge": "Project 3 • Gatekeeper",
+    "arch_p3_desc": "Secure CI/CD integration gateway. Ingests webhooks from GitHub/GitLab, validates Ed25519 license keys, orchestrates execution, and posts formatted reports to Pull Requests.",
+    "arch_p3_f1": "HMAC SHA-256 Webhook verification",
+    "arch_p3_f2": "Ed25519 digital license verification",
+    "arch_p3_f3": "Locks PR merge button on BLOCKER violations",
+    "arch_p3_output": "Action: Lock Merge Button & Post PR Comment",
+    "sec_flow_badge": "Execution Pipeline",
+    "sec_flow_title": "Step-by-Step Code Execution Pipeline on PRs",
+    "sec_flow_desc": "Whenever a developer creates or updates a Pull Request, the pipeline executes automatically in 4 steps:",
+    "flow_diag_title": "// ORCHESTRATION PIPELINE OVERVIEW",
+    "flow_diag_dev": "[ Developer opens/updates Pull Request on GitHub/GitLab ]",
+    "flow_diag_hard": "[ 1. HARD GATE: arch-rules-engine ]",
+    "flow_diag_hard_1": "├─ Extract Git Diff (Delta Mode) & scan AST import graph",
+    "flow_diag_hard_2": "└─ Evaluate against architecture_rules.yaml",
+    "flow_diag_pass": "[ NO VIOLATIONS ]",
+    "flow_diag_pass_gate": "[ Quality Gate: PASSED ✅ ] ──► PR Merge Allowed",
+    "flow_diag_fail": "[ BLOCKER / WARNING DETECTED ]",
+    "flow_diag_ai": "[ 2. AI ADVISORY AGENT: review-agent-service ]",
+    "flow_diag_ai_1": "├─ Collate violation evidence (File, Line, Rule ID)",
+    "flow_diag_ai_2": "└─ Prompt LLM for architectural diagnosis & proposed refactoring diff",
+    "flow_diag_gw": "[ 3. GATEWAY VERDICT: integrations-gateway ]",
+    "flow_diag_gw_1": "├─ Block PR Merge (Quality Gate: FAILED ❌)",
+    "flow_diag_gw_2": "└─ Publish formatted analysis report & code diff to PR comments",
+    "flow_step1_title": "Extract Git Diff (Delta Checker Mode)",
+    "flow_step1_desc": "Instead of re-scanning thousands of files and slowing down CI/CD, the engine runs <code>git diff --name-only origin/main</code> to target strictly the files added or modified in the current PR.",
+    "flow_step2_title": "AST Syntax Parsing & Import Graph Construction",
+    "flow_step2_desc": "The parser scans source code lines, extracts all <code>import</code> statements, resolves source and target architectural layers, and immediately catches cross-boundary violations.",
+    "flow_step3_title": "Trigger AI Review Agent",
+    "flow_step3_desc": "The Review Agent packages violation metadata (file, line, code snippet, rule ID) to the LLM (OpenAI/Gemini/Ollama). AI diagnoses the architectural anti-pattern and drafts ready-to-merge refactoring diffs.",
+    "flow_step4_title": "Integrations Gateway Verdict & PR Reporting",
+    "flow_step4_desc": "The Gateway consolidates verdicts: If any BLOCKER is hit, it sets Check Run Conclusion = FAILURE, locks the PR merge button, and posts comprehensive analysis with code diffs to PR comments.",
+    "sec_rules_badge": "Extensible Architecture-as-Code",
+    "sec_rules_title": "5 Expressive Rule Authoring Mechanisms",
+    "sec_rules_desc": "Freely customize and declare rules inside <code>config/architecture_rules.yaml</code> without touching a single line of core engine source code.",
+    "rule_th_mech": "Mechanism",
+    "rule_th_type": "<code>type</code> Attribute",
+    "rule_th_exec": "Execution Model",
+    "rule_th_solve": "Problem Solved",
+    "rule_r1_name": "1. Architectural Layering",
+    "rule_r1_exec": "Import Graph & Path Resolution",
+    "rule_r1_solve": "Clean Architecture, Domain isolation, circular dependency prevention.",
+    "rule_r2_name": "2. Forbidden Method Calls",
+    "rule_r2_exec": "AST Visitor method traversal",
+    "rule_r2_solve": "Ban <code>print</code>, <code>debugPrint</code>, <code>eval()</code>, prevent direct DB/API queries from UI layer.",
+    "rule_r3_name": "3. Built-in AST Patterns",
+    "rule_r3_exec": "Pre-compiled AST syntactic analyzer",
+    "rule_r3_solve": "Prevents micro anti-patterns: <code>empty_catch_block</code>, <code>await_before_setstate</code>.",
+    "rule_r4_name": "4. Freeform Meta-Variables",
+    "rule_r4_exec": "Semgrep AST Pattern Matcher",
+    "rule_r4_solve": "Express arbitrary AST patterns via <code>$X</code>, <code>$E</code>, <code>...</code> tokens without writing code.",
+    "rule_r5_name": "5. Dynamic Script Plugins",
+    "rule_r5_exec": "Isolated Process Execution",
+    "rule_r5_solve": "Custom company policies: file naming conventions (<code>_view.dart</code>), asset size guards, internal linters.",
+    "rule_card1_title": "Configuration Pattern: 1. layer_boundary",
+    "rule_card2_title": "Configuration Pattern: 2. forbidden_calls",
+    "rule_card3_title": "Configuration Pattern: 3. ast_pattern",
+    "rule_card4_title": "Configuration Pattern: 4. meta_pattern",
+    "rule_card4_doc": "$X Syntax Guide",
+    "rule_card4_desc": "AST pattern definition using Semgrep Metavariables:",
+    "sec_live_badge": "Production Test Run",
+    "sec_live_title": "Verified Live Evidence on Real Test Repository",
+    "sec_live_desc": "Live screenshot directly from Pull Request #12: The system detects architectural violations, locks the merge gate, and posts formatted remediation diffs.",
+    "live_open_img": "Open Full-HD Original Image",
+    "live_bot_time": "commented on Pull Request",
+    "live_bot_gate": "Quality Gate: FAILED ❌ (PR Merge Blocked)",
+    "live_bot_list_title": "Architectural Violations Detected on PR:",
+    "live_v1_desc": "The 'domain' layer must not import from the 'presentation' layer (<code>package:fluffychat/pages/chat/chat_view.dart</code>).",
+    "live_v2_desc": "Raw <code>print()</code> is strictly forbidden in Production to prevent PII leakage (<code>secret_token_xyz</code>) and UI jank.",
+    "live_v3_desc": "Caught exception variable <code>$E</code> in an empty catch block (silent error swallowing corrupts telemetry).",
+    "live_v4_desc": "Mandatory guard clause <code>if (!mounted) return;</code> after <code>await</code> before invoking <code>setState()</code>.",
+    "live_v5_desc": "File naming convention violation: screen widgets must end with <code>_view.dart</code> instead of <code>_page.dart</code>.",
+    "live_bot_diff_title": "AI Actionable Remediation Diff:",
+    "live_bot_diff_comment": "// Fix ASYNC_MOUNTED_GUARD:",
+    "sec_setup_badge": "Deployment Guide",
+    "sec_setup_title": "Step-by-Step Setup Guide for Any Repository",
+    "sec_setup_desc": "Integrate into any codebase (Flutter, iOS, Android, React Native...) in 3 simple steps:",
+    "setup_step1_title": "Declare <code>architecture_rules.yaml</code> in repository root",
+    "setup_step1_link": "Explore rule authoring guide",
+    "setup_step1_desc": "Create <code>config/architecture_rules.yaml</code> inside your repository:",
+    "setup_step2_title": "Deploy Docker Container with Ed25519 License Key",
+    "setup_step2_link": "Explore deployment guide",
+    "setup_step2_desc": "Run the container on your private VM/cluster. The container cryptographically validates the digital license:",
+    "setup_step3_title": "Configure Webhook on GitHub or GitLab Monorepo",
+    "setup_step3_desc": "Navigate to <b>Settings > Webhooks > Add Webhook</b> in your repository:",
+    "setup_step3_url": "• <b>Payload URL:</b> <code>http://your-server-ip:8080/</code>",
+    "setup_step3_type": "• <b>Content type:</b> <code>application/json</code>",
+    "setup_step3_secret": "• <b>Secret:</b> (Matches <code>GITHUB_WEBHOOK_SECRET</code> from Step 2)",
+    "setup_step3_events": "• <b>Trigger Events:</b> Select <code>Pull requests / Merge requests</code>",
+    "setup_step4_title": "Baseline Mechanism for Managing Technical Debt (Clean-As-You-Code)",
+    "setup_step4_desc": "The engine supports a <code>baseline.json</code> file. For mature codebases with existing technical debt, legacy issues are baselined and <b>never block PR merges</b>. The engine strictly blocks NEW violations introduced in the PR diff!",
+    "reg_title": "Register for 30-Day Evaluation License",
+    "reg_subtitle": "Free 30-day full-feature trial for all repositories across your organization.",
+    "reg_lbl_company": "Organization / Company Name *",
+    "reg_ph_company": "E.g. Acme Corporation...",
+    "reg_lbl_name": "Contact Person *",
+    "reg_ph_name": "Your full name",
+    "reg_lbl_email": "Corporate Email Address *",
+    "reg_lbl_plan": "License Plan",
+    "reg_plan_trial": "30-Day Free Trial (All Features)",
+    "reg_plan_pro": "Professional (Up to 10 Repos)",
+    "reg_plan_ent": "Enterprise (Unlimited Repos)",
+    "reg_lbl_machine": "Machine ID (Optional)",
+    "reg_ph_machine": "Leave blank if not yet generated",
+    "reg_lbl_notes": "Project Scope & Requirements",
+    "reg_ph_notes": "E.g. Clean Architecture governance for Flutter & React Native repos...",
+    "reg_btn_submit": "Submit License Request",
+    "adm_title": "Admin License & Compliance Center",
+    "adm_subtitle": "For System Owners (Tech Lead / Enterprise Architect / DevOps Lead)",
+    "adm_guide_title": "What is this Portal for and who can use it?",
+    "adm_guide_desc": "<b>Target Audience:</b> System Owners, Tech Leads, and Platform Engineers managing enterprise on-premise licenses.<br><b>Purpose:</b> The review engine runs completely air-gapped on-premise. When internal development teams or enterprise clients deploy the scanner to GitHub Actions / GitLab CI, they require an Ed25519 cryptographically signed <code>license.lic</code> file issued by the Administrator.",
+    "adm_step1": "Teams submit license requests via the registration form below.",
+    "adm_step2": "Admin reviews request details, validity duration, and repo quota.",
+    "adm_step3": "System cryptographically signs and downloads license.lic for the team.",
+    "adm_gen_title": "Offline License Key Generator (Ed25519 Signature)",
+    "adm_gen_desc": "Generates tamper-proof cryptographic signatures with expiration and repository limits.",
+    "adm_label_customer": "Client / Project Identifier",
+    "adm_label_days": "Validity Duration (Days)",
+    "adm_btn_sign": "Sign & Download license.lic",
+    "adm_table_title": "License Request Queue (Live Supabase DB)",
+    "adm_btn_refresh": "Refresh Data",
+    "adm_th_company": "Company / Project",
+    "adm_th_contact": "Contact Person",
+    "adm_th_email": "Email Address",
+    "adm_th_plan": "License Plan",
+    "adm_th_status": "Status",
+    "adm_th_action": "Approval Action",
+    "live_bot_diff_code": "+ await Future.delayed(Duration(seconds: 2));<br>+ if (!mounted) return; // Guard widget from calling setState after unmount<br>+ setState(() { status = \"completed\"; });",
+    "rule_card1_code": "- id: \"RULE_CLEAN_DOMAIN\"\n  type: \"layer_boundary\"\n  source_layer: \"domain\"\n  forbidden_target_layers: [\"presentation\", \"data\"]\n  severity: \"BLOCKER\"\n  description: \"Domain layer must not import UI or Data layers.\"\n  remediation: \"Apply Dependency Inversion: define domain interfaces.\"",
+    "rule_card2_code": "- id: \"BAN_PRINT_ON_PROD\"\n  type: \"forbidden_calls\"\n  calls: [\"print\", \"debugPrint\"]\n  scope: [\"lib/**/*.dart\"]\n  severity: \"BLOCKER\"\n  description: \"Direct log printing forbidden to prevent PII token leakage.\"\n  remediation: \"Use AppLogger or Logs.d() instead.\"",
+    "rule_card3_code": "- id: \"ASYNC_MOUNTED_GUARD\"\n  type: \"ast_pattern\"\n  pattern_name: \"await_before_setstate\"\n  severity: \"CRITICAL\"\n  description: \"Guard clause mandatory after await before invoking setState.\"\n  remediation: \"Insert 'if (!mounted) return;' immediately after await.\"",
+    "rule_card4_code": "- id: \"NO_SILENT_EMPTY_CATCH\"\n  type: \"meta_pattern\"\n  pattern: \"catch ($E) { }\"\n  severity: \"BLOCKER\"\n  description: \"Caught exception variable swallowed silently in empty catch.\"\n  remediation: \"Log exception telemetry or provide safe fallback handling.\"",
+    "setup_step1_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"]\n\n# 1. Clean Architecture Layer Boundaries\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Core business logic & domain entities\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"User Interface (UI) presentation layer\"\n  - name: \"data\"\n    aliases: [\"repository\", \"network\", \"datasources\"]\n    description: \"Infrastructure data sources & network API\"\n\n# 2. Architecture & Quality Gate Rules\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    name: \"Domain must not import UI\"\n    severity: \"BLOCKER\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    name: \"Ban print on Production\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    name: \"Prevent circular dependencies\"\n    severity: \"BLOCKER\"",
+    "adm_ph_days": "Number of days",
+    "adm_table_loading": "Loading records from Supabase...",
+    "page_title": "AI Architecture Review Engine — Automated Architecture & Code Quality Governance System"
+  }
+};
 
     let currentLang = localStorage.getItem("preferred_lang") || "vi";
 
@@ -1066,6 +1262,8 @@ rules:
       currentLang = lang;
       localStorage.setItem("preferred_lang", lang);
       document.documentElement.lang = lang;
+      const dict = translations[lang] || translations.vi;
+      if (dict.page_title) document.title = dict.page_title;
 
       // Update switcher active styling
       const btnVi = document.getElementById("langBtnVi");
@@ -1081,11 +1279,18 @@ rules:
       }
 
       // Update text in elements with data-i18n
-      const dict = translations[lang] || translations.vi;
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         if (dict[key]) {
           el.innerHTML = dict[key];
+        }
+      });
+
+      // Update placeholders
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (dict[key]) {
+          el.placeholder = dict[key];
         }
       });
     }
