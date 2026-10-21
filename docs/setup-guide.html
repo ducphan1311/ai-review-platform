@@ -92,6 +92,75 @@ docker run -d \
   ducphan1311/ai-review-platform:latest</code></pre>
       </div>
 
+      
+      <!-- Section 2.5: Internal Network & Corporate Firewall Options -->
+      <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
+          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">2.5</span>
+          <span data-i18n="sec2_5_title">Mô Hình Mạng Nội Bộ & Tường Lửa Doanh Nghiệp (Internal Network)</span>
+        </h2>
+        <p class="text-xs text-slate-600 mb-4" data-i18n="sec2_5_desc">
+          Tùy theo chính sách an ninh mạng của doanh nghiệp, bạn có thể lựa chọn 1 trong 3 mô hình kết nối phù hợp:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <!-- Option A: Self-hosted GitLab/GitHub Enterprise -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">Phương án A</span>
+                <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optA_title">Nội Bộ 100% (Direct LAN)</h3>
+              </div>
+              <p class="text-[11px] text-slate-600 mb-3" data-i18n="sec2_5_optA_desc">
+                Áp dụng khi server Git (GitLab CE/EE, GitHub Enterprise Server, Gitea) và Docker Service cùng nằm trong mạng Private LAN.
+              </p>
+            </div>
+            <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 font-mono" data-i18n="sec2_5_optA_code">
+              Webhook URL: <code>http://10.0.x.x:8080/webhook</code><br>
+              <span class="text-emerald-600 font-semibold">✓ Không cần Internet</span>
+            </div>
+          </div>
+
+          <!-- Option B: Cloudflare Tunnel / Reverse Proxy -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-blue-100 text-blue-800">Phương án B</span>
+                <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optB_title">Cloudflare Tunnel / Proxy</h3>
+              </div>
+              <p class="text-[11px] text-slate-600 mb-3" data-i18n="sec2_5_optB_desc">
+                Dành cho GitHub.com/GitLab.com cloud muốn gửi Webhook về Server nội bộ mà <b>không cần mở Port Firewall (No NAT/Port Forward)</b>.
+              </p>
+            </div>
+            <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 font-mono" data-i18n="sec2_5_optB_code">
+              cloudflared tunnel run ai-review<br>
+              <span class="text-blue-600 font-semibold">✓ Bảo mật SSL & Zero Trust</span>
+            </div>
+          </div>
+
+          <!-- Option C: Self-Hosted CI Runner (GitHub Action / GitLab CI) -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-2 mb-2">
+                <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-purple-100 text-purple-800">Phương án C</span>
+                <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optC_title">Self-Hosted CI Runner</h3>
+              </div>
+              <p class="text-[11px] text-slate-600 mb-3" data-i18n="sec2_5_optC_desc">
+                Áp dụng khi mạng hoàn toàn cô lập (Air-Gapped / Inbound blocked). Chạy quét trực tiếp bằng CI Runner nội bộ không cần Webhook.
+              </p>
+            </div>
+            <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 font-mono" data-i18n="sec2_5_optC_code">
+              docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform ...<br>
+              <span class="text-purple-600 font-semibold">✓ Chạy trong GitHub Action nội bộ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900" data-i18n="sec2_5_callout">
+          🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL="http://ollama-internal:11434/v1"</code> và <code>AI_REVIEW_MODEL="qwen2.5-coder:32b"</code> để xử lý AI hoàn toàn offline!
+        </div>
+      </div>
+
       <!-- Section 3 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
@@ -184,6 +253,18 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec2_title": "Khởi Chạy Docker Container On-Premise",
     "sec2_desc": "Mount file <code>license.lic</code> do Danny cấp vào container. Nếu license hết hạn hoặc bị giả mạo, server sẽ từ chối khởi động để đảm bảo an toàn.",
     "sec2_code": "# 1. Tạo thư mục làm việc và đặt file license.lic vào\nmkdir -p /opt/ai-review\ncp /path/to/downloaded/license.lic /opt/ai-review/license.lic\n\n# 2. Khởi chạy Docker Container\ndocker run -d \\\n  --name ai-review-service \\\n  --restart unless-stopped \\\n  -p 8080:8080 \\\n  -v /opt/ai-review/license.lic:/app/license.lic:ro \\\n  -e GITHUB_WEBHOOK_SECRET=\"your-secret-hex-chars\" \\\n  -e OPENAI_API_KEY=\"sk-proj-***\" \\\n  -e OPENAI_BASE_URL=\"https://api.openai.com/v1\" \\\n  -e AI_REVIEW_MODEL=\"gpt-4o\" \\\n  ducphan1311/ai-review-platform:latest",
+        "sec2_5_title": "Mô Hình Mạng Nội Bộ & Tường Lửa Doanh Nghiệp (Internal Network)",
+    "sec2_5_desc": "Tùy theo chính sách an ninh mạng của doanh nghiệp, bạn có thể lựa chọn 1 trong 3 mô hình kết nối phù hợp:",
+    "sec2_5_optA_title": "Nội Bộ 100% (Direct LAN)",
+    "sec2_5_optA_desc": "Áp dụng khi server Git (GitLab CE/EE, GitHub Enterprise Server, Gitea) và Docker Service cùng nằm trong mạng Private LAN.",
+    "sec2_5_optA_code": "Webhook URL: <code>http://10.0.x.x:8080/webhook</code><br><span class=\"text-emerald-600 font-semibold\">✓ Không cần Internet</span>",
+    "sec2_5_optB_title": "Cloudflare Tunnel / Proxy",
+    "sec2_5_optB_desc": "Dành cho GitHub.com/GitLab.com cloud muốn gửi Webhook về Server nội bộ mà <b>không cần mở Port Firewall (No NAT/Port Forward)</b>.",
+    "sec2_5_optB_code": "cloudflared tunnel run ai-review<br><span class=\"text-blue-600 font-semibold\">✓ Bảo mật SSL & Zero Trust</span>",
+    "sec2_5_optC_title": "Self-Hosted CI Runner",
+    "sec2_5_optC_desc": "Áp dụng khi mạng hoàn toàn cô lập (Air-Gapped / Inbound blocked). Chạy quét trực tiếp bằng CI Runner nội bộ không cần Webhook.",
+    "sec2_5_optC_code": "docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform ...<br><span class=\"text-purple-600 font-semibold\">✓ Chạy trong GitHub Action nội bộ</span>",
+    "sec2_5_callout": "🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL=\"http://ollama-internal:11434/v1\"</code> và <code>AI_REVIEW_MODEL=\"qwen2.5-coder:32b\"</code> để xử lý AI hoàn toàn offline!",
     "sec3_title": "Cấu Hình Tệp Quy Tắc <code>architecture_rules.yaml</code>",
     "sec3_desc": "Tại thư mục gốc của repository cần kiểm tra, tạo thư mục <code>config/</code> và đặt file <code>architecture_rules.yaml</code>:",
     "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Chỉ định thư mục mã nguồn\n\n# 1. Định nghĩa phân tầng Clean Architecture\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Tầng logic nghiệp vụ & entity cốt lõi\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"Tầng giao diện người dùng\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Tầng dữ liệu DB & API\"\n\n# 2. Quy tắc kiểm soát nghiêm ngặt\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
@@ -211,6 +292,18 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec2_title": "Run On-Premise Docker Container",
     "sec2_desc": "Mount the cryptographically signed <code>license.lic</code> file issued by Danny into the container. If the license is expired or tampered with, the service fails closed and refuses startup.",
     "sec2_code": "# 1. Create workspace directory and copy license.lic\nmkdir -p /opt/ai-review\ncp /path/to/downloaded/license.lic /opt/ai-review/license.lic\n\n# 2. Run the Docker Container\ndocker run -d \\\n  --name ai-review-service \\\n  --restart unless-stopped \\\n  -p 8080:8080 \\\n  -v /opt/ai-review/license.lic:/app/license.lic:ro \\\n  -e GITHUB_WEBHOOK_SECRET=\"your-secret-hex-chars\" \\\n  -e OPENAI_API_KEY=\"sk-proj-***\" \\\n  -e OPENAI_BASE_URL=\"https://api.openai.com/v1\" \\\n  -e AI_REVIEW_MODEL=\"gpt-4o\" \\\n  ducphan1311/ai-review-platform:latest",
+        "sec2_5_title": "Internal Network & Corporate Firewall Architecture Options",
+    "sec2_5_desc": "Depending on enterprise network security compliance, choose one of the three deployment topologies:",
+    "sec2_5_optA_title": "100% Direct LAN (No Internet)",
+    "sec2_5_optA_desc": "For on-premise Git servers (GitLab Self-Managed, GitHub Enterprise Server, Gitea) co-located with Docker in the same private subnet.",
+    "sec2_5_optA_code": "Webhook URL: <code>http://10.0.x.x:8080/webhook</code><br><span class=\"text-emerald-600 font-semibold\">✓ Air-gapped / No Internet</span>",
+    "sec2_5_optB_title": "Cloudflare Tunnel / Proxy",
+    "sec2_5_optB_desc": "Allows GitHub.com cloud to trigger webhooks to internal servers <b>without inbound firewall port forwarding (Zero Trust)</b>.",
+    "sec2_5_optB_code": "cloudflared tunnel run ai-review<br><span class=\"text-blue-600 font-semibold\">✓ TLS encrypted & Zero Trust</span>",
+    "sec2_5_optC_title": "Self-Hosted CI Runner",
+    "sec2_5_optC_desc": "For completely locked-down inbound networks. Execute quality gates directly inside internal self-hosted GitHub/GitLab runners.",
+    "sec2_5_optC_code": "docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform ...<br><span class=\"text-purple-600 font-semibold\">✓ Native In-Workflow Execution</span>",
+    "sec2_5_callout": "🔒 <b>100% On-Premise LLM:</b> If corporate security forbids outbound cloud LLM access, configure <code>OPENAI_BASE_URL=\"http://ollama-internal:11434/v1\"</code> with <code>AI_REVIEW_MODEL=\"qwen2.5-coder:32b\"</code> for zero external data egress!",
     "sec3_title": "Configure <code>architecture_rules.yaml</code> Rule Specification",
     "sec3_desc": "In the target repository root directory, create a <code>config/</code> directory and place your <code>architecture_rules.yaml</code> file:",
     "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Source code scan directories\n\n# 1. Clean Architecture Layer Boundaries\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Core business logic & domain entities\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"User Interface (UI) presentation layer\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Infrastructure data sources & network API\"\n\n# 2. Strict Architecture Gate Rules\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
