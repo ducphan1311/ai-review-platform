@@ -1352,8 +1352,9 @@ rules:
     }
 
     // Initialize Supabase client cleanly without global collisions
-    const SUPABASE_URL = "https://zqpytlatdyljvqdhebew.supabase.co";
-    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxcHl0bGF0ZHlsanZxZGhlYmV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1NDc1NzYsImV4cCI6MjEwODEyMzU3Nn0.phM9Km0KyUxp0CmIRJHIG1mhuI7eLhcqKWrMkWihxJU";
+    // Injected at deployment via GitHub Actions Secrets (or fallback for local development)
+    const SUPABASE_URL = window.__ENV_SUPABASE_URL__ || "__SUPABASE_URL_PLACEHOLDER__";
+    const SUPABASE_ANON = window.__ENV_SUPABASE_ANON_KEY__ || "__SUPABASE_ANON_KEY_PLACEHOLDER__";
     
     let dbClient = null;
     try {
@@ -1610,7 +1611,7 @@ rules:
                   ? "Bảng <code>public.license_requests</code> chưa có trong schema cache. Vui lòng mở Supabase SQL Editor và chạy file <code>supabase_schema.sql</code>."
                   : "Table <code>public.license_requests</code> not found in schema cache. Please open Supabase SQL Editor and execute <code>supabase_schema.sql</code>."}
               </p>
-              <a href="https://supabase.com/dashboard/project/zqpytlatdyljvqdhebew/sql" target="_blank" class="inline-flex items-center space-x-1 font-bold text-indigo-600 hover:text-indigo-800 text-[11px] pt-1">
+              <a href="https://supabase.com/dashboard" target="_blank" class="inline-flex items-center space-x-1 font-bold text-indigo-600 hover:text-indigo-800 text-[11px] pt-1">
                 <span>Mở Supabase SQL Editor →</span>
               </a>
             </div>

@@ -1,0 +1,8 @@
+name = "ai-review-registration-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Environment variables to configure in Cloudflare Dashboard / Wrangler Secrets:
+# 1. wrangler secret put SUPABASE_URL
+# 2. wrangler secret put SUPABASE_SERVICE_ROLE_KEY (hoặc SUPABASE_ANON_KEY)
+# 3. wrangler secret put TURNSTILE_SECRET_KEY (nếu dùng Cloudflare Turnstile CAPTCHA)

@@ -1,5 +1,5 @@
--- SQL Schema khởi tạo cho Supabase Project: zqpytlatdyljvqdhebew
--- Chạy đoạn script này tại: https://supabase.com/dashboard/project/zqpytlatdyljvqdhebew/sql
+-- SQL Schema khởi tạo cho Supabase Project: <your-project-ref>
+-- Chạy đoạn script này tại: https://supabase.com/dashboard
 
 -- 1. Bảng tiếp nhận đăng ký License từ Landing Page
 CREATE TABLE IF NOT EXISTS public.license_requests (
