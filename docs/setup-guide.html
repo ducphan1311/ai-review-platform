@@ -491,6 +491,130 @@ docker exec ai-review-service python -m app.arch_engine.cli baseline /path/to/re
         </div>
       </div>
 
+      <!-- Section 5: Enterprise Firewall & 9router AI Gateway (Google Antigravity Bypass) -->
+      <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm" id="sec5-enterprise-firewall">
+        <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
+          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">5</span>
+          <span data-i18n="sec5_title">Vượt Tường Lửa Ngân Hàng/Doanh Nghiệp Với 9router AI Gateway (Google Antigravity)</span>
+        </h2>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed" data-i18n="sec5_desc">
+          Trong môi trường mạng nội bộ doanh nghiệp (Ngân hàng, Tài chính, Tập đoàn lớn), tường lửa thường <b>chặn toàn bộ dịch vụ AI bên ngoài như OpenAI, Claude</b> nhưng lại <b>cho phép các dịch vụ của Google</b> (như Google Cloud, Google Antigravity / Gemini CLI). Giải pháp tối ưu là sử dụng <b>9router</b> làm AI Gateway nội bộ chuyển đổi giao thức OpenAI sang Google Antigravity.
+        </p>
+
+        <!-- Architecture Flow Diagram -->
+        <div class="mb-5 p-4 rounded-xl bg-slate-950 text-slate-200 border border-slate-800 font-mono text-[11px] leading-relaxed overflow-x-auto">
+          <div class="text-emerald-400 font-bold mb-2">📡 Luồng Chuyển Đổi Giao Thức AI Nội Bộ (Enterprise In-LAN Flow):</div>
+<pre><code>[CI/CD / Review Container]  (Chỉ truy cập IP mạng LAN)
+         │
+         │  HTTP / POST http://&lt;LAN_IP&gt;:20128/v1/chat/completions (Chuẩn OpenAI format)
+         ▼
+[9router AI Gateway]        (Máy trạm hoặc Server nội bộ 192.168.x.x)
+         │  - Chuyển đổi OpenAI Payload &lt;--&gt; Google Antigravity Protobuf/REST
+         │  - Quản lý Quota, Token nội bộ, không lộ credential cho Dev/CI Runner
+         ▼
+[Enterprise Firewall]       (Chặn OpenAI/Claude, CHO PHÉP *.googleapis.com)
+         │
+         ▼  HTTPS Outbound đã được Whitelist
+[Google Antigravity Cloud]  (ag/gemini-4-argon, ag/gemini-3.8-flash - Context 1M tokens)</code></pre>
+        </div>
+
+        <!-- 4 Step Implementation Guide -->
+        <div class="space-y-4">
+          <!-- Step 1 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 1</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec5_step1_title">Khởi chạy 9router trong mạng nội bộ (LAN Server hoặc Docker)</h4>
+            </div>
+            <p class="text-[11px] text-slate-600" data-i18n="sec5_step1_desc">
+              Clone repo <a href="https://github.com/ducphan1311/9router" target="_blank" class="text-indigo-600 underline font-semibold">9router</a> về máy trạm hoặc máy chủ nội bộ (ví dụ IP máy: <code>192.168.1.50</code>) và khởi chạy:
+            </p>
+            <pre class="bg-slate-950 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto border border-slate-800"><code># Cách 1: Chạy trực tiếp bằng Node.js / PM2 (Lắng nghe 0.0.0.0 để cho phép máy khác trong LAN kết nối)
+git clone https://github.com/ducphan1311/9router.git
+cd 9router && npm install && npm run build
+PORT=20128 HOST=0.0.0.0 npm start
+
+# Cách 2: Chạy bằng Docker Container
+docker run -d --name 9router-gateway --restart unless-stopped \
+  -p 20128:20128 \
+  -v $(pwd)/.data:/app/.data \
+  -e PORT=20128 -e HOST=0.0.0.0 \
+  ducphan1311/9router:latest</code></pre>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 2</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec5_step2_title">Kết nối 9router với Google Antigravity &amp; Tạo API Key nội bộ</h4>
+            </div>
+            <ol class="text-[11px] text-slate-600 list-decimal list-inside space-y-1" data-i18n="sec5_step2_desc">
+              <li>Mở trình duyệt truy cập Web UI của 9router tại <code>http://&lt;IP_LAN_9ROUTER&gt;:20128</code> (hoặc <code>http://localhost:20128</code>).</li>
+              <li>Vào menu <b>Providers</b> &rarr; Chọn provider <b>Antigravity</b> (hoặc Google Cloud Code).</li>
+              <li>Bấm <b>Connect with Google</b> để ủy quyền tài khoản Google kích hoạt Antigravity (Refresh token được lưu cục bộ an toàn trong <code>.data/</code>).</li>
+              <li>Vào menu <b>API Keys</b> &rarr; Tạo 1 key nội bộ cho team (dạng <code>sk-9r-internal-xxxx</code>).</li>
+            </ol>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 3</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec5_step3_title">Lựa chọn Model Antigravity tối ưu cho tác vụ Code Review</h4>
+            </div>
+            <p class="text-[11px] text-slate-600 mb-2" data-i18n="sec5_step3_models_desc">9router tự động ánh xạ các model Antigravity sang định danh chuẩn:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 bg-indigo-50/60 border border-indigo-200 rounded-lg">
+                <span class="font-bold text-indigo-900">⚡ ag/gemini-3.8-flash (Khuyên dùng hàng ngày):</span>
+                <p class="text-[11px] mt-1 text-slate-600">Tốc độ phản hồi cực nhanh, độ trễ thấp, context window 1M tokens, chi phí tối ưu cho hàng trăm PR mỗi ngày.</p>
+              </div>
+              <div class="p-3 bg-purple-50/60 border border-purple-200 rounded-lg">
+                <span class="font-bold text-purple-900">🧠 ag/gemini-4-argon-high (Phân tích chuyên sâu):</span>
+                <p class="text-[11px] mt-1 text-slate-600">Khả năng suy luận logic và kiến trúc ở mức cao nhất, thích hợp cho việc đánh giá refactor toàn bộ module lớn.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 4</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec5_step4_title">Truyền 3 biến môi trường vào Container AI Review Platform</h4>
+            </div>
+            <p class="text-[11px] text-slate-600" data-i18n="sec5_step4_desc">
+              Chỉ cần cấu hình 3 biến môi trường sau cho Container Review hoặc CI Runner, không cần sửa đổi bất kỳ dòng mã nguồn nào:
+            </p>
+            <pre class="bg-slate-950 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec5_step4_code"># Chạy trực tiếp qua Docker CLI:
+docker run --rm \
+  -e OPENAI_BASE_URL="http://192.168.1.50:20128/v1" \
+  -e OPENAI_API_KEY="sk-9r-internal-secret-key" \
+  -e AI_REVIEW_MODEL="ag/gemini-3.8-flash" \
+  -v $(pwd):/repo \
+  -v /opt/ai-review/license.lic:/app/license.lic:ro \
+  ducphan1311/ai-review-platform:latest \
+  python -m app.arch_engine.cli check --repo-path /repo --diff --base origin/main
+
+# Khai báo trong GitLab CI (.gitlab-ci.yml):
+# variables:
+#   OPENAI_BASE_URL: "http://192.168.1.50:20128/v1"
+#   OPENAI_API_KEY: "$INTERNAL_9ROUTER_KEY"
+#   AI_REVIEW_MODEL: "ag/gemini-3.8-flash"</code></pre>
+          </div>
+        </div>
+
+        <!-- Enterprise Advantage Callout -->
+        <div class="mt-4 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs space-y-1 text-emerald-950">
+          <div class="font-bold text-emerald-800 flex items-center space-x-1.5">
+            <span>🛡️ Lợi Ích Tuân Thủ An Ninh Mạng Ngân Hàng (Security Compliance)</span>
+          </div>
+          <p class="text-[11px] text-emerald-900 leading-relaxed" data-i18n="sec5_callout">
+            • <b>Không vi phạm chính sách tường lửa:</b> Không cần xin mở luồng mạng ra bên ngoài tới OpenAI hay Anthropic, tận dụng chính đường kết nối Google Services đã được duyệt.<br>
+            • <b>Bảo vệ bí mật doanh nghiệp:</b> API Key của Google và tài khoản quản trị chỉ nằm tại máy chủ 9router nội bộ; toàn bộ CI Runner và Dev không bao giờ nhìn thấy token thật.<br>
+            • <b>Hỗ trợ Context khủng 1M Tokens:</b> Phân tích được trọn vẹn toàn bộ PR lớn và các file cấu trúc mà không sợ tràn context window.
+          </p>
+        </div>
+      </div>
+
     </section>
   </main>
 
@@ -560,6 +684,17 @@ docker exec ai-review-service python -m app.arch_engine.cli baseline /path/to/re
     "sec4_step3_desc": "Trong mọi lần quét PR (cả qua Webhook lẫn CI Pipeline), cờ <code>--baseline baseline.json</code> sẽ kích hoạt bộ lọc <code>BaselineManager.filter_violations()</code>:",
     "sec4_rebaseline_desc": "Khi dự án cập nhật thêm các quy tắc mới trong <code>architecture_rules.yaml</code> hoặc khi nhóm kỹ thuật đã hoàn tất một đợt dọn dẹp kỹ thuật lớn (Refactoring sprint), chỉ cần chạy lại lệnh ở <b>Bước 1</b> để cập nhật file <code>baseline.json</code> mới nhất.",
     "sec4_callout": "💡 <b>Nguyên lý Clean-As-You-Code:</b> Kể từ thời điểm này, mọi PR chỉ bị chặn (FAILED) nếu phát sinh vi phạm <b>MỚI</b> so với <code>baseline.json</code>. Các nợ cũ sẽ không bao giờ làm nghẽn tiến độ release của team!",
+    "sec5_title": "Vượt Tường Lửa Ngân Hàng/Doanh Nghiệp Với 9router AI Gateway (Google Antigravity)",
+    "sec5_desc": "Trong môi trường mạng nội bộ doanh nghiệp (Ngân hàng, Tài chính, Tập đoàn lớn), tường lửa thường <b>chặn toàn bộ dịch vụ AI bên ngoài như OpenAI, Claude</b> nhưng lại <b>cho phép các dịch vụ của Google</b> (như Google Cloud, Google Antigravity / Gemini CLI). Giải pháp tối ưu là sử dụng <b>9router</b> làm AI Gateway nội bộ chuyển đổi giao thức OpenAI sang Google Antigravity.",
+    "sec5_step1_title": "Khởi chạy 9router trong mạng nội bộ (LAN Server hoặc Docker)",
+    "sec5_step1_desc": "Clone repo 9router về máy trạm hoặc máy chủ nội bộ (ví dụ IP máy: <code>192.168.1.50</code>) và khởi chạy:",
+    "sec5_step2_title": "Kết nối 9router với Google Antigravity & Tạo API Key nội bộ",
+    "sec5_step2_desc": "Mở trình duyệt truy cập Web UI của 9router tại <code>http://&lt;IP_LAN_9ROUTER&gt;:20128</code>, vào Providers &rarr; Antigravity để liên kết tài khoản Google.",
+    "sec5_step3_title": "Lựa chọn Model Antigravity tối ưu cho tác vụ Code Review",
+    "sec5_step3_models_desc": "9router tự động ánh xạ các model Antigravity sang định danh chuẩn:",
+    "sec5_step4_title": "Truyền 3 biến môi trường vào Container AI Review Platform",
+    "sec5_step4_desc": "Chỉ cần cấu hình 3 biến môi trường sau cho Container Review hoặc CI Runner, không cần sửa đổi bất kỳ dòng mã nguồn nào:",
+    "sec5_callout": "• <b>Không vi phạm chính sách tường lửa:</b> Không cần xin mở luồng mạng ra bên ngoài tới OpenAI hay Anthropic, tận dụng chính đường kết nối Google Services đã được duyệt.<br>• <b>Bảo vệ bí mật doanh nghiệp:</b> API Key của Google và tài khoản quản trị chỉ nằm tại máy chủ 9router nội bộ; toàn bộ CI Runner và Dev không bao giờ nhìn thấy token thật.<br>• <b>Hỗ trợ Context khủng 1M Tokens:</b> Phân tích được trọn vẹn toàn bộ PR lớn và các file cấu trúc mà không sợ tràn context window.",
     "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
   },
   "en": {
@@ -623,6 +758,17 @@ docker exec ai-review-service python -m app.arch_engine.cli baseline /path/to/re
     "sec4_step3_desc": "Across both Webhook and CI runner modes, the <code>--baseline baseline.json</code> flag activates <code>BaselineManager.filter_violations()</code>:",
     "sec4_rebaseline_desc": "Whenever new rules are introduced into <code>architecture_rules.yaml</code> or after an engineering team completes a major refactoring sprint, simply rerun <b>Step 1</b> to regenerate an updated <code>baseline.json</code> snapshot.",
     "sec4_callout": "💡 <b>Clean-As-You-Code Principle:</b> From this point forward, Pull Requests are only blocked (FAILED) if they introduce <b>NEW</b> violations relative to <code>baseline.json</code>. Pre-existing debt never bottlenecks your team's deployment schedule!",
+    "sec5_title": "Bypass Enterprise Firewall via 9router AI Gateway (Google Antigravity)",
+    "sec5_desc": "In strict enterprise networks (Banking, Financial Institutions, Large Corporations), firewalls often <b>block external AI providers such as OpenAI and Claude</b> while <b>whitelisting Google ecosystem endpoints</b> (e.g. Google Cloud, Google Antigravity / Gemini CLI). The optimal architecture is deploying <b>9router</b> as an in-LAN AI Gateway to translate OpenAI protocol to Google Antigravity seamlessly.",
+    "sec5_step1_title": "Deploy 9router within internal network (LAN Server or Docker)",
+    "sec5_step1_desc": "Clone the 9router repository to a LAN workstation or internal server (e.g., host IP <code>192.168.1.50</code>) and launch:",
+    "sec5_step2_title": "Connect 9router with Google Antigravity & Generate Internal API Key",
+    "sec5_step2_desc": "Access 9router Web UI via <code>http://&lt;LAN_IP&gt;:20128</code>, navigate to Providers &rarr; Antigravity to authorize your Google account.",
+    "sec5_step3_title": "Select Optimized Antigravity Models for Architectural Review",
+    "sec5_step3_models_desc": "9router automatically routes and normalizes Antigravity model identifiers:",
+    "sec5_step4_title": "Inject 3 Environment Variables into AI Review Platform Container",
+    "sec5_step4_desc": "Configure the 3 environment variables below for Review Containers or CI Runners without modifying any application code:",
+    "sec5_callout": "• <b>Strict Firewall Compliance:</b> Zero outbound exceptions required for OpenAI or Anthropic; reuses existing whitelisted Google Services pathways.<br>• <b>Enterprise Credential Isolation:</b> Google API tokens and admin credentials stay strictly on the internal 9router host; CI runners never see raw credentials.<br>• <b>Massive 1M Token Context Window:</b> Reliably evaluates entire complex monorepos and extensive PR diffs without token truncation.",
     "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
   }
 };
