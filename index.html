@@ -795,12 +795,56 @@ rules:
             <p class="text-xs text-slate-500" data-i18n="adm_subtitle">Dành cho System Owner (Tech Lead / Architect / DevOps Lead)</p>
           </div>
         </div>
-        <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600 transition p-1.5 rounded-lg hover:bg-slate-200/60">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
+        <div class="flex items-center space-x-2">
+          <div id="adminUserBadge" class="hidden items-center space-x-2 bg-white px-2.5 py-1 rounded-xl border border-slate-200 text-xs shadow-sm">
+            <img id="adminUserAvatar" src="" class="w-5 h-5 rounded-full" alt="avatar" />
+            <span id="adminUsername" class="font-bold text-slate-800"></span>
+            <button onclick="adminLogout()" class="text-slate-400 hover:text-rose-600 ml-1" title="Đăng xuất">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+          </div>
+          <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600 transition p-1.5 rounded-lg hover:bg-slate-200/60">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
       </div>
 
-      <div class="p-6 overflow-y-auto space-y-6 flex-1 bg-slate-50/50">
+      <div class="overflow-y-auto flex-1 bg-slate-50/50 flex flex-col">
+        
+        <!-- Auth Lock Screen (Shown when not authenticated as ducphan1311) -->
+        <div id="adminAuthLock" class="p-8 sm:p-12 text-center flex-1 flex flex-col items-center justify-center space-y-5">
+          <div class="w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-md flex items-center justify-center text-3xl text-slate-900">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div class="max-w-md">
+            <h4 class="text-xl font-bold text-slate-900 mb-1.5" data-i18n="adm_lock_title">Xác Thực Quản Trị Viên (System Owner)</h4>
+            <p class="text-xs text-slate-500 leading-relaxed" data-i18n="adm_lock_desc">
+              Khu vực quản trị này được bảo mật nghiêm ngặt. Chỉ chủ sở hữu tài khoản GitHub <code class="font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200">ducphan1311</code> mới có quyền truy cập và ký số bản quyền.
+            </p>
+          </div>
+
+          <form onsubmit="verifyGitHubAdmin(event)" class="w-full max-w-sm space-y-3 pt-2">
+            <div>
+              <div class="relative">
+                <input type="password" id="ghPatInput" required placeholder="Dán GitHub Personal Access Token (PAT)" data-i18n-placeholder="adm_lock_input_ph" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono pr-10" />
+                <button type="button" onclick="togglePatVisibility()" class="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 text-xs">
+                  <i class="fa-solid fa-eye" id="patEyeIcon"></i>
+                </button>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1.5 text-left" data-i18n="adm_lock_hint">
+                * Yêu cầu token quyền <code>read:user</code> để đối soát username GitHub của bạn.
+              </p>
+            </div>
+            <div id="ghAuthError" class="hidden text-xs text-rose-600 bg-rose-50 border border-rose-200 p-3 rounded-xl text-left font-medium"></div>
+            <button type="submit" id="btnVerifyGh" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-xs transition flex items-center justify-center space-x-2 shadow-sm">
+              <i class="fa-solid fa-lock-open text-xs"></i>
+              <span data-i18n="adm_lock_btn">Xác Minh Danh Tính & Mở Khóa</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Authorized Admin Panel -->
+        <div id="adminAuthorizedContent" class="hidden p-6 space-y-6">
         
         <!-- Explanation & User Guide Card -->
         <div class="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 text-xs text-indigo-900 space-y-2.5">
@@ -887,6 +931,8 @@ rules:
             </table>
           </div>
         </div>
+
+        </div> <!-- /adminAuthorizedContent -->
 
       </div>
 
@@ -1076,7 +1122,12 @@ rules:
     "setup_step1_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"]\n\n# 1. Phân tầng kiến trúc Clean Architecture\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Tầng dữ liệu cốt lõi & logic nghiệp vụ\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"Tầng giao diện người dùng (UI)\"\n  - name: \"data\"\n    aliases: [\"repository\", \"network\", \"datasources\"]\n    description: \"Tầng hạ tầng kết nối DB / API\"\n\n# 2. Rào chắn quy tắc kiểm tra\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    name: \"Domain cấm import UI\"\n    severity: \"BLOCKER\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    name: \"Cấm print trên Production\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    name: \"Chống phụ thuộc vòng lặp\"\n    severity: \"BLOCKER\"",
     "adm_ph_days": "Số ngày",
     "adm_table_loading": "Đang tải dữ liệu từ Supabase...",
-    "page_title": "AI Architecture Review Engine — Hệ Thống Tự Động Kiểm Soát Kiến Trúc & Chất Lượng Mã Nguồn"
+    "page_title": "AI Architecture Review Engine — Hệ Thống Tự Động Kiểm Soát Kiến Trúc & Chất Lượng Mã Nguồn",
+    "adm_lock_title": "Xác Thực Quản Trị Viên (System Owner)",
+    "adm_lock_desc": "Khu vực quản trị này được bảo mật nghiêm ngặt. Chỉ chủ sở hữu tài khoản GitHub <code class=\"font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200\">ducphan1311</code> mới có quyền truy cập và ký số bản quyền.",
+    "adm_lock_input_ph": "Dán GitHub Personal Access Token (PAT)",
+    "adm_lock_hint": "* Yêu cầu token quyền <code>read:user</code> để đối soát username GitHub của bạn.",
+    "adm_lock_btn": "Xác Minh Danh Tính & Mở Khóa"
   },
   "en": {
     "nav_brand_badge": "Enterprise On-Premise",
@@ -1252,7 +1303,12 @@ rules:
     "setup_step1_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"]\n\n# 1. Clean Architecture Layer Boundaries\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Core business logic & domain entities\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"User Interface (UI) presentation layer\"\n  - name: \"data\"\n    aliases: [\"repository\", \"network\", \"datasources\"]\n    description: \"Infrastructure data sources & network API\"\n\n# 2. Architecture & Quality Gate Rules\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    name: \"Domain must not import UI\"\n    severity: \"BLOCKER\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    name: \"Ban print on Production\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    name: \"Prevent circular dependencies\"\n    severity: \"BLOCKER\"",
     "adm_ph_days": "Number of days",
     "adm_table_loading": "Loading records from Supabase...",
-    "page_title": "AI Architecture Review Engine — Automated Architecture & Code Quality Governance System"
+    "page_title": "AI Architecture Review Engine — Automated Architecture & Code Quality Governance System",
+    "adm_lock_title": "Administrator Authentication (System Owner)",
+    "adm_lock_desc": "This administration portal is strictly restricted. Only the GitHub account owner <code class=\"font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200\">ducphan1311</code> is authorized to access and issue digital licenses.",
+    "adm_lock_input_ph": "Paste GitHub Personal Access Token (PAT)",
+    "adm_lock_hint": "* Requires token with <code>read:user</code> scope to verify your GitHub identity.",
+    "adm_lock_btn": "Verify Identity & Unlock"
   }
 };
 
@@ -1323,6 +1379,117 @@ rules:
       }
     };
 
+    // Admin Authentication with GitHub
+    const AUTHORIZED_GITHUB_USER = "ducphan1311";
+
+    function checkAdminSession() {
+      const savedUser = sessionStorage.getItem("admin_gh_user");
+      const savedToken = sessionStorage.getItem("admin_gh_token");
+      const lockEl = document.getElementById("adminAuthLock");
+      const contentEl = document.getElementById("adminAuthorizedContent");
+      const badgeEl = document.getElementById("adminUserBadge");
+      const usernameEl = document.getElementById("adminUsername");
+      const avatarEl = document.getElementById("adminUserAvatar");
+
+      if (savedUser && savedUser.toLowerCase() === AUTHORIZED_GITHUB_USER.toLowerCase() && savedToken) {
+        if (lockEl) lockEl.classList.add("hidden");
+        if (contentEl) contentEl.classList.remove("hidden");
+        if (badgeEl) {
+          badgeEl.classList.remove("hidden");
+          badgeEl.classList.add("flex");
+        }
+        if (usernameEl) usernameEl.innerText = savedUser;
+        const savedAvatar = sessionStorage.getItem("admin_gh_avatar");
+        if (avatarEl && savedAvatar) avatarEl.src = savedAvatar;
+        return true;
+      } else {
+        if (lockEl) lockEl.classList.remove("hidden");
+        if (contentEl) contentEl.classList.add("hidden");
+        if (badgeEl) badgeEl.classList.add("hidden");
+        return false;
+      }
+    }
+
+    window.togglePatVisibility = function() {
+      const input = document.getElementById("ghPatInput");
+      const icon = document.getElementById("patEyeIcon");
+      if (!input) return;
+      if (input.type === "password") {
+        input.type = "text";
+        if (icon) icon.className = "fa-solid fa-eye-slash";
+      } else {
+        input.type = "password";
+        if (icon) icon.className = "fa-solid fa-eye";
+      }
+    };
+
+    window.verifyGitHubAdmin = async function(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById("ghPatInput");
+      const errBox = document.getElementById("ghAuthError");
+      const btn = document.getElementById("btnVerifyGh");
+      const token = input ? input.value.trim() : "";
+
+      if (!token) return;
+
+      if (errBox) {
+        errBox.classList.add("hidden");
+        errBox.innerText = "";
+      }
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>${currentLang === "vi" ? "Đang xác thực GitHub..." : "Verifying GitHub..."}`;
+
+      try {
+        const res = await fetch("https://api.github.com/user", {
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Accept": "application/vnd.github+json"
+          }
+        });
+
+        if (!res.ok) {
+          throw new Error(currentLang === "vi" 
+            ? "Token không hợp lệ hoặc đã hết hạn (GitHub HTTP " + res.status + ")" 
+            : "Invalid or expired GitHub token (HTTP " + res.status + ")");
+        }
+
+        const data = await res.json();
+        if (!data || !data.login) {
+          throw new Error("Cannot retrieve GitHub profile");
+        }
+
+        if (data.login.toLowerCase() !== AUTHORIZED_GITHUB_USER.toLowerCase()) {
+          throw new Error(currentLang === "vi" 
+            ? `Truy cập bị từ chối: Tài khoản "${data.login}" không phải là Quản trị viên "${AUTHORIZED_GITHUB_USER}".`
+            : `Access Denied: Account "${data.login}" is not authorized administrator "${AUTHORIZED_GITHUB_USER}".`);
+        }
+
+        // Authentication Success
+        sessionStorage.setItem("admin_gh_user", data.login);
+        sessionStorage.setItem("admin_gh_token", token);
+        sessionStorage.setItem("admin_gh_avatar", data.avatar_url || "");
+
+        input.value = "";
+        checkAdminSession();
+        loadRequests();
+      } catch (err) {
+        if (errBox) {
+          errBox.classList.remove("hidden");
+          errBox.innerText = err.message || "Lỗi xác thực GitHub.";
+        }
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-lock-open text-xs"></i><span data-i18n="adm_lock_btn">${currentLang === "vi" ? "Xác Minh Danh Tính & Mở Khóa" : "Verify Identity & Unlock"}</span>`;
+      }
+    };
+
+    window.adminLogout = function() {
+      sessionStorage.removeItem("admin_gh_user");
+      sessionStorage.removeItem("admin_gh_token");
+      sessionStorage.removeItem("admin_gh_avatar");
+      checkAdminSession();
+    };
+
     // Global toggle for Admin Modal
     window.toggleAdminModal = function() {
       const modal = document.getElementById("adminModal");
@@ -1330,7 +1497,10 @@ rules:
       modal.classList.toggle("hidden");
       if (!modal.classList.contains("hidden")) {
         document.body.style.overflow = "hidden";
-        loadRequests();
+        const isAuthed = checkAdminSession();
+        if (isAuthed) {
+          loadRequests();
+        }
       } else {
         document.body.style.overflow = "";
       }
@@ -1427,7 +1597,27 @@ rules:
           </tr>
         `).join("");
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-rose-500 font-medium">Supabase Error: ${err.message}.</td></tr>`;
+        const isSchemaMissing = err.message && err.message.includes("public.license_requests");
+        if (isSchemaMissing) {
+          tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-6 text-center text-slate-500">
+            <div class="max-w-md mx-auto p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs text-left space-y-2">
+              <div class="font-bold flex items-center space-x-1.5 text-amber-800">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>${currentLang === "vi" ? "Chưa khởi tạo bảng database trên Supabase" : "Database table not yet initialized on Supabase"}</span>
+              </div>
+              <p class="leading-relaxed text-[11px]">
+                ${currentLang === "vi" 
+                  ? "Bảng <code>public.license_requests</code> chưa có trong schema cache. Vui lòng mở Supabase SQL Editor và chạy file <code>supabase_schema.sql</code>."
+                  : "Table <code>public.license_requests</code> not found in schema cache. Please open Supabase SQL Editor and execute <code>supabase_schema.sql</code>."}
+              </p>
+              <a href="https://supabase.com/dashboard/project/zqpytlatdyljvqdhebew/sql" target="_blank" class="inline-flex items-center space-x-1 font-bold text-indigo-600 hover:text-indigo-800 text-[11px] pt-1">
+                <span>Mở Supabase SQL Editor →</span>
+              </a>
+            </div>
+          </td></tr>`;
+        } else {
+          tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-rose-500 font-medium">Supabase Error: ${err.message}.</td></tr>`;
+        }
       }
     };
 
