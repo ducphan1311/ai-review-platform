@@ -93,7 +93,7 @@ docker run -d \
       </div>
 
       
-      <!-- Section 2.5: Internal Network & Corporate Firewall Options -->
+            <!-- Section 2.5: Internal Network & Corporate Firewall Options -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
           <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">2.5</span>
@@ -103,83 +103,164 @@ docker run -d \
           Tùy theo chính sách an ninh mạng của doanh nghiệp, bạn có thể lựa chọn 1 trong 3 mô hình kết nối phù hợp:
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <!-- Option A: Self-hosted GitLab/GitHub Enterprise -->
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+        <!-- 3 Cards Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <!-- Option A Card -->
+          <div onclick="switchTopologyTab('optA')" class="cursor-pointer p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-emerald-500 hover:bg-emerald-50/20 transition flex flex-col justify-between">
             <div>
               <div class="flex items-center space-x-2 mb-2">
                 <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">Phương án A</span>
                 <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optA_title">Nội Bộ 100% (Direct LAN)</h3>
               </div>
               <p class="text-[11px] text-slate-600 mb-3" data-i18n="sec2_5_optA_desc">
-                Áp dụng khi server Git (GitLab CE/EE, GitHub Enterprise Server, Gitea) và Docker Service cùng nằm trong mạng Private LAN.
+                GitLab/GitHub Enterprise cùng nằm trong mạng Private LAN. Không cần Internet.
               </p>
             </div>
-            <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 font-mono" data-i18n="sec2_5_optA_code">
-              Webhook URL: <code>http://10.0.x.x:8080/webhook</code><br>
-              <span class="text-emerald-600 font-semibold">✓ Không cần Internet</span>
+            <div class="text-[11px] text-slate-700 bg-white p-2 rounded-lg border border-slate-200 font-mono text-center text-emerald-700 font-semibold" data-i18n="sec2_5_optA_tag">
+              Xem cấu hình chi tiết →
             </div>
           </div>
 
-          <!-- Option B: Cloudflare Tunnel / Reverse Proxy -->
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+          <!-- Option B Card -->
+          <div onclick="switchTopologyTab('optB')" class="cursor-pointer p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-blue-500 hover:bg-blue-50/20 transition flex flex-col justify-between">
             <div>
               <div class="flex items-center space-x-2 mb-2">
                 <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-blue-100 text-blue-800">Phương án B</span>
-                <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optB_title">Cloudflare Tunnel / Proxy</h3>
+                <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optB_title">Cloudflare Tunnel (Proxy)</h3>
               </div>
               <p class="text-[11px] text-slate-600 mb-3" data-i18n="sec2_5_optB_desc">
-                Dành cho GitHub.com/GitLab.com cloud muốn gửi Webhook về Server nội bộ mà <b>không cần mở Port Firewall (No NAT/Port Forward)</b>.
+                GitHub Cloud gửi Webhook về Server nội bộ mà <b>không cần mở Port Firewall</b>.
               </p>
             </div>
-            <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 font-mono" data-i18n="sec2_5_optB_code">
-              cloudflared tunnel run ai-review<br>
-              <span class="text-blue-600 font-semibold">✓ Bảo mật SSL & Zero Trust</span>
+            <div class="text-[11px] text-slate-700 bg-white p-2 rounded-lg border border-slate-200 font-mono text-center text-blue-700 font-semibold" data-i18n="sec2_5_optB_tag">
+              Xem cấu hình chi tiết →
             </div>
           </div>
 
-          <!-- Option C: Self-Hosted CI Runner (GitHub Action / GitLab CI) -->
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+          <!-- Option C Card -->
+          <div onclick="switchTopologyTab('optC')" class="cursor-pointer p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-purple-500 hover:bg-purple-50/20 transition flex flex-col justify-between">
             <div>
               <div class="flex items-center space-x-2 mb-2">
                 <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-purple-100 text-purple-800">Phương án C</span>
                 <h3 class="text-xs font-bold text-slate-900" data-i18n="sec2_5_optC_title">Self-Hosted CI Runner</h3>
               </div>
               <p class="text-[11px] text-slate-600 mb-3" data-i18n="sec2_5_optC_desc">
-                Áp dụng khi mạng hoàn toàn cô lập (Air-Gapped / Inbound blocked). Chạy quét trực tiếp bằng CI Runner nội bộ không cần Webhook.
+                Mạng cô lập hoàn toàn (Air-gapped). Quét trực tiếp trong Pipeline nội bộ.
               </p>
             </div>
-            <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 font-mono" data-i18n="sec2_5_optC_code">
-              docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform ...<br>
-              <span class="text-purple-600 font-semibold">✓ Chạy trong GitHub Action nội bộ</span>
+            <div class="text-[11px] text-slate-700 bg-white p-2 rounded-lg border border-slate-200 font-mono text-center text-purple-700 font-semibold" data-i18n="sec2_5_optC_tag">
+              Xem cấu hình chi tiết →
             </div>
           </div>
         </div>
 
-        <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900" data-i18n="sec2_5_callout">
-          🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL="http://ollama-internal:11434/v1"</code> và <code>AI_REVIEW_MODEL="qwen2.5-coder:32b"</code> để xử lý AI hoàn toàn offline!
-        </div>
-      
-      <!-- Detailed CI/CD Pipeline Files & Internal Network Implementation -->
-      <div class="mt-6 border-t border-slate-200 pt-6">
-        <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center space-x-2">
-          <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
-          <span data-i18n="sec2_5_detail_heading">Chi Tiết Từng Dòng Lệnh Cấu Hình Pipeline (GitHub Actions & GitLab CI)</span>
-        </h3>
-        
-        <p class="text-xs text-slate-600 mb-4" data-i18n="sec2_5_detail_desc">
-          File pipeline dưới đây được chuẩn hóa để tương thích với tất cả các nền tảng CI/CD (GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins) chạy trên Server hoặc Self-Hosted Runner nội bộ:
-        </p>
+        <!-- Dynamic Detailed View for 3 Topologies -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50/40">
+          
+          <!-- Tab Navigation Buttons -->
+          <div class="flex flex-wrap gap-2 mb-4 border-b border-slate-200 pb-3">
+            <button type="button" id="tabBtnOptA" onclick="switchTopologyTab('optA')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-700 border border-emerald-300 shadow-sm transition">Phương án A: Mạng Nội Bộ (Direct LAN)</button>
+            <button type="button" id="tabBtnOptB" onclick="switchTopologyTab('optB')" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 border border-slate-200 bg-white transition">Phương án B: Cloudflare Tunnel (Không Mở Port)</button>
+            <button type="button" id="tabBtnOptC" onclick="switchTopologyTab('optC')" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 border border-slate-200 bg-white transition">Phương án C: Self-Hosted CI Runner Pipeline</button>
+          </div>
 
-        <!-- Tabs Switcher -->
-        <div class="bg-slate-100 p-1 rounded-xl flex space-x-1 mb-4 text-xs font-semibold max-w-md">
-          <button type="button" id="tabBtnGithub" onclick="switchCiTab('github')" class="flex-1 py-1.5 px-3 rounded-lg bg-white text-indigo-700 shadow-sm text-center transition">GitHub Actions (.github/workflows/ai-review.yml)</button>
-          <button type="button" id="tabBtnGitlab" onclick="switchCiTab('gitlab')" class="flex-1 py-1.5 px-3 rounded-lg text-slate-600 hover:text-slate-900 text-center transition">GitLab CI (.gitlab-ci.yml)</button>
-        </div>
+          <!-- Content Option A -->
+          <div id="contentOptA" class="space-y-4">
+            <div class="text-xs text-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span data-i18n="sec2_5_optA_header">Hướng Dẫn Cấu Hình Webhook Trong Mạng LAN Nội Bộ (GitLab / GitHub Enterprise)</span>
+              </h4>
+              <p data-i18n="sec2_5_optA_detail_desc">Khi máy chủ Git Server và máy chủ chạy Docker Container cùng nằm chung dải mạng Private LAN (ví dụ <code>10.0.x.x</code> hoặc <code>192.168.x.x</code>), toàn bộ dữ liệu di chuyển 100% nội bộ không cần Internet.</p>
+            </div>
 
-        <!-- GitHub Actions Tab Content -->
-        <div id="tabContentGithub" class="space-y-3">
-          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec2_5_github_code">name: Architecture & AI Review Quality Gate
+            <!-- Warning Box: GitLab SSRF Localhost Fix -->
+            <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-1.5">
+              <div class="font-bold flex items-center space-x-1.5">
+                <span>⚠️ Lưu Ý Quan Trọng Cho GitLab On-Premise (SSRF Protection):</span>
+              </div>
+              <p data-i18n="sec2_5_gitlab_ssrf_note">Mặc định, GitLab sẽ chặn Webhook gửi tới các địa chỉ IP nội bộ và báo lỗi: <code>Requests to localhost/local network are not allowed</code>. Bạn cần bật quyền theo các bước sau:</p>
+              <ol class="list-decimal list-inside space-x-0 space-y-1 pl-1 text-[11px] font-mono text-slate-800 bg-amber-100/50 p-2.5 rounded-lg">
+                <li>Truy cập GitLab với quyền Admin: <b>Admin Area → Settings → Network</b></li>
+                <li>Mở rộng mục <b>Outbound requests</b></li>
+                <li>Tick chọn: <b>Allow requests to the local network from webhooks and integrations</b></li>
+                <li>Bấm <b>Save changes</b> để áp dụng.</li>
+              </ol>
+            </div>
+
+            <!-- Setup Form Steps -->
+            <div class="space-y-2 text-xs">
+              <p class="font-semibold text-slate-800" data-i18n="sec2_5_webhook_form_title">Điền thông số Webhook trên GitLab / GitHub Repository:</p>
+              <div class="bg-slate-950 text-slate-200 p-3.5 rounded-xl font-mono text-xs space-y-1.5 border border-slate-800">
+                <div class="text-emerald-400"># 1. URL máy chủ container On-Premise:</div>
+                <div>URL: <span class="text-amber-300">http://10.0.12.34:8080/</span></div>
+                <div class="text-emerald-400 mt-2"># 2. Secret Token (khớp với GITHUB_WEBHOOK_SECRET khi chạy docker run):</div>
+                <div>Secret Token: <span class="text-amber-300">your-super-secret-token-32-chars-min</span></div>
+                <div class="text-emerald-400 mt-2"># 3. Trigger Events (Sự kiện kích hoạt):</div>
+                <div>Triggers: <span class="text-indigo-300">[x] Merge request events</span> (GitLab) hoặc <span class="text-indigo-300">[x] Pull requests</span> (GitHub)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Option B -->
+          <div id="contentOptB" class="hidden space-y-4">
+            <div class="text-xs text-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                <span data-i18n="sec2_5_optB_header">Kết Nối GitHub.com Về Server Nội Bộ Bằng Cloudflare Tunnel (Zero Open Ports)</span>
+              </h4>
+              <p data-i18n="sec2_5_optB_detail_desc">Nếu công ty của bạn dùng <b>GitHub.com (Cloud)</b> nhưng máy chủ quét AI nằm sau tường lửa công ty và <b>bị cấm mở port / cấm NAT IP tĩnh</b>, giải pháp an toàn nhất đạt chuẩn ngân hàng là sử dụng <b>Cloudflare Tunnel</b>.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 bg-white border border-slate-200 rounded-lg">
+                <div class="font-bold text-slate-900 mb-1">🛡️ Lợi Ích An Ninh Tuyệt Đối:</div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1 text-[11px]">
+                  <li>Không cần mở bất kỳ cổng Inbound nào trên Router Firewall (No Port Forward).</li>
+                  <li>Tự động kích hoạt mã hóa SSL/TLS chuẩn Cloudflare Edge.</li>
+                  <li>Chống tấn công DDoS và kiểm soát lượng request.</li>
+                </ul>
+              </div>
+              <div class="p-3 bg-white border border-slate-200 rounded-lg">
+                <div class="font-bold text-slate-900 mb-1">⚡ Cách Hoạt Động:</div>
+                <p class="text-slate-600 text-[11px]">Container <code>cloudflared</code> tạo 1 outbound tunnel an toàn ra Cloudflare Edge. Khi GitHub bắn webhook vào domain, Cloudflare đẩy về port 8080 nội bộ.</p>
+              </div>
+            </div>
+
+            <!-- Docker Command for Cloudflared -->
+            <div class="space-y-2 text-xs">
+              <p class="font-semibold text-slate-800" data-i18n="sec2_5_cloudflared_cmd_title">Chạy Cloudflare Tunnel bằng 1 câu lệnh Docker duy nhất trên cùng máy chủ:</p>
+              <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl font-mono text-xs overflow-x-auto border border-slate-800"><code># 1. Khởi chạy Cloudflare Tunnel Client kết nối về Cloudflare Zero Trust:
+docker run -d   --name ai-review-tunnel   --restart unless-stopped   --network="host"   cloudflare/cloudflared:latest tunnel --no-autoupdate run --token &lt;YOUR_CLOUDFLARE_TUNNEL_TOKEN&gt;
+
+# 2. Cấu hình trên Dashboard Cloudflare Zero Trust:
+# Public Hostname: ai-review.yourdomain.com -> Service: HTTP -> localhost:8080
+
+# 3. Trên GitHub.com -> Repo Settings -> Webhooks:
+# Payload URL: https://ai-review.yourdomain.com/
+# Content type: application/json</code></pre>
+            </div>
+          </div>
+
+          <!-- Content Option C -->
+          <div id="contentOptC" class="hidden space-y-4">
+            <div class="text-xs text-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                <span data-i18n="sec2_5_optC_header">Phương Án C: Chạy Trực Tiếp Trong CI Pipeline (Self-Hosted CI Runner)</span>
+              </h4>
+              <p data-i18n="sec2_5_optC_detail_desc">Dành cho môi trường cô lập tuyệt đối (Air-Gapped / Inbound bị chặn 100%), không muốn duy trì Webhook server thường trực. Pipeline sẽ kích hoạt container quét trực tiếp theo từng PR/MR.</p>
+            </div>
+
+            <!-- Sub Tabs: GitHub vs GitLab -->
+            <div class="bg-slate-200/70 p-1 rounded-xl flex space-x-1 text-xs font-semibold max-w-md">
+              <button type="button" id="tabBtnGithub" onclick="switchCiTab('github')" class="flex-1 py-1 px-3 rounded-lg bg-white text-indigo-700 shadow-sm text-center transition">GitHub Actions (.github/workflows/ai-review.yml)</button>
+              <button type="button" id="tabBtnGitlab" onclick="switchCiTab('gitlab')" class="flex-1 py-1 px-3 rounded-lg text-slate-600 hover:text-slate-900 text-center transition">GitLab CI (.gitlab-ci.yml)</button>
+            </div>
+
+            <!-- GitHub Actions Tab Content -->
+            <div id="tabContentGithub" class="space-y-3">
+              <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec2_5_github_code">name: Architecture & AI Review Quality Gate
 
 on:
   pull_request:
@@ -220,14 +301,13 @@ jobs:
       # --baseline ...: Nợ kỹ thuật cũ được ghi nhận (nguyên lý Clean-As-You-Code)
       # --diff: Chỉ phân tích các file bị chỉnh sửa trong PR này (tiết kiệm thời gian)
       # --base: Nhánh cơ sở để diff (ví dụ origin/main)</code></pre>
-        </div>
+            </div>
 
-        <!-- GitLab CI Tab Content -->
-        <div id="tabContentGitlab" class="hidden space-y-3">
-          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec2_5_gitlab_code"># .gitlab-ci.yml - Cấu hình kiểm tra kiến trúc trên GitLab On-Premise
+            <!-- GitLab CI Tab Content -->
+            <div id="tabContentGitlab" class="hidden space-y-3">
+              <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec2_5_gitlab_code"># .gitlab-ci.yml - Cấu hình kiểm tra kiến trúc trên GitLab On-Premise
 
 stages:
-  - test
   - quality-gate
 
 ai-architecture-review:
@@ -254,9 +334,13 @@ ai-architecture-review:
 
   # Nếu có vi phạm mới (BLOCKER), CI Pipeline sẽ FAILED ngay lập tức để bảo vệ nhánh chính
   allow_failure: false</code></pre>
+            </div>
+          </div>
         </div>
-      </div>
 
+        <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900" data-i18n="sec2_5_callout">
+          🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL="http://ollama-internal:11434/v1"</code> và <code>AI_REVIEW_MODEL="qwen2.5-coder:32b"</code> để xử lý AI hoàn toàn offline!
+        </div>
       </div>
 
       <!-- Section 3 -->
@@ -365,6 +449,18 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec2_5_callout": "🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL=\"http://ollama-internal:11434/v1\"</code> và <code>AI_REVIEW_MODEL=\"qwen2.5-coder:32b\"</code> để xử lý AI hoàn toàn offline!",
         "sec2_5_detail_heading": "Chi Tiết Từng Dòng Lệnh Cấu Hình Pipeline (GitHub Actions & GitLab CI)",
     "sec2_5_detail_desc": "File pipeline dưới đây được chuẩn hóa để tương thích với tất cả các nền tảng CI/CD (GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins) chạy trên Server hoặc Self-Hosted Runner nội bộ:",
+        "sec2_5_optA_tag": "Xem cấu hình chi tiết →",
+    "sec2_5_optB_tag": "Xem cấu hình chi tiết →",
+    "sec2_5_optC_tag": "Xem cấu hình chi tiết →",
+    "sec2_5_optA_header": "Hướng Dẫn Cấu Hình Webhook Trong Mạng LAN Nội Bộ (GitLab / GitHub Enterprise)",
+    "sec2_5_optA_detail_desc": "Khi máy chủ Git Server và máy chủ chạy Docker Container cùng nằm chung dải mạng Private LAN (ví dụ <code>10.0.x.x</code> hoặc <code>192.168.x.x</code>), toàn bộ dữ liệu di chuyển 100% nội bộ không cần Internet.",
+    "sec2_5_gitlab_ssrf_note": "Mặc định, GitLab sẽ chặn Webhook gửi tới các địa chỉ IP nội bộ và báo lỗi: <code>Requests to localhost/local network are not allowed</code>. Bạn cần bật quyền theo các bước sau:",
+    "sec2_5_webhook_form_title": "Điền thông số Webhook trên GitLab / GitHub Repository:",
+    "sec2_5_optB_header": "Kết Nối GitHub.com Về Server Nội Bộ Bằng Cloudflare Tunnel (Zero Open Ports)",
+    "sec2_5_optB_detail_desc": "Nếu công ty của bạn dùng <b>GitHub.com (Cloud)</b> nhưng máy chủ quét AI nằm sau tường lửa công ty và <b>bị cấm mở port / cấm NAT IP tĩnh</b>, giải pháp an toàn nhất đạt chuẩn ngân hàng là sử dụng <b>Cloudflare Tunnel</b>.",
+    "sec2_5_cloudflared_cmd_title": "Chạy Cloudflare Tunnel bằng 1 câu lệnh Docker duy nhất trên cùng máy chủ:",
+    "sec2_5_optC_header": "Phương Án C: Chạy Trực Tiếp Trong CI Pipeline (Self-Hosted CI Runner)",
+    "sec2_5_optC_detail_desc": "Dành cho môi trường cô lập tuyệt đối (Air-Gapped / Inbound bị chặn 100%), không muốn duy trì Webhook server thường trực. Pipeline sẽ kích hoạt container quét trực tiếp theo từng PR/MR.",
     "sec3_title": "Cấu Hình Tệp Quy Tắc <code>architecture_rules.yaml</code>",
     "sec3_desc": "Tại thư mục gốc của repository cần kiểm tra, tạo thư mục <code>config/</code> và đặt file <code>architecture_rules.yaml</code>:",
     "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Chỉ định thư mục mã nguồn\n\n# 1. Định nghĩa phân tầng Clean Architecture\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Tầng logic nghiệp vụ & entity cốt lõi\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"Tầng giao diện người dùng\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Tầng dữ liệu DB & API\"\n\n# 2. Quy tắc kiểm soát nghiêm ngặt\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
@@ -406,6 +502,18 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec2_5_callout": "🔒 <b>100% On-Premise LLM:</b> If corporate security forbids outbound cloud LLM access, configure <code>OPENAI_BASE_URL=\"http://ollama-internal:11434/v1\"</code> with <code>AI_REVIEW_MODEL=\"qwen2.5-coder:32b\"</code> for zero external data egress!",
         "sec2_5_detail_heading": "Detailed Pipeline Configuration & Line-by-Line Breakdown (GitHub Actions & GitLab CI)",
     "sec2_5_detail_desc": "The pipeline specifications below are standardized to execute seamlessly across all enterprise CI/CD systems (GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins) on internal self-hosted runners:",
+        "sec2_5_optA_tag": "View Setup Details →",
+    "sec2_5_optB_tag": "View Setup Details →",
+    "sec2_5_optC_tag": "View Setup Details →",
+    "sec2_5_optA_header": "Private LAN Webhook Setup Guide (GitLab / GitHub Enterprise)",
+    "sec2_5_optA_detail_desc": "When both the Git Server and the Docker Container instance reside inside the same private LAN subnet (e.g. <code>10.0.x.x</code> or <code>192.168.x.x</code>), network traffic remains 100% internal with zero internet exposure.",
+    "sec2_5_gitlab_ssrf_note": "By default, GitLab blocks webhooks destined for local IP addresses with error: <code>Requests to localhost/local network are not allowed</code>. Enable local requests via these steps:",
+    "sec2_5_webhook_form_title": "Webhook Parameters for GitLab / GitHub Repository Settings:",
+    "sec2_5_optB_header": "Secure GitHub.com to Internal Server Connection via Cloudflare Tunnel (Zero Open Ports)",
+    "sec2_5_optB_detail_desc": "If your team uses <b>GitHub.com (Cloud)</b> while your scanning server is isolated behind corporate firewalls with <b>strict inbound port blocking & no public static IP</b>, the enterprise-grade solution is <b>Cloudflare Tunnel</b>.",
+    "sec2_5_cloudflared_cmd_title": "Run Cloudflare Tunnel client via a single Docker command:",
+    "sec2_5_optC_header": "Option C: In-Workflow Execution (Self-Hosted CI Runner)",
+    "sec2_5_optC_detail_desc": "For fully air-gapped environments or organizations that prefer not to maintain an always-on webhook daemon. Scans are dispatched per-PR/MR inside CI runners.",
     "sec3_title": "Configure <code>architecture_rules.yaml</code> Rule Specification",
     "sec3_desc": "In the target repository root directory, create a <code>config/</code> directory and place your <code>architecture_rules.yaml</code> file:",
     "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Source code scan directories\n\n# 1. Clean Architecture Layer Boundaries\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Core business logic & domain entities\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"User Interface (UI) presentation layer\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Infrastructure data sources & network API\"\n\n# 2. Strict Architecture Gate Rules\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
@@ -419,6 +527,33 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     let currentLang = localStorage.getItem("preferred_lang") || "vi";
 
     
+    
+    function switchTopologyTab(opt) {
+      const btnA = document.getElementById("tabBtnOptA");
+      const btnB = document.getElementById("tabBtnOptB");
+      const btnC = document.getElementById("tabBtnOptC");
+      const cA = document.getElementById("contentOptA");
+      const cB = document.getElementById("contentOptB");
+      const cC = document.getElementById("contentOptC");
+
+      // Reset styles
+      [btnA, btnB, btnC].forEach(b => {
+        b.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 border border-slate-200 bg-white transition";
+      });
+      [cA, cB, cC].forEach(c => c.classList.add("hidden"));
+
+      if (opt === 'optA') {
+        btnA.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-emerald-700 border border-emerald-300 shadow-sm transition";
+        cA.classList.remove("hidden");
+      } else if (opt === 'optB') {
+        btnB.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 border border-blue-300 shadow-sm transition";
+        cB.classList.remove("hidden");
+      } else {
+        btnC.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-purple-700 border border-purple-300 shadow-sm transition";
+        cC.classList.remove("hidden");
+      }
+    }
+
     function switchCiTab(type) {
       const btnGh = document.getElementById("tabBtnGithub");
       const btnGl = document.getElementById("tabBtnGitlab");
