@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cẩm Nang Meta-Variables (Semgrep AST Patterns) — AI Architecture Review</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+  <!-- Nav -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center space-x-3">
+          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Trang Chủ</span>
+          </a>
+          <span class="text-slate-300">/</span>
+          <span class="font-bold text-slate-800 text-sm">Cẩm Nang Meta-Variables AST</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="setup-guide.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">← Cài Đặt Chi Tiết</a>
+          <a href="rule-authoring.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">← Hướng Dẫn Tự Viết Rule</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1">
+    <div class="mb-10">
+      <span class="text-xs font-bold uppercase tracking-wider text-violet-600">Advanced Pattern Matching</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Cẩm Nang Meta-Variables & AST Syntax Patterns</h1>
+      <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+        Hướng dẫn sử dụng các biến đại diện siêu cấp (Metavariables: <code>$X</code>, <code>$E</code>, <code>...</code>) để bắt trúng các lỗi logic và lỗ hổng bảo mật phức tạp trên Dart, Swift, Kotlin, TypeScript.
+      </p>
+    </div>
+
+    <div class="space-y-8">
+      
+      <!-- Concept Overview -->
+      <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-3">1. Nguyên Lý Hoạt Động Của Meta-Variables</h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+          Thay vì sử dụng biểu thức chính quy (Regex) dễ gây ra lỗi sai sót (False Positive) do khoảng trắng hay xuống dòng, <b>Meta-Variables</b> hoạt động trực tiếp trên cây cú pháp AST của mã nguồn. Nó hiểu được cấu trúc của biểu thức, hàm, hoặc khối lệnh.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 border rounded-xl">
+            <code class="font-bold text-violet-600">$X</code>
+            <p class="text-slate-600 mt-1">Đại diện cho <b>một biến, biểu thức hoặc kiểu dữ liệu bất kỳ</b>.</p>
+          </div>
+          <div class="p-3 bg-slate-50 border rounded-xl">
+            <code class="font-bold text-violet-600">$...ARGS</code>
+            <p class="text-slate-600 mt-1">Đại diện cho <b>danh sách không hoặc nhiều tham số</b>.</p>
+          </div>
+          <div class="p-3 bg-slate-50 border rounded-xl">
+            <code class="font-bold text-violet-600">...</code>
+            <p class="text-slate-600 mt-1">Toán tử Ellipsis đại diện cho <b>chuỗi câu lệnh bất kỳ</b>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real World Examples -->
+      <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900 mb-4">2. Các Ca Bắt Lỗi Thực Tế Thường Gặp</h2>
+        
+        <div class="space-y-6">
+          <!-- Case 1 -->
+          <div>
+            <h3 class="text-sm font-bold text-slate-800 mb-1 flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <span>Bắt ngoại lệ bị nuốt ngầm (Silent Catch Block)</span>
+            </h3>
+            <p class="text-xs text-slate-500 mb-2">Phát hiện bất kỳ khối catch nào bắt biến ngoại lệ nhưng không xử lý gì bên trong:</p>
+            <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-xl text-xs font-mono overflow-x-auto"><code>- id: "NO_SILENT_EMPTY_CATCH"
+  type: "meta_pattern"
+  pattern: "catch ($E) { }"
+  severity: "BLOCKER"</code></pre>
+          </div>
+
+          <!-- Case 2 -->
+          <div>
+            <h3 class="text-sm font-bold text-slate-800 mb-1 flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <span>Cấm gọi setState ngay sau lệnh bất đồng bộ mà thiếu Guard Clause</span>
+            </h3>
+            <p class="text-xs text-slate-500 mb-2">Phát hiện lệnh await được gọi, sau đó lập tức gọi setState mà không kiểm tra mounted:</p>
+            <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-xl text-xs font-mono overflow-x-auto"><code>- id: "UNGUARDED_ASYNC_SETSTATE"
+  type: "meta_pattern"
+  pattern: |
+    await $ASYNC_CALL;
+    ...
+    setState($...ARGS);
+  severity: "CRITICAL"</code></pre>
+          </div>
+
+          <!-- Case 3 -->
+          <div>
+            <h3 class="text-sm font-bold text-slate-800 mb-1 flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <span>Cấm hardcode URL hoặc IP nhạy cảm trong mã nguồn</span>
+            </h3>
+            <p class="text-xs text-slate-500 mb-2">Bắt các chuỗi kết nối chứa IP hoặc http:// nội bộ:</p>
+            <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-xl text-xs font-mono overflow-x-auto"><code>- id: "BAN_HARDCODED_INTERNAL_URL"
+  type: "meta_pattern"
+  pattern: 'http://=~/^http:\/\/10\..*/'
+  severity: "BLOCKER"</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="py-6 bg-white border-t border-slate-200 text-center text-xs text-slate-500">
+    <p>© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
+  </footer>
+</body>
+</html>
