@@ -386,27 +386,111 @@ rules:
     severity: "BLOCKER"</code></pre>
       </div>
 
-      <!-- Section 4 -->
+            <!-- Section 4: Deep Dive into Baseline & Clean-As-You-Code -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
           <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">4</span>
-          <span data-i18n="sec4_title">Khởi Tạo Baseline (Quản Lý Nợ Kỹ Thuật Dự Án Cũ)</span>
+          <span data-i18n="sec4_title">Cơ Chế Baseline Quản Lý Nợ Kỹ Thuật (Clean-As-You-Code)</span>
         </h2>
-        <p class="text-xs text-slate-600 mb-3" data-i18n="sec4_desc">
-          Nếu repository của bạn đã phát triển từ trước và có sẵn nhiều vi phạm cũ, hãy sinh file <code>baseline.json</code> để ghi nhận nợ kỹ thuật hiện tại:
+        <p class="text-xs text-slate-600 mb-4" data-i18n="sec4_desc">
+          Triết lý <b>Clean-As-You-Code</b> giải quyết bài toán nhức nhối nhất khi áp dụng bộ luật kiểm soát kiến trúc vào các dự án lâu năm (Legacy Codebase): <i>"Dự án đã có sẵn hàng trăm lỗi kiến trúc cũ, làm sao bật Quality Gate mà không làm tê liệt tiến độ release của toàn bộ các team?"</i>
         </p>
-        <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec4_code"># Chạy lệnh xuất baseline toàn bộ dự án hiện tại:
-docker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \
-  --config config/architecture_rules.yaml \
-  --format json \
-  --output baseline.json
 
-# Commit file baseline.json này lên nhánh main:
-git add baseline.json && git commit -m "chore: record initial architecture baseline" && git push</code></pre>
-        <div class="mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-900" data-i18n="sec4_callout">
-          💡 <b>Nguyên lý Clean-As-You-Code:</b> Kể từ thời điểm này, mọi PR chỉ bị chặn (FAILED) nếu phát sinh vi phạm <b>MỚI</b> so với <code>baseline.json</code>. Các nợ cũ sẽ không bao giờ làm nghẽn tiến độ release của team!
+        <!-- 3 Pillars of Baseline -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+          <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
+            <div class="font-bold text-slate-900 flex items-center space-x-1.5">
+              <span>🎯 1. Khoanh Vùng Nợ Cũ</span>
+            </div>
+            <p class="text-[11px] text-slate-600">Toàn bộ vi phạm hiện có sẽ được đóng băng (freeze) vào file <code>baseline.json</code> và được gán nhãn là "nợ kỹ thuật đã chấp nhận".</p>
+          </div>
+          <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
+            <div class="font-bold text-slate-900 flex items-center space-x-1.5">
+              <span>🛡️ 2. Chặn Đứng Vi Phạm Mới</span>
+            </div>
+            <p class="text-[11px] text-slate-600">Mọi Pull Request mới từ nay chỉ bị <b>FAILED</b> nếu nhà phát triển vô tình tạo ra vi phạm <b>MỚI</b> so với baseline.</p>
+          </div>
+          <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
+            <div class="font-bold text-slate-900 flex items-center space-x-1.5">
+              <span>📉 3. Tự Động Giảm Nợ Dần</span>
+            </div>
+            <p class="text-[11px] text-slate-600">Khi dev refactor và sửa bớt lỗi cũ trong PR, baseline sẽ tự động co lại. Nợ kiến trúc giảm dần theo thời gian mà không cần dừng dự án.</p>
+          </div>
+        </div>
+
+        <!-- Step-by-Step Practical Guide -->
+        <div class="space-y-4">
+          <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider" data-i18n="sec4_guide_title">Quy Trình 3 Bước Tạo Và Đưa Baseline Vào Vận Hành Thực Tế:</h3>
+
+          <!-- Step 1 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 1</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec4_step1_title">Tạo file snapshot baseline cho toàn bộ mã nguồn hiện tại</h4>
+            </div>
+            <p class="text-[11px] text-slate-600" data-i18n="sec4_step1_desc">Chạy lệnh CLI sau từ máy của Tech Lead / DevOps hoặc trực tiếp trên server qua container:</p>
+            <pre class="bg-slate-950 text-slate-200 p-3 rounded-lg text-xs font-mono overflow-x-auto border border-slate-800"><code># Cách 1: Sử dụng Docker Container trực tiếp trong thư mục repository:
+docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform:latest   python -m app.arch_engine.cli baseline /repo   --config /repo/config/architecture_rules.yaml   --output /repo/baseline.json
+
+# Hoặc Cách 2: Nếu container đang chạy dưới dạng background service:
+docker exec ai-review-service python -m app.arch_engine.cli baseline /path/to/repo   --config config/architecture_rules.yaml   --output baseline.json</code></pre>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 2</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec4_step2_title">Kiểm tra cấu trúc và Commit file baseline.json lên nhánh chính (main)</h4>
+            </div>
+            <p class="text-[11px] text-slate-600" data-i18n="sec4_step2_desc">File <code>baseline.json</code> sinh ra có định dạng chuẩn mực chứa mã băm xác thực (SHA-256 Signature) cho từng lỗi, không phụ thuộc vào dòng code hay timestamp (Deterministic):</p>
+            <pre class="bg-slate-950 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto border border-slate-800"><code>{
+  "version": "2.0.0",
+  "total_violations_recorded": 14,
+  "violations": [
+    {
+      "signature": "a7b3c9d1e2f4a5b6",
+      "file_path": "lib/domain/usecases/login_usecase.dart",
+      "rule_id": "RULE_CLEAN_DOMAIN",
+      "import_statement": "import 'package:app/data/datasources/api.dart';",
+      "first_detected_at": "accepted-baseline"
+    }
+  ]
+}</code></pre>
+            <p class="text-[11px] text-slate-700">Commit file này vào Git để làm mốc tham chiếu chuẩn cho toàn bộ team:</p>
+            <pre class="bg-slate-950 text-slate-200 p-2.5 rounded-lg text-xs font-mono border border-slate-800"><code>git add baseline.json && git commit -m "chore(arch): initialize clean-as-you-code baseline" && git push origin main</code></pre>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-700">Bước 3</span>
+              <h4 class="text-xs font-bold text-slate-900" data-i18n="sec4_step3_title">Cách Engine sử dụng file baseline.json trong các lần quét PR tiếp theo</h4>
+            </div>
+            <p class="text-[11px] text-slate-600" data-i18n="sec4_step3_desc">Trong mọi lần quét PR (cả qua Webhook lẫn CI Pipeline), cờ <code>--baseline baseline.json</code> sẽ kích hoạt bộ lọc <code>BaselineManager.filter_violations()</code>:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 bg-emerald-50/60 border border-emerald-200 rounded-lg text-emerald-950">
+                <span class="font-bold text-emerald-800">✅ Vi phạm cũ (Có trong baseline.json):</span>
+                <p class="text-[11px] mt-1 text-emerald-900">Được đánh dấu <code>is_new: false</code>. Engine bỏ qua và <b>CHO PHÉP PASS</b>, không làm chặn tiến độ release.</p>
+              </div>
+              <div class="p-3 bg-rose-50/60 border border-rose-200 rounded-lg text-rose-950">
+                <span class="font-bold text-rose-800">❌ Vi phạm mới (Không có trong baseline.json):</span>
+                <p class="text-[11px] mt-1 text-rose-900">Được đánh dấu <code>is_new: true</code>. Engine báo <b>FAILED (Exit code 1)</b> và kích hoạt AI tư vấn giải pháp sửa ngay.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rebaseline Section -->
+        <div class="mt-4 p-3.5 bg-slate-950 text-slate-200 rounded-xl text-xs space-y-1.5 border border-slate-800">
+          <div class="font-bold text-indigo-400 flex items-center space-x-1.5">
+            <span>🔄 Khi nào cần Re-baseline (Tái tạo lại baseline)?</span>
+          </div>
+          <p class="text-[11px] text-slate-300 leading-relaxed" data-i18n="sec4_rebaseline_desc">
+            Khi dự án cập nhật thêm các quy tắc mới trong <code>architecture_rules.yaml</code> hoặc khi nhóm kỹ thuật đã hoàn tất một đợt dọn dẹp kỹ thuật lớn (Refactoring sprint), chỉ cần chạy lại lệnh ở <b>Bước 1</b> để cập nhật file <code>baseline.json</code> mới nhất.
+          </p>
         </div>
       </div>
+
     </section>
   </main>
 
@@ -467,6 +551,14 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec4_title": "Khởi Tạo Baseline (Quản Lý Nợ Kỹ Thuật Dự Án Cũ)",
     "sec4_desc": "Nếu repository của bạn đã phát triển từ trước và có sẵn nhiều vi phạm cũ, hãy sinh file <code>baseline.json</code> để ghi nhận nợ kỹ thuật hiện tại:",
     "sec4_code": "# Chạy lệnh xuất baseline toàn bộ dự án hiện tại:\ndocker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \\\n  --config config/architecture_rules.yaml \\\n  --format json \\\n  --output baseline.json\n\n# Commit file baseline.json này lên nhánh main:\ngit add baseline.json && git commit -m \"chore: record initial architecture baseline\" && git push",
+        "sec4_guide_title": "Quy Trình 3 Bước Tạo Và Đưa Baseline Vào Vận Hành Thực Tế:",
+    "sec4_step1_title": "Tạo file snapshot baseline cho toàn bộ mã nguồn hiện tại",
+    "sec4_step1_desc": "Chạy lệnh CLI sau từ máy của Tech Lead / DevOps hoặc trực tiếp trên server qua container:",
+    "sec4_step2_title": "Kiểm tra cấu trúc và Commit file baseline.json lên nhánh chính (main)",
+    "sec4_step2_desc": "File <code>baseline.json</code> sinh ra có định dạng chuẩn mực chứa mã băm xác thực (SHA-256 Signature) cho từng lỗi, không phụ thuộc vào dòng code hay timestamp (Deterministic):",
+    "sec4_step3_title": "Cách Engine sử dụng file baseline.json trong các lần quét PR tiếp theo",
+    "sec4_step3_desc": "Trong mọi lần quét PR (cả qua Webhook lẫn CI Pipeline), cờ <code>--baseline baseline.json</code> sẽ kích hoạt bộ lọc <code>BaselineManager.filter_violations()</code>:",
+    "sec4_rebaseline_desc": "Khi dự án cập nhật thêm các quy tắc mới trong <code>architecture_rules.yaml</code> hoặc khi nhóm kỹ thuật đã hoàn tất một đợt dọn dẹp kỹ thuật lớn (Refactoring sprint), chỉ cần chạy lại lệnh ở <b>Bước 1</b> để cập nhật file <code>baseline.json</code> mới nhất.",
     "sec4_callout": "💡 <b>Nguyên lý Clean-As-You-Code:</b> Kể từ thời điểm này, mọi PR chỉ bị chặn (FAILED) nếu phát sinh vi phạm <b>MỚI</b> so với <code>baseline.json</code>. Các nợ cũ sẽ không bao giờ làm nghẽn tiến độ release của team!",
     "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
   },
@@ -520,6 +612,16 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec4_title": "Initialize Baseline (Managing Legacy Project Debt)",
     "sec4_desc": "If your repository has existing architectural violations, generate a <code>baseline.json</code> file to catalog the current debt without blocking release velocity:",
     "sec4_code": "# Export baseline for entire existing repository:\ndocker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \\\n  --config config/architecture_rules.yaml \\\n  --format json \\\n  --output baseline.json\n\n# Commit baseline.json to main branch:\ngit add baseline.json && git commit -m \"chore: record initial architecture baseline\" && git push",
+        "sec4_title": "Technical Debt Management via Baseline (Clean-As-You-Code)",
+    "sec4_desc": "The <b>Clean-As-You-Code</b> philosophy solves the most critical pain point when enforcing architectural gates across legacy codebases: <i>'Our existing project already contains hundreds of architectural violations; how do we enable strict gates without freezing release velocity?'</i>",
+    "sec4_guide_title": "3-Step Workflow: Generate and Operationalize Baseline in Production:",
+    "sec4_step1_title": "Generate baseline snapshot file for entire current codebase",
+    "sec4_step1_desc": "Execute the CLI command locally or within the Docker container:",
+    "sec4_step2_title": "Verify deterministic structure and commit baseline.json to main branch",
+    "sec4_step2_desc": "The resulting <code>baseline.json</code> utilizes tamper-resistant SHA-256 signatures per violation without brittle line numbers or volatile timestamps (fully deterministic):",
+    "sec4_step3_title": "How the Engine evaluates baseline.json during subsequent PR scans",
+    "sec4_step3_desc": "Across both Webhook and CI runner modes, the <code>--baseline baseline.json</code> flag activates <code>BaselineManager.filter_violations()</code>:",
+    "sec4_rebaseline_desc": "Whenever new rules are introduced into <code>architecture_rules.yaml</code> or after an engineering team completes a major refactoring sprint, simply rerun <b>Step 1</b> to regenerate an updated <code>baseline.json</code> snapshot.",
     "sec4_callout": "💡 <b>Clean-As-You-Code Principle:</b> From this point forward, Pull Requests are only blocked (FAILED) if they introduce <b>NEW</b> violations relative to <code>baseline.json</code>. Pre-existing debt never bottlenecks your team's deployment schedule!",
     "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
   }
