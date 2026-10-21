@@ -159,6 +159,104 @@ docker run -d \
         <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900" data-i18n="sec2_5_callout">
           🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL="http://ollama-internal:11434/v1"</code> và <code>AI_REVIEW_MODEL="qwen2.5-coder:32b"</code> để xử lý AI hoàn toàn offline!
         </div>
+      
+      <!-- Detailed CI/CD Pipeline Files & Internal Network Implementation -->
+      <div class="mt-6 border-t border-slate-200 pt-6">
+        <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+          <span data-i18n="sec2_5_detail_heading">Chi Tiết Từng Dòng Lệnh Cấu Hình Pipeline (GitHub Actions & GitLab CI)</span>
+        </h3>
+        
+        <p class="text-xs text-slate-600 mb-4" data-i18n="sec2_5_detail_desc">
+          File pipeline dưới đây được chuẩn hóa để tương thích với tất cả các nền tảng CI/CD (GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins) chạy trên Server hoặc Self-Hosted Runner nội bộ:
+        </p>
+
+        <!-- Tabs Switcher -->
+        <div class="bg-slate-100 p-1 rounded-xl flex space-x-1 mb-4 text-xs font-semibold max-w-md">
+          <button type="button" id="tabBtnGithub" onclick="switchCiTab('github')" class="flex-1 py-1.5 px-3 rounded-lg bg-white text-indigo-700 shadow-sm text-center transition">GitHub Actions (.github/workflows/ai-review.yml)</button>
+          <button type="button" id="tabBtnGitlab" onclick="switchCiTab('gitlab')" class="flex-1 py-1.5 px-3 rounded-lg text-slate-600 hover:text-slate-900 text-center transition">GitLab CI (.gitlab-ci.yml)</button>
+        </div>
+
+        <!-- GitHub Actions Tab Content -->
+        <div id="tabContentGithub" class="space-y-3">
+          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec2_5_github_code">name: Architecture & AI Review Quality Gate
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  architecture-gate:
+    name: Deterministic AST & AI Advisory Gate
+    # Chạy trên self-hosted runner nội bộ (không cần mở cổng mạng ra ngoài)
+    runs-on: self-hosted
+
+    steps:
+      # 1. Checkout mã nguồn repo với đầy đủ git history để so sánh delta diff
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Bắt buộc lấy toàn bộ commit history để so sánh với nhánh đích
+
+      # 2. Khởi chạy container quét mã nguồn & thực thi Quality Gate
+      - name: Run Commercial Architecture & Quality Gate
+        env:
+          # Cấu hình LLM nội bộ (100% On-premise, không gửi code ra bên ngoài)
+          OPENAI_BASE_URL: "http://ollama-internal:11434/v1"
+          OPENAI_API_KEY: "internal-key-placeholder"
+          AI_REVIEW_MODEL: "qwen2.5-coder:32b"
+        run: |
+          echo "🚀 Đang kích hoạt engine kiểm tra kiến trúc On-Premise..."
+
+          # Lệnh chạy container kiểm tra trực tiếp mã nguồn được mount vào /repo:
+          # -v $(pwd):/repo: Mount thư mục code hiện tại vào container
+          # -v /opt/ai-review/license.lic:/app/license.lic:ro: Mount file bản quyền bảo mật
+          docker run --rm             -v $(pwd):/repo             -v /opt/ai-review/license.lic:/app/license.lic:ro             -e OPENAI_BASE_URL="${OPENAI_BASE_URL}"             -e OPENAI_API_KEY="${OPENAI_API_KEY}"             -e AI_REVIEW_MODEL="${AI_REVIEW_MODEL}"             ducphan1311/ai-review-platform:latest             python -m app.arch_engine.cli check               --repo-path /repo               --config /repo/config/architecture_rules.yaml               --baseline /repo/baseline.json               --diff               --base origin/${{ github.base_ref }}               --format terminal
+
+      # Giải thích từng dòng cờ lệnh (Arguments):
+      # --repo-path /repo: Đường dẫn thư mục mã nguồn cần quét
+      # --config ...: File quy tắc kiến trúc (phân tầng, cấm import vòng)
+      # --baseline ...: Nợ kỹ thuật cũ được ghi nhận (nguyên lý Clean-As-You-Code)
+      # --diff: Chỉ phân tích các file bị chỉnh sửa trong PR này (tiết kiệm thời gian)
+      # --base: Nhánh cơ sở để diff (ví dụ origin/main)</code></pre>
+        </div>
+
+        <!-- GitLab CI Tab Content -->
+        <div id="tabContentGitlab" class="hidden space-y-3">
+          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec2_5_gitlab_code"># .gitlab-ci.yml - Cấu hình kiểm tra kiến trúc trên GitLab On-Premise
+
+stages:
+  - test
+  - quality-gate
+
+ai-architecture-review:
+  stage: quality-gate
+  # Gán tag cho runner nội bộ của công ty (Docker executor hoặc Shell executor)
+  tags:
+    - internal-docker-runner
+  only:
+    - merge_requests
+
+  variables:
+    # Không gửi dữ liệu ra ngoài Internet - trỏ về cụm AI Server nội bộ
+    OPENAI_BASE_URL: "http://ollama-internal:11434/v1"
+    OPENAI_API_KEY: "internal-key-placeholder"
+    AI_REVIEW_MODEL: "qwen2.5-coder:32b"
+
+  script:
+    - echo "🔍 Bắt đầu quét kiểm tra kiến trúc Merge Request trên GitLab..."
+    # Lấy thông tin nhánh đích để so sánh sai khác (Git diff)
+    - git fetch origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    # Chạy container phân tích kiến trúc
+    - |
+      docker run --rm         -v $(pwd):/repo         -v /opt/ai-review/license.lic:/app/license.lic:ro         -e OPENAI_BASE_URL="${OPENAI_BASE_URL}"         -e OPENAI_API_KEY="${OPENAI_API_KEY}"         -e AI_REVIEW_MODEL="${AI_REVIEW_MODEL}"         ducphan1311/ai-review-platform:latest         python -m app.arch_engine.cli check           --repo-path /repo           --config /repo/config/architecture_rules.yaml           --baseline /repo/baseline.json           --diff           --base origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME           --format terminal
+
+  # Nếu có vi phạm mới (BLOCKER), CI Pipeline sẽ FAILED ngay lập tức để bảo vệ nhánh chính
+  allow_failure: false</code></pre>
+        </div>
+      </div>
+
       </div>
 
       <!-- Section 3 -->
@@ -265,6 +363,8 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec2_5_optC_desc": "Áp dụng khi mạng hoàn toàn cô lập (Air-Gapped / Inbound blocked). Chạy quét trực tiếp bằng CI Runner nội bộ không cần Webhook.",
     "sec2_5_optC_code": "docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform ...<br><span class=\"text-purple-600 font-semibold\">✓ Chạy trong GitHub Action nội bộ</span>",
     "sec2_5_callout": "🔒 <b>100% On-Premise LLM:</b> Nếu chính sách doanh nghiệp cấm kết nối ra OpenAI, truyền biến <code>OPENAI_BASE_URL=\"http://ollama-internal:11434/v1\"</code> và <code>AI_REVIEW_MODEL=\"qwen2.5-coder:32b\"</code> để xử lý AI hoàn toàn offline!",
+        "sec2_5_detail_heading": "Chi Tiết Từng Dòng Lệnh Cấu Hình Pipeline (GitHub Actions & GitLab CI)",
+    "sec2_5_detail_desc": "File pipeline dưới đây được chuẩn hóa để tương thích với tất cả các nền tảng CI/CD (GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins) chạy trên Server hoặc Self-Hosted Runner nội bộ:",
     "sec3_title": "Cấu Hình Tệp Quy Tắc <code>architecture_rules.yaml</code>",
     "sec3_desc": "Tại thư mục gốc của repository cần kiểm tra, tạo thư mục <code>config/</code> và đặt file <code>architecture_rules.yaml</code>:",
     "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Chỉ định thư mục mã nguồn\n\n# 1. Định nghĩa phân tầng Clean Architecture\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Tầng logic nghiệp vụ & entity cốt lõi\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"Tầng giao diện người dùng\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Tầng dữ liệu DB & API\"\n\n# 2. Quy tắc kiểm soát nghiêm ngặt\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
@@ -304,6 +404,8 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
     "sec2_5_optC_desc": "For completely locked-down inbound networks. Execute quality gates directly inside internal self-hosted GitHub/GitLab runners.",
     "sec2_5_optC_code": "docker run --rm -v $(pwd):/repo ducphan1311/ai-review-platform ...<br><span class=\"text-purple-600 font-semibold\">✓ Native In-Workflow Execution</span>",
     "sec2_5_callout": "🔒 <b>100% On-Premise LLM:</b> If corporate security forbids outbound cloud LLM access, configure <code>OPENAI_BASE_URL=\"http://ollama-internal:11434/v1\"</code> with <code>AI_REVIEW_MODEL=\"qwen2.5-coder:32b\"</code> for zero external data egress!",
+        "sec2_5_detail_heading": "Detailed Pipeline Configuration & Line-by-Line Breakdown (GitHub Actions & GitLab CI)",
+    "sec2_5_detail_desc": "The pipeline specifications below are standardized to execute seamlessly across all enterprise CI/CD systems (GitHub Actions, GitLab CI, Bitbucket Pipelines, Jenkins) on internal self-hosted runners:",
     "sec3_title": "Configure <code>architecture_rules.yaml</code> Rule Specification",
     "sec3_desc": "In the target repository root directory, create a <code>config/</code> directory and place your <code>architecture_rules.yaml</code> file:",
     "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Source code scan directories\n\n# 1. Clean Architecture Layer Boundaries\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Core business logic & domain entities\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"User Interface (UI) presentation layer\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Infrastructure data sources & network API\"\n\n# 2. Strict Architecture Gate Rules\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
@@ -315,6 +417,25 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
   }
 };
     let currentLang = localStorage.getItem("preferred_lang") || "vi";
+
+    
+    function switchCiTab(type) {
+      const btnGh = document.getElementById("tabBtnGithub");
+      const btnGl = document.getElementById("tabBtnGitlab");
+      const tabGh = document.getElementById("tabContentGithub");
+      const tabGl = document.getElementById("tabContentGitlab");
+      if (type === 'github') {
+        btnGh.className = "flex-1 py-1.5 px-3 rounded-lg bg-white text-indigo-700 shadow-sm text-center transition";
+        btnGl.className = "flex-1 py-1.5 px-3 rounded-lg text-slate-600 hover:text-slate-900 text-center transition";
+        tabGh.classList.remove("hidden");
+        tabGl.classList.add("hidden");
+      } else {
+        btnGl.className = "flex-1 py-1.5 px-3 rounded-lg bg-white text-indigo-700 shadow-sm text-center transition";
+        btnGh.className = "flex-1 py-1.5 px-3 rounded-lg text-slate-600 hover:text-slate-900 text-center transition";
+        tabGl.classList.remove("hidden");
+        tabGh.classList.add("hidden");
+      }
+    }
 
     function setLanguage(lang) {
       currentLang = lang;
