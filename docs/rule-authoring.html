@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hướng Dẫn Tự Định Nghĩa Quy Tắc Kiến Trúc (Rule Authoring Guide)</title>
+  <title data-i18n="page_title">Hướng Dẫn Tự Định Nghĩa Quy Tắc Kiến Trúc (Rule Authoring Guide)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     code, pre { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
@@ -18,28 +18,34 @@
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
-        <div class="flex items-center space-x-3">
-          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm">
+        <div class="flex items-center space-x-3 min-w-0">
+          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm shrink-0">
             <i class="fa-solid fa-arrow-left"></i>
-            <span>Trang Chủ</span>
+            <span data-i18n="nav_home">Trang Chủ</span>
           </a>
           <span class="text-slate-300">/</span>
-          <span class="font-bold text-slate-800 text-sm">Hướng Dẫn Tự Viết Rule Mới</span>
+          <span class="font-bold text-slate-800 text-sm truncate" data-i18n="nav_current">Hướng Dẫn Tự Viết Rule Mới</span>
         </div>
-        <div class="flex items-center space-x-4">
-          <a href="setup-guide.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">← Cài Đặt Chi Tiết</a>
-          <a href="meta-variables.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">Meta-Variables Guide →</a>
+        <div class="flex items-center space-x-3 sm:space-x-4 shrink-0">
+          <a href="setup-guide.html" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-indigo-600 transition" data-i18n="nav_setup_link">← Cài Đặt Chi Tiết</a>
+          <a href="meta-variables.html" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-indigo-600 transition" data-i18n="nav_meta_link">Meta-Variables Guide →</a>
+
+          <!-- Language Switcher -->
+          <div class="flex items-center space-x-1 bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-semibold">
+            <button id="langBtnVi" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-lg transition font-medium">VI</button>
+            <button id="langBtnEn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg transition font-medium">EN</button>
+          </div>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Content -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
     <div class="mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Extensible Architecture-As-Code</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Hướng Dẫn Tự Định Nghĩa Quy Tắc (Rule Authoring)</h1>
-      <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+      <span class="text-xs font-bold uppercase tracking-wider text-indigo-600" data-i18n="badge_rules">Extensible Architecture-As-Code</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="title_main">Hướng Dẫn Tự Định Nghĩa Quy Tắc (Rule Authoring)</h1>
+      <p class="text-slate-600 mt-3 text-sm leading-relaxed" data-i18n="desc_main">
         Tài liệu đặc tả toàn diện 5 cơ chế định nghĩa quy tắc kiểm tra trong file <code>architecture_rules.yaml</code> mà <b>không cần đụng tới bất kỳ dòng mã nguồn nào của engine</b>.
       </p>
     </div>
@@ -50,13 +56,13 @@
       <!-- Mechanism 1 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <div class="flex items-center space-x-3 mb-3">
-          <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 font-extrabold text-xs flex items-center justify-center">1</span>
-          <h2 class="text-lg font-bold text-slate-900">Cơ Chế 1: <code>layer_boundary</code> (Kiểm Soát Vĩ Mô Clean Architecture)</h2>
+          <span class="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-600 font-extrabold text-xs flex items-center justify-center shrink-0">1</span>
+          <h2 class="text-lg font-bold text-slate-900" data-i18n="m1_title">Cơ Chế 1: <code>layer_boundary</code> (Kiểm Soát Vĩ Mô Clean Architecture)</h2>
         </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+        <p class="text-xs text-slate-600 mb-3 leading-relaxed" data-i18n="m1_desc">
           Xây dựng đồ thị phụ thuộc (Dependency Graph) dựa trên toàn bộ câu lệnh <code>import</code> trong dự án. Ngăn chặn triệt để việc tầng Domain nhập khẩu ngược các thành phần UI hoặc tầng Data.
         </p>
-        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code>rules:
+        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code data-i18n="m1_code">rules:
   - id: "RULE_CLEAN_DOMAIN"
     type: "layer_boundary"
     severity: "BLOCKER"
@@ -69,13 +75,13 @@
       <!-- Mechanism 2 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <div class="flex items-center space-x-3 mb-3">
-          <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-600 font-extrabold text-xs flex items-center justify-center">2</span>
-          <h2 class="text-lg font-bold text-slate-900">Cơ Chế 2: <code>forbidden_calls</code> (Cấm Lời Gọi Hàm Bất Kỳ)</h2>
+          <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-600 font-extrabold text-xs flex items-center justify-center shrink-0">2</span>
+          <h2 class="text-lg font-bold text-slate-900" data-i18n="m2_title">Cơ Chế 2: <code>forbidden_calls</code> (Cấm Lời Gọi Hàm Bất Kỳ)</h2>
         </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+        <p class="text-xs text-slate-600 mb-3 leading-relaxed" data-i18n="m2_desc">
           Duyệt qua cây cú pháp trừu tượng (AST) và gắn cờ vi phạm ngay khi xuất hiện bất kỳ phương thức nào có tên trong danh sách <code>calls</code>.
         </p>
-        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code>rules:
+        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code data-i18n="m2_code">rules:
   - id: "BAN_PRINT_ON_PROD"
     type: "forbidden_calls"
     calls: ["print", "debugPrint"]
@@ -88,13 +94,13 @@
       <!-- Mechanism 3 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <div class="flex items-center space-x-3 mb-3">
-          <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 font-extrabold text-xs flex items-center justify-center">3</span>
-          <h2 class="text-lg font-bold text-slate-900">Cơ Chế 3: <code>ast_pattern</code> (Mẫu Anti-Pattern Dựng Sẵn)</h2>
+          <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 font-extrabold text-xs flex items-center justify-center shrink-0">3</span>
+          <h2 class="text-lg font-bold text-slate-900" data-i18n="m3_title">Cơ Chế 3: <code>ast_pattern</code> (Mẫu Anti-Pattern Dựng Sẵn)</h2>
         </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+        <p class="text-xs text-slate-600 mb-3 leading-relaxed" data-i18n="m3_desc">
           Sử dụng các visitor chuyên dụng được tối ưu hóa sẵn trong core engine để phát hiện các lỗi bất đồng bộ và rò rỉ bộ nhớ.
         </p>
-        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code>rules:
+        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code data-i18n="m3_code">rules:
   - id: "ASYNC_MOUNTED_GUARD"
     type: "ast_pattern"
     pattern_name: "await_before_setstate"
@@ -106,13 +112,13 @@
       <!-- Mechanism 4 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <div class="flex items-center space-x-3 mb-3">
-          <span class="w-7 h-7 rounded-lg bg-violet-100 text-violet-600 font-extrabold text-xs flex items-center justify-center">4</span>
-          <h2 class="text-lg font-bold text-slate-900">Cơ Chế 4: <code>meta_pattern</code> (Cú Pháp Mẫu Meta-Variables)</h2>
+          <span class="w-7 h-7 rounded-lg bg-violet-100 text-violet-600 font-extrabold text-xs flex items-center justify-center shrink-0">4</span>
+          <h2 class="text-lg font-bold text-slate-900" data-i18n="m4_title">Cơ Chế 4: <code>meta_pattern</code> (Cú Pháp Mẫu Meta-Variables)</h2>
         </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+        <p class="text-xs text-slate-600 mb-3 leading-relaxed" data-i18n="m4_desc">
           Cho phép viết quy tắc tự do dưới dạng biểu thức đại diện biến (Metavariables). Động cơ Semgrep sẽ tự động khớp mẫu trên AST mà không cần phải compile lại mã nguồn.
         </p>
-        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code>rules:
+        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code data-i18n="m4_code">rules:
   - id: "NO_SILENT_EMPTY_CATCH"
     type: "meta_pattern"
     pattern: "catch ($E) { }"
@@ -124,13 +130,13 @@
       <!-- Mechanism 5 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <div class="flex items-center space-x-3 mb-3">
-          <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 font-extrabold text-xs flex items-center justify-center">5</span>
-          <h2 class="text-lg font-bold text-slate-900">Cơ Chế 5: <code>custom_script</code> (Plugin Tự Nạp Ngoài)</h2>
+          <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 font-extrabold text-xs flex items-center justify-center shrink-0">5</span>
+          <h2 class="text-lg font-bold text-slate-900" data-i18n="m5_title">Cơ Chế 5: <code>custom_script</code> (Plugin Tự Nạp Ngoài)</h2>
         </div>
-        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+        <p class="text-xs text-slate-600 mb-3 leading-relaxed" data-i18n="m5_desc">
           Dành cho các quy tắc kiểm tra riêng biệt của công ty (quy ước đặt tên file, kiểm tra tài nguyên asset, lint nội bộ). Engine sẽ gọi script này và nhận kết quả chuẩn định dạng JSON.
         </p>
-        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code>rules:
+        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code data-i18n="m5_code">rules:
   - id: "CHECK_VIEW_FILE_NAMING"
     type: "custom_script"
     script_path: "scripts/rules/check_naming.sh"
@@ -143,7 +149,97 @@
   </main>
 
   <footer class="py-6 bg-white border-t border-slate-200 text-center text-xs text-slate-500">
-    <p>© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
+    <p data-i18n="footer_text">© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
   </footer>
+
+  
+  <script>
+    const translations = {
+  "vi": {
+    "page_title": "Hướng Dẫn Tự Định Nghĩa Quy Tắc Kiến Trúc (Rule Authoring Guide)",
+    "nav_home": "Trang Chủ",
+    "nav_current": "Hướng Dẫn Tự Viết Rule Mới",
+    "nav_setup_link": "← Cài Đặt Chi Tiết",
+    "nav_meta_link": "Meta-Variables Guide →",
+    "badge_rules": "Extensible Architecture-As-Code",
+    "title_main": "Hướng Dẫn Tự Định Nghĩa Quy Tắc (Rule Authoring)",
+    "desc_main": "Tài liệu đặc tả toàn diện 5 cơ chế định nghĩa quy tắc kiểm tra trong file <code>architecture_rules.yaml</code> mà <b>không cần đụng tới bất kỳ dòng mã nguồn nào của engine</b>.",
+    "m1_title": "Cơ Chế 1: <code>layer_boundary</code> (Kiểm Soát Vĩ Mô Clean Architecture)",
+    "m1_desc": "Xây dựng đồ thị phụ thuộc (Dependency Graph) dựa trên toàn bộ câu lệnh <code>import</code> trong dự án. Ngăn chặn triệt để việc tầng Domain nhập khẩu ngược các thành phần UI hoặc tầng Data.",
+    "m1_code": "rules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    description: \"Tầng Domain cấm phụ thuộc vào UI hoặc DB/API.\"\n    remediation: \"Sử dụng Dependency Inversion: khai báo Abstract Repository tại Domain.\"",
+    "m2_title": "Cơ Chế 2: <code>forbidden_calls</code> (Cấm Lời Gọi Hàm Bất Kỳ)",
+    "m2_desc": "Duyệt qua cây cú pháp trừu tượng (AST) và gắn cờ vi phạm ngay khi xuất hiện bất kỳ phương thức nào có tên trong danh sách <code>calls</code>.",
+    "m2_code": "rules:\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    scope: [\"lib/**/*.dart\"]\n    severity: \"BLOCKER\"\n    description: \"Cấm in log console trực tiếp trên bản release.\"\n    remediation: \"Thay thế bằng AppLogger.d() hoặc Logs.i().\"",
+    "m3_title": "Cơ Chế 3: <code>ast_pattern</code> (Mẫu Anti-Pattern Dựng Sẵn)",
+    "m3_desc": "Sử dụng các visitor chuyên dụng được tối ưu hóa sẵn trong core engine để phát hiện các lỗi bất đồng bộ và rò rỉ bộ nhớ.",
+    "m3_code": "rules:\n  - id: \"ASYNC_MOUNTED_GUARD\"\n    type: \"ast_pattern\"\n    pattern_name: \"await_before_setstate\"\n    severity: \"CRITICAL\"\n    description: \"Bắt buộc có guard clause kiểm tra mounted sau lệnh await.\"\n    remediation: \"Thêm 'if (!mounted) return;' ngay sau lời gọi await.\"",
+    "m4_title": "Cơ Chế 4: <code>meta_pattern</code> (Cú Pháp Mẫu Meta-Variables)",
+    "m4_desc": "Cho phép viết quy tắc tự do dưới dạng biểu thức đại diện biến (Metavariables). Động cơ Semgrep sẽ tự động khớp mẫu trên AST mà không cần phải compile lại mã nguồn.",
+    "m4_code": "rules:\n  - id: \"NO_SILENT_EMPTY_CATCH\"\n    type: \"meta_pattern\"\n    pattern: \"catch ($E) { }\"\n    severity: \"BLOCKER\"\n    description: \"Bắt ngoại lệ ngầm nhưng bỏ trống phần thân catch.\"\n    remediation: \"Ghi log stack trace hoặc xử lý fallback an toàn.\"",
+    "m5_title": "Cơ Chế 5: <code>custom_script</code> (Plugin Tự Nạp Ngoài)",
+    "m5_desc": "Dành cho các quy tắc kiểm tra riêng biệt của công ty (quy ước đặt tên file, kiểm tra tài nguyên asset, lint nội bộ). Engine sẽ gọi script này và nhận kết quả chuẩn định dạng JSON.",
+    "m5_code": "rules:\n  - id: \"CHECK_VIEW_FILE_NAMING\"\n    type: \"custom_script\"\n    script_path: \"scripts/rules/check_naming.sh\"\n    severity: \"WARNING\"\n    description: \"File giao diện màn hình phải có hậu tố _view.dart.\"\n    remediation: \"Đổi tên file từ _page.dart sang _view.dart.\"",
+    "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
+  },
+  "en": {
+    "page_title": "Rule Authoring Guide (Custom Architecture Rules) — AI Architecture Review",
+    "nav_home": "Home",
+    "nav_current": "Rule Authoring Guide",
+    "nav_setup_link": "← Setup Guide",
+    "nav_meta_link": "Meta-Variables Guide →",
+    "badge_rules": "Extensible Architecture-As-Code",
+    "title_main": "Custom Rule Authoring Guide",
+    "desc_main": "Comprehensive documentation for all 5 custom rule mechanisms in <code>architecture_rules.yaml</code>, allowing teams to declare new architectural policies <b>without modifying any core engine code</b>.",
+    "m1_title": "Mechanism 1: <code>layer_boundary</code> (Macro Clean Architecture Governance)",
+    "m1_desc": "Constructs a full project-wide import dependency graph to strictly enforce Clean Architecture boundaries. Prevents domain layer packages from reverse-importing UI or data layer modules.",
+    "m1_code": "rules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    description: \"Domain layer must not depend on UI or Data layers.\"\n    remediation: \"Apply Dependency Inversion: declare abstract repositories in Domain.\"",
+    "m2_title": "Mechanism 2: <code>forbidden_calls</code> (Disallow Specific Method Calls)",
+    "m2_desc": "Traverses the Abstract Syntax Tree (AST) to flag violations whenever specified forbidden function or method names in the <code>calls</code> list are invoked.",
+    "m2_code": "rules:\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    scope: [\"lib/**/*.dart\"]\n    severity: \"BLOCKER\"\n    description: \"Direct console logging is forbidden in production release builds.\"\n    remediation: \"Replace with AppLogger.d() or Logs.i().\"",
+    "m3_title": "Mechanism 3: <code>ast_pattern</code> (Built-in Anti-Pattern Visitors)",
+    "m3_desc": "Leverages dedicated, high-performance AST visitors embedded within the core engine to catch subtle asynchronous pitfalls and memory leaks.",
+    "m3_code": "rules:\n  - id: \"ASYNC_MOUNTED_GUARD\"\n    type: \"ast_pattern\"\n    pattern_name: \"await_before_setstate\"\n    severity: \"CRITICAL\"\n    description: \"Guard clause checking mounted state is required after await before setState.\"\n    remediation: \"Add 'if (!mounted) return;' immediately after the await statement.\"",
+    "m4_title": "Mechanism 4: <code>meta_pattern</code> (Metavariable AST Pattern Matching)",
+    "m4_desc": "Allows authors to write arbitrary AST patterns using metavariables. The Semgrep AST engine matches syntax patterns declaratively without needing compilation or bespoke code.",
+    "m4_code": "rules:\n  - id: \"NO_SILENT_EMPTY_CATCH\"\n    type: \"meta_pattern\"\n    pattern: \"catch ($E) { }\"\n    severity: \"BLOCKER\"\n    description: \"Exceptions caught in empty catch blocks without logging or telemetry.\"\n    remediation: \"Log stack trace telemetry or provide safe fallback handling.\"",
+    "m5_title": "Mechanism 5: <code>custom_script</code> (External Self-Loaded Plugins)",
+    "m5_desc": "Built for organization-specific linter rules (file naming conventions, asset file size validation, proprietary compliance checks). The engine executes the script and consumes standard JSON scan output.",
+    "m5_code": "rules:\n  - id: \"CHECK_VIEW_FILE_NAMING\"\n    type: \"custom_script\"\n    script_path: \"scripts/rules/check_naming.sh\"\n    severity: \"WARNING\"\n    description: \"Screen widget files must end with _view.dart suffix.\"\n    remediation: \"Rename file from _page.dart to _view.dart.\"",
+    "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
+  }
+};
+    let currentLang = localStorage.getItem("preferred_lang") || "vi";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("preferred_lang", lang);
+      document.documentElement.lang = lang;
+      const dict = translations[lang] || translations.vi;
+      if (dict.page_title) document.title = dict.page_title;
+
+      const btnVi = document.getElementById("langBtnVi");
+      const btnEn = document.getElementById("langBtnEn");
+      if (btnVi && btnEn) {
+        if (lang === "vi") {
+          btnVi.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnEn.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        } else {
+          btnEn.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnVi.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        }
+      }
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setLanguage(currentLang);
+    });
+  </script>
 </body>
 </html>

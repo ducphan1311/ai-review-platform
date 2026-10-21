@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cẩm Nang Meta-Variables (Semgrep AST Patterns) — AI Architecture Review</title>
+  <title data-i18n="page_title">Cẩm Nang Meta-Variables (Semgrep AST Patterns) — AI Architecture Review</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     code, pre { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
@@ -18,28 +18,34 @@
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
-        <div class="flex items-center space-x-3">
-          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm">
+        <div class="flex items-center space-x-3 min-w-0">
+          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm shrink-0">
             <i class="fa-solid fa-arrow-left"></i>
-            <span>Trang Chủ</span>
+            <span data-i18n="nav_home">Trang Chủ</span>
           </a>
           <span class="text-slate-300">/</span>
-          <span class="font-bold text-slate-800 text-sm">Cẩm Nang Meta-Variables AST</span>
+          <span class="font-bold text-slate-800 text-sm truncate" data-i18n="nav_current">Cẩm Nang Meta-Variables AST</span>
         </div>
-        <div class="flex items-center space-x-4">
-          <a href="setup-guide.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">← Cài Đặt Chi Tiết</a>
-          <a href="rule-authoring.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">← Hướng Dẫn Tự Viết Rule</a>
+        <div class="flex items-center space-x-3 sm:space-x-4 shrink-0">
+          <a href="setup-guide.html" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-indigo-600 transition" data-i18n="nav_setup_link">← Cài Đặt Chi Tiết</a>
+          <a href="rule-authoring.html" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-indigo-600 transition" data-i18n="nav_rule_link">← Hướng Dẫn Tự Viết Rule</a>
+
+          <!-- Language Switcher -->
+          <div class="flex items-center space-x-1 bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-semibold">
+            <button id="langBtnVi" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-lg transition font-medium">VI</button>
+            <button id="langBtnEn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg transition font-medium">EN</button>
+          </div>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Content -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
     <div class="mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-violet-600">Advanced Pattern Matching</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Cẩm Nang Meta-Variables & AST Syntax Patterns</h1>
-      <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+      <span class="text-xs font-bold uppercase tracking-wider text-violet-600" data-i18n="badge_meta">Advanced Pattern Matching</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="title_main">Cẩm Nang Meta-Variables & AST Syntax Patterns</h1>
+      <p class="text-slate-600 mt-3 text-sm leading-relaxed" data-i18n="desc_main">
         Hướng dẫn sử dụng các biến đại diện siêu cấp (Metavariables: <code>$X</code>, <code>$E</code>, <code>...</code>) để bắt trúng các lỗi logic và lỗ hổng bảo mật phức tạp trên Dart, Swift, Kotlin, TypeScript.
       </p>
     </div>
@@ -48,38 +54,38 @@
       
       <!-- Concept Overview -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
-        <h2 class="text-lg font-bold text-slate-900 mb-3">1. Nguyên Lý Hoạt Động Của Meta-Variables</h2>
-        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+        <h2 class="text-lg font-bold text-slate-900 mb-3" data-i18n="sec1_title">1. Nguyên Lý Hoạt Động Của Meta-Variables</h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4" data-i18n="sec1_desc">
           Thay vì sử dụng biểu thức chính quy (Regex) dễ gây ra lỗi sai sót (False Positive) do khoảng trắng hay xuống dòng, <b>Meta-Variables</b> hoạt động trực tiếp trên cây cú pháp AST của mã nguồn. Nó hiểu được cấu trúc của biểu thức, hàm, hoặc khối lệnh.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
           <div class="p-3 bg-slate-50 border rounded-xl">
-            <code class="font-bold text-violet-600">$X</code>
-            <p class="text-slate-600 mt-1">Đại diện cho <b>một biến, biểu thức hoặc kiểu dữ liệu bất kỳ</b>.</p>
+            <code class="font-bold text-violet-600" data-i18n="sec1_box1_title">$X</code>
+            <p class="text-slate-600 mt-1" data-i18n="sec1_box1_desc">Đại diện cho <b>một biến, biểu thức hoặc kiểu dữ liệu bất kỳ</b>.</p>
           </div>
           <div class="p-3 bg-slate-50 border rounded-xl">
-            <code class="font-bold text-violet-600">$...ARGS</code>
-            <p class="text-slate-600 mt-1">Đại diện cho <b>danh sách không hoặc nhiều tham số</b>.</p>
+            <code class="font-bold text-violet-600" data-i18n="sec1_box2_title">$...ARGS</code>
+            <p class="text-slate-600 mt-1" data-i18n="sec1_box2_desc">Đại diện cho <b>danh sách không hoặc nhiều tham số</b>.</p>
           </div>
           <div class="p-3 bg-slate-50 border rounded-xl">
-            <code class="font-bold text-violet-600">...</code>
-            <p class="text-slate-600 mt-1">Toán tử Ellipsis đại diện cho <b>chuỗi câu lệnh bất kỳ</b>.</p>
+            <code class="font-bold text-violet-600" data-i18n="sec1_box3_title">...</code>
+            <p class="text-slate-600 mt-1" data-i18n="sec1_box3_desc">Toán tử Ellipsis đại diện cho <b>chuỗi câu lệnh bất kỳ</b>.</p>
           </div>
         </div>
       </div>
 
       <!-- Real World Examples -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
-        <h2 class="text-lg font-bold text-slate-900 mb-4">2. Các Ca Bắt Lỗi Thực Tế Thường Gặp</h2>
+        <h2 class="text-lg font-bold text-slate-900 mb-4" data-i18n="sec2_title">2. Các Ca Bắt Lỗi Thực Tế Thường Gặp</h2>
         
         <div class="space-y-6">
           <!-- Case 1 -->
           <div>
             <h3 class="text-sm font-bold text-slate-800 mb-1 flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-              <span>Bắt ngoại lệ bị nuốt ngầm (Silent Catch Block)</span>
+              <span class="w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
+              <span data-i18n="case1_title">Bắt ngoại lệ bị nuốt ngầm (Silent Catch Block)</span>
             </h3>
-            <p class="text-xs text-slate-500 mb-2">Phát hiện bất kỳ khối catch nào bắt biến ngoại lệ nhưng không xử lý gì bên trong:</p>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="case1_desc">Phát hiện bất kỳ khối catch nào bắt biến ngoại lệ nhưng không xử lý gì bên trong:</p>
             <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-xl text-xs font-mono overflow-x-auto"><code>- id: "NO_SILENT_EMPTY_CATCH"
   type: "meta_pattern"
   pattern: "catch ($E) { }"
@@ -89,10 +95,10 @@
           <!-- Case 2 -->
           <div>
             <h3 class="text-sm font-bold text-slate-800 mb-1 flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-              <span>Cấm gọi setState ngay sau lệnh bất đồng bộ mà thiếu Guard Clause</span>
+              <span class="w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
+              <span data-i18n="case2_title">Cấm gọi setState ngay sau lệnh bất đồng bộ mà thiếu Guard Clause</span>
             </h3>
-            <p class="text-xs text-slate-500 mb-2">Phát hiện lệnh await được gọi, sau đó lập tức gọi setState mà không kiểm tra mounted:</p>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="case2_desc">Phát hiện lệnh await được gọi, sau đó lập tức gọi setState mà không kiểm tra mounted:</p>
             <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-xl text-xs font-mono overflow-x-auto"><code>- id: "UNGUARDED_ASYNC_SETSTATE"
   type: "meta_pattern"
   pattern: |
@@ -105,10 +111,10 @@
           <!-- Case 3 -->
           <div>
             <h3 class="text-sm font-bold text-slate-800 mb-1 flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-              <span>Cấm hardcode URL hoặc IP nhạy cảm trong mã nguồn</span>
+              <span class="w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
+              <span data-i18n="case3_title">Cấm hardcode URL hoặc IP nhạy cảm trong mã nguồn</span>
             </h3>
-            <p class="text-xs text-slate-500 mb-2">Bắt các chuỗi kết nối chứa IP hoặc http:// nội bộ:</p>
+            <p class="text-xs text-slate-500 mb-2" data-i18n="case3_desc">Bắt các chuỗi kết nối chứa IP hoặc http:// nội bộ:</p>
             <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-xl text-xs font-mono overflow-x-auto"><code>- id: "BAN_HARDCODED_INTERNAL_URL"
   type: "meta_pattern"
   pattern: 'http://=~/^http:\/\/10\..*/'
@@ -121,7 +127,97 @@
   </main>
 
   <footer class="py-6 bg-white border-t border-slate-200 text-center text-xs text-slate-500">
-    <p>© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
+    <p data-i18n="footer_text">© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
   </footer>
+
+  
+  <script>
+    const translations = {
+  "vi": {
+    "page_title": "Cẩm Nang Meta-Variables (Semgrep AST Patterns) — AI Architecture Review",
+    "nav_home": "Trang Chủ",
+    "nav_current": "Cẩm Nang Meta-Variables AST",
+    "nav_setup_link": "← Cài Đặt Chi Tiết",
+    "nav_rule_link": "← Hướng Dẫn Tự Viết Rule",
+    "badge_meta": "Advanced Pattern Matching",
+    "title_main": "Cẩm Nang Meta-Variables & AST Syntax Patterns",
+    "desc_main": "Hướng dẫn sử dụng các biến đại diện siêu cấp (Metavariables: <code>$X</code>, <code>$E</code>, <code>...</code>) để bắt trúng các lỗi logic và lỗ hổng bảo mật phức tạp trên Dart, Swift, Kotlin, TypeScript.",
+    "sec1_title": "1. Nguyên Lý Hoạt Động Của Meta-Variables",
+    "sec1_desc": "Thay vì sử dụng biểu thức chính quy (Regex) dễ gây ra lỗi sai sót (False Positive) do khoảng trắng hay xuống dòng, <b>Meta-Variables</b> hoạt động trực tiếp trên cây cú pháp AST của mã nguồn. Nó hiểu được cấu trúc của biểu thức, hàm, hoặc khối lệnh.",
+    "sec1_box1_title": "$X",
+    "sec1_box1_desc": "Đại diện cho <b>một biến, biểu thức hoặc kiểu dữ liệu bất kỳ</b>.",
+    "sec1_box2_title": "$...ARGS",
+    "sec1_box2_desc": "Đại diện cho <b>danh sách không hoặc nhiều tham số</b>.",
+    "sec1_box3_title": "...",
+    "sec1_box3_desc": "Toán tử Ellipsis đại diện cho <b>chuỗi câu lệnh bất kỳ</b>.",
+    "sec2_title": "2. Các Ca Bắt Lỗi Thực Tế Thường Gặp",
+    "case1_title": "Bắt ngoại lệ bị nuốt ngầm (Silent Catch Block)",
+    "case1_desc": "Phát hiện bất kỳ khối catch nào bắt biến ngoại lệ nhưng không xử lý gì bên trong:",
+    "case2_title": "Cấm gọi setState ngay sau lệnh bất đồng bộ mà thiếu Guard Clause",
+    "case2_desc": "Phát hiện lệnh await được gọi, sau đó lập tức gọi setState mà không kiểm tra mounted:",
+    "case3_title": "Cấm hardcode URL hoặc IP nhạy cảm trong mã nguồn",
+    "case3_desc": "Bắt các chuỗi kết nối chứa IP hoặc http:// nội bộ:",
+    "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
+  },
+  "en": {
+    "page_title": "Meta-Variables Guide (Semgrep AST Patterns) — AI Architecture Review",
+    "nav_home": "Home",
+    "nav_current": "Meta-Variables AST Guide",
+    "nav_setup_link": "← Setup Guide",
+    "nav_rule_link": "← Rule Authoring Guide",
+    "badge_meta": "Advanced Pattern Matching",
+    "title_main": "Meta-Variables & AST Syntax Pattern Reference",
+    "desc_main": "Reference guide for declaring metavariables (<code>$X</code>, <code>$E</code>, <code>...</code>) to capture complex architectural anti-patterns and vulnerabilities across Dart, Swift, Kotlin, and TypeScript.",
+    "sec1_title": "1. Core Principles of Meta-Variables",
+    "sec1_desc": "Unlike fragile regular expressions (Regex) that produce false positives over whitespace and line breaks, <b>Meta-Variables</b> evaluate directly on the code's Abstract Syntax Tree (AST), understanding statement structures, function declarations, and semantic scopes.",
+    "sec1_box1_title": "$X",
+    "sec1_box1_desc": "Represents <b>any variable, expression, or data type</b>.",
+    "sec1_box2_title": "$...ARGS",
+    "sec1_box2_desc": "Represents <b>zero or more function/method arguments</b>.",
+    "sec1_box3_title": "...",
+    "sec1_box3_desc": "Ellipsis operator representing <b>any arbitrary sequence of statements</b>.",
+    "sec2_title": "2. Real-World Anti-Pattern Detection Cases",
+    "case1_title": "Silent Catch Blocks Swallowing Exceptions",
+    "case1_desc": "Flags any catch block that captures an exception variable but leaves the body empty:",
+    "case2_title": "Unguarded setState Call Immediately Following Asynchronous Await",
+    "case2_desc": "Detects await statements directly followed by setState invocations without an unmount guard check:",
+    "case3_title": "Hardcoded Internal IPs or Sensitive URLs in Source Code",
+    "case3_desc": "Matches connection strings containing internal private IPs or insecure http:// protocols:",
+    "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
+  }
+};
+    let currentLang = localStorage.getItem("preferred_lang") || "vi";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("preferred_lang", lang);
+      document.documentElement.lang = lang;
+      const dict = translations[lang] || translations.vi;
+      if (dict.page_title) document.title = dict.page_title;
+
+      const btnVi = document.getElementById("langBtnVi");
+      const btnEn = document.getElementById("langBtnEn");
+      if (btnVi && btnEn) {
+        if (lang === "vi") {
+          btnVi.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnEn.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        } else {
+          btnEn.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnVi.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        }
+      }
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setLanguage(currentLang);
+    });
+  </script>
 </body>
 </html>

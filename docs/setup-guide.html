@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hướng Dẫn Triển Khai Enterprise & CI/CD Setup — AI Architecture Review</title>
+  <title data-i18n="page_title">Hướng Dẫn Triển Khai Enterprise & CI/CD Setup — AI Architecture Review</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     code, pre { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
@@ -18,28 +18,34 @@
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
-        <div class="flex items-center space-x-3">
-          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm">
+        <div class="flex items-center space-x-3 min-w-0">
+          <a href="../index.html" class="flex items-center space-x-2 text-slate-600 hover:text-indigo-600 transition font-medium text-sm shrink-0">
             <i class="fa-solid fa-arrow-left"></i>
-            <span>Trang Chủ</span>
+            <span data-i18n="nav_home">Trang Chủ</span>
           </a>
           <span class="text-slate-300">/</span>
-          <span class="font-bold text-slate-800 text-sm">Tài Liệu Cài Đặt Chi Tiết</span>
+          <span class="font-bold text-slate-800 text-sm truncate" data-i18n="nav_current">Tài Liệu Cài Đặt Chi Tiết</span>
         </div>
-        <div class="flex items-center space-x-4">
-          <a href="rule-authoring.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">Hướng Dẫn Tự Viết Rule →</a>
-          <a href="meta-variables.html" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition">Meta-Variables Guide →</a>
+        <div class="flex items-center space-x-3 sm:space-x-4 shrink-0">
+          <a href="rule-authoring.html" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-indigo-600 transition" data-i18n="nav_rule_link">Hướng Dẫn Tự Viết Rule →</a>
+          <a href="meta-variables.html" class="hidden sm:inline-block text-xs font-semibold text-slate-600 hover:text-indigo-600 transition" data-i18n="nav_meta_link">Meta-Variables Guide →</a>
+          
+          <!-- Language Switcher -->
+          <div class="flex items-center space-x-1 bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-semibold">
+            <button id="langBtnVi" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-lg transition font-medium">VI</button>
+            <button id="langBtnEn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg transition font-medium">EN</button>
+          </div>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Content -->
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full">
     <div class="mb-10">
-      <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Enterprise Deployment Runbook</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Hướng Dẫn Thiết Lập Hệ Thống & Tích Hợp CI/CD</h1>
-      <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+      <span class="text-xs font-bold uppercase tracking-wider text-indigo-600" data-i18n="badge_runbook">Enterprise Deployment Runbook</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="title_main">Hướng Dẫn Thiết Lập Hệ Thống & Tích Hợp CI/CD</h1>
+      <p class="text-slate-600 mt-3 text-sm leading-relaxed" data-i18n="desc_main">
         Tài liệu đặc tả quy trình triển khai On-Premise container, kích hoạt bản quyền Ed25519, tích hợp Webhook cho GitHub/GitLab Monorepo và quản lý nợ kỹ thuật bằng baseline.
       </p>
     </div>
@@ -48,28 +54,28 @@
     <section class="space-y-6">
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center">1</span>
-          <span>Yêu Cầu Hạ Tầng (Prerequisites)</span>
+          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">1</span>
+          <span data-i18n="sec1_title">Yêu Cầu Hạ Tầng (Prerequisites)</span>
         </h2>
         <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc list-inside">
-          <li><b>Hệ điều hành:</b> Linux (Ubuntu 20.04+, RHEL 8+, Debian 11+) hoặc macOS / Windows WSL2.</li>
-          <li><b>Container Runtime:</b> Docker Engine 24.0+ hoặc Podman / Kubernetes.</li>
-          <li><b>Tài nguyên tối thiểu:</b> 2 vCPU, 2GB RAM, 10GB dung lượng ổ đĩa.</li>
-          <li><b>Mạng:</b> Cho phép server GitHub/GitLab gửi HTTP POST Webhook tới port 8080 của container.</li>
-          <li><b>LLM Backend:</b> Cung cấp OpenAI API Key hoặc bất kỳ OpenAI-compatible endpoint nào (Local Ollama, vLLM, Azure OpenAI).</li>
+          <li data-i18n="sec1_os"><b>Hệ điều hành:</b> Linux (Ubuntu 20.04+, RHEL 8+, Debian 11+) hoặc macOS / Windows WSL2.</li>
+          <li data-i18n="sec1_runtime"><b>Container Runtime:</b> Docker Engine 24.0+ hoặc Podman / Kubernetes.</li>
+          <li data-i18n="sec1_resources"><b>Tài nguyên tối thiểu:</b> 2 vCPU, 2GB RAM, 10GB dung lượng ổ đĩa.</li>
+          <li data-i18n="sec1_network"><b>Mạng:</b> Cho phép server GitHub/GitLab gửi HTTP POST Webhook tới port 8080 của container.</li>
+          <li data-i18n="sec1_llm"><b>LLM Backend:</b> Cung cấp OpenAI API Key hoặc bất kỳ OpenAI-compatible endpoint nào (Local Ollama, vLLM, Azure OpenAI).</li>
         </ul>
       </div>
 
       <!-- Section 2 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center">2</span>
-          <span>Khởi Chạy Docker Container On-Premise</span>
+          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">2</span>
+          <span data-i18n="sec2_title">Khởi Chạy Docker Container On-Premise</span>
         </h2>
-        <p class="text-xs text-slate-600 mb-3">
+        <p class="text-xs text-slate-600 mb-3" data-i18n="sec2_desc">
           Mount file <code>license.lic</code> do Danny cấp vào container. Nếu license hết hạn hoặc bị giả mạo, server sẽ từ chối khởi động để đảm bảo an toàn.
         </p>
-        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code># 1. Tạo thư mục làm việc và đặt file license.lic vào
+        <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto"><code data-i18n="sec2_code"># 1. Tạo thư mục làm việc và đặt file license.lic vào
 mkdir -p /opt/ai-review
 cp /path/to/downloaded/license.lic /opt/ai-review/license.lic
 
@@ -79,8 +85,8 @@ docker run -d \
   --restart unless-stopped \
   -p 8080:8080 \
   -v /opt/ai-review/license.lic:/app/license.lic:ro \
-  -e GITHUB_WEBHOOK_SECRET="your-hmac-sha256-secret-min-32-chars" \
-  -e OPENAI_API_KEY="sk-corporate-key" \
+  -e GITHUB_WEBHOOK_SECRET="your-secret-hex-chars" \
+  -e OPENAI_API_KEY="sk-proj-***" \
   -e OPENAI_BASE_URL="https://api.openai.com/v1" \
   -e AI_REVIEW_MODEL="gpt-4o" \
   ai-review-platform:latest</code></pre>
@@ -89,13 +95,13 @@ docker run -d \
       <!-- Section 3 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center">3</span>
-          <span>Cấu Hình Tệp Quy Tắc <code>architecture_rules.yaml</code></span>
+          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">3</span>
+          <span data-i18n="sec3_title">Cấu Hình Tệp Quy Tắc <code>architecture_rules.yaml</code></span>
         </h2>
-        <p class="text-xs text-slate-600 mb-3">
+        <p class="text-xs text-slate-600 mb-3" data-i18n="sec3_desc">
           Tại thư mục gốc của repository cần kiểm tra, tạo thư mục <code>config/</code> và đặt file <code>architecture_rules.yaml</code>:
         </p>
-        <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code>version: "1.0.0"
+        <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec3_code">version: "1.0.0"
 monorepo:
   package_dirs: ["lib"] # Chỉ định thư mục mã nguồn
 
@@ -132,13 +138,13 @@ rules:
       <!-- Section 4 -->
       <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <h2 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center">4</span>
-          <span>Khởi Tạo Baseline (Quản Lý Nợ Kỹ Thuật Dự Án Cũ)</span>
+          <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-xs font-extrabold flex items-center justify-center shrink-0">4</span>
+          <span data-i18n="sec4_title">Khởi Tạo Baseline (Quản Lý Nợ Kỹ Thuật Dự Án Cũ)</span>
         </h2>
-        <p class="text-xs text-slate-600 mb-3">
+        <p class="text-xs text-slate-600 mb-3" data-i18n="sec4_desc">
           Nếu repository của bạn đã phát triển từ trước và có sẵn nhiều vi phạm cũ, hãy sinh file <code>baseline.json</code> để ghi nhận nợ kỹ thuật hiện tại:
         </p>
-        <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code># Chạy lệnh xuất baseline toàn bộ dự án hiện tại:
+        <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code data-i18n="sec4_code"># Chạy lệnh xuất baseline toàn bộ dự án hiện tại:
 docker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \
   --config config/architecture_rules.yaml \
   --format json \
@@ -146,7 +152,7 @@ docker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \
 
 # Commit file baseline.json này lên nhánh main:
 git add baseline.json && git commit -m "chore: record initial architecture baseline" && git push</code></pre>
-        <div class="mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-900">
+        <div class="mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-900" data-i18n="sec4_callout">
           💡 <b>Nguyên lý Clean-As-You-Code:</b> Kể từ thời điểm này, mọi PR chỉ bị chặn (FAILED) nếu phát sinh vi phạm <b>MỚI</b> so với <code>baseline.json</code>. Các nợ cũ sẽ không bao giờ làm nghẽn tiến độ release của team!
         </div>
       </div>
@@ -154,7 +160,99 @@ git add baseline.json && git commit -m "chore: record initial architecture basel
   </main>
 
   <footer class="py-6 bg-white border-t border-slate-200 text-center text-xs text-slate-500">
-    <p>© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
+    <p data-i18n="footer_text">© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved.</p>
   </footer>
+
+  
+  <script>
+    const translations = {
+  "vi": {
+    "page_title": "Hướng Dẫn Triển Khai Enterprise & CI/CD Setup — AI Architecture Review",
+    "nav_home": "Trang Chủ",
+    "nav_current": "Tài Liệu Cài Đặt Chi Tiết",
+    "nav_rule_link": "Hướng Dẫn Tự Viết Rule →",
+    "nav_meta_link": "Meta-Variables Guide →",
+    "badge_runbook": "Enterprise Deployment Runbook",
+    "title_main": "Hướng Dẫn Thiết Lập Hệ Thống & Tích Hợp CI/CD",
+    "desc_main": "Tài liệu đặc tả quy trình triển khai On-Premise container, kích hoạt bản quyền Ed25519, tích hợp Webhook cho GitHub/GitLab Monorepo và quản lý nợ kỹ thuật bằng baseline.",
+    "sec1_title": "Yêu Cầu Hạ Tầng (Prerequisites)",
+    "sec1_os": "<b>Hệ điều hành:</b> Linux (Ubuntu 20.04+, RHEL 8+, Debian 11+) hoặc macOS / Windows WSL2.",
+    "sec1_runtime": "<b>Container Runtime:</b> Docker Engine 24.0+ hoặc Podman / Kubernetes.",
+    "sec1_resources": "<b>Tài nguyên tối thiểu:</b> 2 vCPU, 2GB RAM, 10GB dung lượng ổ đĩa.",
+    "sec1_network": "<b>Mạng:</b> Cho phép server GitHub/GitLab gửi HTTP POST Webhook tới port 8080 của container.",
+    "sec1_llm": "<b>LLM Backend:</b> Cung cấp OpenAI API Key hoặc bất kỳ OpenAI-compatible endpoint nào (Local Ollama, vLLM, Azure OpenAI).",
+    "sec2_title": "Khởi Chạy Docker Container On-Premise",
+    "sec2_desc": "Mount file <code>license.lic</code> do Danny cấp vào container. Nếu license hết hạn hoặc bị giả mạo, server sẽ từ chối khởi động để đảm bảo an toàn.",
+    "sec2_code": "# 1. Tạo thư mục làm việc và đặt file license.lic vào\nmkdir -p /opt/ai-review\ncp /path/to/downloaded/license.lic /opt/ai-review/license.lic\n\n# 2. Khởi chạy Docker Container\ndocker run -d \\\n  --name ai-review-service \\\n  --restart unless-stopped \\\n  -p 8080:8080 \\\n  -v /opt/ai-review/license.lic:/app/license.lic:ro \\\n  -e GITHUB_WEBHOOK_SECRET=\"your-secret-hex-chars\" \\\n  -e OPENAI_API_KEY=\"sk-proj-***\" \\\n  -e OPENAI_BASE_URL=\"https://api.openai.com/v1\" \\\n  -e AI_REVIEW_MODEL=\"gpt-4o\" \\\n  ai-review-platform:latest",
+    "sec3_title": "Cấu Hình Tệp Quy Tắc <code>architecture_rules.yaml</code>",
+    "sec3_desc": "Tại thư mục gốc của repository cần kiểm tra, tạo thư mục <code>config/</code> và đặt file <code>architecture_rules.yaml</code>:",
+    "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Chỉ định thư mục mã nguồn\n\n# 1. Định nghĩa phân tầng Clean Architecture\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Tầng logic nghiệp vụ & entity cốt lõi\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"Tầng giao diện người dùng\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Tầng dữ liệu DB & API\"\n\n# 2. Quy tắc kiểm soát nghiêm ngặt\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
+    "sec4_title": "Khởi Tạo Baseline (Quản Lý Nợ Kỹ Thuật Dự Án Cũ)",
+    "sec4_desc": "Nếu repository của bạn đã phát triển từ trước và có sẵn nhiều vi phạm cũ, hãy sinh file <code>baseline.json</code> để ghi nhận nợ kỹ thuật hiện tại:",
+    "sec4_code": "# Chạy lệnh xuất baseline toàn bộ dự án hiện tại:\ndocker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \\\n  --config config/architecture_rules.yaml \\\n  --format json \\\n  --output baseline.json\n\n# Commit file baseline.json này lên nhánh main:\ngit add baseline.json && git commit -m \"chore: record initial architecture baseline\" && git push",
+    "sec4_callout": "💡 <b>Nguyên lý Clean-As-You-Code:</b> Kể từ thời điểm này, mọi PR chỉ bị chặn (FAILED) nếu phát sinh vi phạm <b>MỚI</b> so với <code>baseline.json</code>. Các nợ cũ sẽ không bao giờ làm nghẽn tiến độ release của team!",
+    "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
+  },
+  "en": {
+    "page_title": "Enterprise Deployment & CI/CD Setup Guide — AI Architecture Review",
+    "nav_home": "Home",
+    "nav_current": "Deployment Guide",
+    "nav_rule_link": "Rule Authoring Guide →",
+    "nav_meta_link": "Meta-Variables Guide →",
+    "badge_runbook": "Enterprise Deployment Runbook",
+    "title_main": "System Setup & CI/CD Integration Guide",
+    "desc_main": "Complete runbook for on-premise container deployment, Ed25519 digital license verification, GitHub/GitLab monorepo webhook integration, and technical debt management via baseline files.",
+    "sec1_title": "Infrastructure Prerequisites",
+    "sec1_os": "<b>Operating System:</b> Linux (Ubuntu 20.04+, RHEL 8+, Debian 11+), macOS, or Windows WSL2.",
+    "sec1_runtime": "<b>Container Runtime:</b> Docker Engine 24.0+, Podman, or Kubernetes.",
+    "sec1_resources": "<b>Minimum Hardware:</b> 2 vCPUs, 2GB RAM, 10GB disk space.",
+    "sec1_network": "<b>Network Connectivity:</b> Allows GitHub/GitLab servers to deliver HTTP POST webhooks to container port 8080.",
+    "sec1_llm": "<b>LLM Backend:</b> OpenAI API Key or any OpenAI-compatible provider (Local Ollama, vLLM, Azure OpenAI).",
+    "sec2_title": "Run On-Premise Docker Container",
+    "sec2_desc": "Mount the cryptographically signed <code>license.lic</code> file issued by Danny into the container. If the license is expired or tampered with, the service fails closed and refuses startup.",
+    "sec2_code": "# 1. Create workspace directory and copy license.lic\nmkdir -p /opt/ai-review\ncp /path/to/downloaded/license.lic /opt/ai-review/license.lic\n\n# 2. Run the Docker Container\ndocker run -d \\\n  --name ai-review-service \\\n  --restart unless-stopped \\\n  -p 8080:8080 \\\n  -v /opt/ai-review/license.lic:/app/license.lic:ro \\\n  -e GITHUB_WEBHOOK_SECRET=\"your-secret-hex-chars\" \\\n  -e OPENAI_API_KEY=\"sk-proj-***\" \\\n  -e OPENAI_BASE_URL=\"https://api.openai.com/v1\" \\\n  -e AI_REVIEW_MODEL=\"gpt-4o\" \\\n  ai-review-platform:latest",
+    "sec3_title": "Configure <code>architecture_rules.yaml</code> Rule Specification",
+    "sec3_desc": "In the target repository root directory, create a <code>config/</code> directory and place your <code>architecture_rules.yaml</code> file:",
+    "sec3_code": "version: \"1.0.0\"\nmonorepo:\n  package_dirs: [\"lib\"] # Source code scan directories\n\n# 1. Clean Architecture Layer Boundaries\nlayers:\n  - name: \"domain\"\n    aliases: [\"config\", \"utils\", \"core\"]\n    description: \"Core business logic & domain entities\"\n  - name: \"presentation\"\n    aliases: [\"pages\", \"widgets\", \"ui\"]\n    description: \"User Interface (UI) presentation layer\"\n  - name: \"data\"\n    aliases: [\"datasources\", \"repository\", \"network\"]\n    description: \"Infrastructure data sources & network API\"\n\n# 2. Strict Architecture Gate Rules\nrules:\n  - id: \"RULE_CLEAN_DOMAIN\"\n    type: \"layer_boundary\"\n    source_layer: \"domain\"\n    forbidden_target_layers: [\"presentation\", \"data\"]\n    severity: \"BLOCKER\"\n\n  - id: \"BAN_PRINT_ON_PROD\"\n    type: \"forbidden_calls\"\n    calls: [\"print\", \"debugPrint\"]\n    severity: \"BLOCKER\"\n\n  - id: \"RULE_CIRCULAR_DEP\"\n    type: \"layer_boundary\"\n    severity: \"BLOCKER\"",
+    "sec4_title": "Initialize Baseline (Managing Legacy Project Debt)",
+    "sec4_desc": "If your repository has existing architectural violations, generate a <code>baseline.json</code> file to catalog the current debt without blocking release velocity:",
+    "sec4_code": "# Export baseline for entire existing repository:\ndocker exec ai-review-service python -m app.arch_engine.cli scan /path/to/repo \\\n  --config config/architecture_rules.yaml \\\n  --format json \\\n  --output baseline.json\n\n# Commit baseline.json to main branch:\ngit add baseline.json && git commit -m \"chore: record initial architecture baseline\" && git push",
+    "sec4_callout": "💡 <b>Clean-As-You-Code Principle:</b> From this point forward, Pull Requests are only blocked (FAILED) if they introduce <b>NEW</b> violations relative to <code>baseline.json</code>. Pre-existing debt never bottlenecks your team's deployment schedule!",
+    "footer_text": "© 2026 AI Architecture Review Platform by Phan Minh Duc (Danny). All rights reserved."
+  }
+};
+    let currentLang = localStorage.getItem("preferred_lang") || "vi";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("preferred_lang", lang);
+      document.documentElement.lang = lang;
+      const dict = translations[lang] || translations.vi;
+      if (dict.page_title) document.title = dict.page_title;
+
+      const btnVi = document.getElementById("langBtnVi");
+      const btnEn = document.getElementById("langBtnEn");
+      if (btnVi && btnEn) {
+        if (lang === "vi") {
+          btnVi.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnEn.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        } else {
+          btnEn.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnVi.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        }
+      }
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setLanguage(currentLang);
+    });
+  </script>
 </body>
 </html>
