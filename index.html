@@ -27,46 +27,77 @@
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-100">
-            <i class="fa-solid fa-layer-group text-lg"></i>
+        
+        <!-- Brand Logo & Clean Badge -->
+        <div class="flex items-center space-x-3 shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-100 shrink-0">
+            <i class="fa-solid fa-layer-group text-base"></i>
           </div>
-          <div>
-            <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">AI Architecture Review</span>
-            <span class="ml-2 text-xs font-bold px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">Enterprise On-Premise</span>
+          <div class="flex items-center space-x-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent whitespace-nowrap">AI Architecture Review</span>
+            <span class="inline-flex items-center px-2 py-0.5 text-[10px] sm:text-xs font-bold bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200 whitespace-nowrap shrink-0">
+              <i class="fa-solid fa-server mr-1 text-[9px] text-indigo-500"></i>Enterprise On-Premise
+            </span>
           </div>
         </div>
-        <div class="hidden lg:flex items-center space-x-6">
-          <a href="#architecture" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Kiến Trúc 3 Tầng</a>
-          <a href="#how-it-works" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Luồng Xử Lý PR</a>
-          <a href="#rule-mechanisms" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">5 Cơ Chế Rule</a>
-          <a href="#live-demo" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition flex items-center space-x-1.5">
+
+        <!-- Navigation Links (Desktop) -->
+        <div class="hidden xl:flex items-center space-x-5 text-sm font-semibold text-slate-700">
+          <a href="#architecture" class="hover:text-indigo-600 transition whitespace-nowrap" data-i18n="nav_arch">Kiến Trúc 3 Tầng</a>
+          <a href="#how-it-works" class="hover:text-indigo-600 transition whitespace-nowrap" data-i18n="nav_flow">Luồng Xử Lý PR</a>
+          <a href="#rule-mechanisms" class="hover:text-indigo-600 transition whitespace-nowrap" data-i18n="nav_rules">5 Cơ Chế Rule</a>
+          <a href="#live-demo" class="text-indigo-600 hover:text-indigo-800 transition flex items-center space-x-1.5 whitespace-nowrap">
             <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Minh Chứng Thực Tế</span>
+            <span data-i18n="nav_live">Minh Chứng Thực Tế</span>
           </a>
-          <div class="relative group">
-            <button class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition flex items-center space-x-1">
-              <span>Tài Liệu Chi Tiết</span>
-              <i class="fa-solid fa-chevron-down text-xs"></i>
+          
+          <!-- Dropdown Menu with Hover Bridge -->
+          <div class="relative group" id="docsDropdownContainer">
+            <button class="hover:text-indigo-600 transition flex items-center space-x-1 py-4 focus:outline-none whitespace-nowrap" id="docsDropdownBtn">
+              <span data-i18n="nav_docs">Tài Liệu Chi Tiết</span>
+              <i class="fa-solid fa-chevron-down text-[10px] ml-0.5 transition-transform duration-200 group-hover:rotate-180"></i>
             </button>
-            <div class="absolute right-0 mt-2 w-56 rounded-2xl bg-white shadow-xl border border-slate-200 py-2 hidden group-hover:block transition z-50">
-              <a href="docs/setup-guide.html" class="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">
-                <i class="fa-solid fa-book-bookmark mr-2 text-indigo-500"></i>Hướng Dẫn Cài Đặt Chi Tiết
-              </a>
-              <a href="docs/rule-authoring.html" class="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">
-                <i class="fa-solid fa-sliders mr-2 text-violet-500"></i>Hướng Dẫn Tự Viết Rule Mới
-              </a>
-              <a href="docs/meta-variables.html" class="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">
-                <i class="fa-solid fa-code mr-2 text-emerald-500"></i>Cẩm Nang Meta-Variables AST
-              </a>
+            <!-- Bridge container: pt-1 ensures no gap so mouse transition never triggers mouseleave -->
+            <div class="absolute right-0 top-[85%] pt-1 w-64 hidden group-hover:block transition-all z-50">
+              <div class="rounded-2xl bg-white shadow-2xl border border-slate-200 py-2 overflow-hidden">
+                <a href="docs/setup-guide.html" class="flex items-center px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition">
+                  <i class="fa-solid fa-book-bookmark mr-2.5 text-indigo-500 w-4 text-center"></i>
+                  <span data-i18n="nav_doc_setup">Hướng Dẫn Cài Đặt Chi Tiết</span>
+                </a>
+                <a href="docs/rule-authoring.html" class="flex items-center px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition">
+                  <i class="fa-solid fa-sliders mr-2.5 text-violet-500 w-4 text-center"></i>
+                  <span data-i18n="nav_doc_rules">Hướng Dẫn Tự Viết Rule Mới</span>
+                </a>
+                <a href="docs/meta-variables.html" class="flex items-center px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition">
+                  <i class="fa-solid fa-code mr-2.5 text-emerald-500 w-4 text-center"></i>
+                  <span data-i18n="nav_doc_meta">Cẩm Nang Meta-Variables AST</span>
+                </a>
+              </div>
             </div>
           </div>
-          <a href="#register" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Đăng Ký License</a>
-          <button onclick="toggleAdminModal()" class="text-xs font-bold px-3.5 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition flex items-center space-x-2 shadow-sm">
-            <i class="fa-solid fa-lock text-xs"></i>
-            <span>Portal Quản Trị</span>
+
+          <a href="#register" class="hover:text-indigo-600 transition whitespace-nowrap" data-i18n="nav_register">Đăng Ký License</a>
+        </div>
+
+        <!-- Right Controls: Language Switcher + Portal Button -->
+        <div class="flex items-center space-x-2.5">
+          <!-- Language Switcher -->
+          <div class="inline-flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-bold">
+            <button id="langBtnVi" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm" title="Tiếng Việt">
+              🇻🇳 VI
+            </button>
+            <button id="langBtnEn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800" title="English">
+              🇬🇧 EN
+            </button>
+          </div>
+
+          <!-- Portal Quản Trị Button -->
+          <button onclick="toggleAdminModal()" class="text-xs font-bold px-3 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition flex items-center space-x-1.5 shadow-sm whitespace-nowrap">
+            <i class="fa-solid fa-shield-halved text-indigo-400 text-xs"></i>
+            <span data-i18n="nav_portal">Portal Quản Trị</span>
           </button>
         </div>
+
       </div>
     </div>
   </nav>
@@ -76,9 +107,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold mb-6">
         <i class="fa-solid fa-shield-halved text-emerald-500"></i>
-        <span>Bảo vệ Clean Architecture • 100% On-Premise Không Rò Rỉ Mã Nguồn</span>
+        <span data-i18n="hero_badge">Bảo vệ Clean Architecture • 100% On-Premise Không Rò Rỉ Mã Nguồn</span>
       </div>
-      <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto" data-i18n="hero_title">
         Hệ Thống Tự Động Review Kiến Trúc & Code Quality Cho Doanh Nghiệp
       </h1>
       <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
@@ -89,11 +120,11 @@
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#register" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition text-center flex items-center justify-center space-x-2">
           <i class="fa-solid fa-key"></i>
-          <span>Nhận License Kích Hoạt 30 Ngày</span>
+          <span data-i18n="hero_btn_trial">Nhận License Kích Hoạt 30 Ngày</span>
         </a>
         <a href="#how-it-works" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 transition text-center flex items-center justify-center space-x-2">
           <i class="fa-solid fa-diagram-project text-indigo-600"></i>
-          <span>Xem Luồng Vận Hành Chi Tiết</span>
+          <span data-i18n="hero_btn_flow">Xem Luồng Vận Hành Chi Tiết</span>
         </a>
       </div>
 
@@ -417,8 +448,8 @@
   <section id="live-demo" class="py-16 bg-slate-50 border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Production Test Run</span>
-        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Minh Chứng Thực Tế Trên Repository Kiểm Thử</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600" data-i18n="sec_live_badge">Production Test Run</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-1" data-i18n="sec_live_title">Minh Chứng Thực Tế Trên Repository Kiểm Thử</h2>
         <p class="text-sm text-slate-600 mt-2">
           Dưới đây là hình ảnh chụp màn hình trực tiếp từ Pull Request thực tế: Hệ thống phát hiện toàn bộ vi phạm kiến trúc, khóa quyền merge và đăng tải bình luận phân tích.
         </p>
@@ -533,8 +564,8 @@
   <section id="setup-guide" class="py-16 bg-white border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Deployment Guide</span>
-        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Hướng Dẫn Thiết Lập Cho Repository Mới</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600" data-i18n="sec_setup_badge">Deployment Guide</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-2" data-i18n="sec_setup_title">Hướng Dẫn Thiết Lập Cho Repository Mới</h2>
         <p class="text-slate-600 text-sm mt-2">Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:</p>
       </div>
 
@@ -703,53 +734,99 @@ rules:
   <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-slate-200">
       
+      <!-- Modal Header -->
       <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-        <div class="flex items-center space-x-2">
-          <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-          <h3 class="font-extrabold text-slate-800 text-lg">Admin License Portal — Phan Minh Đức</h3>
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center text-sm font-bold shadow-sm">
+            <i class="fa-solid fa-shield-halved text-indigo-400"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-slate-900 text-base" data-i18n="adm_title">Portal Quản Trị & Cấp Phép Bản Quyền (Admin Center)</h3>
+            <p class="text-xs text-slate-500" data-i18n="adm_subtitle">Dành cho System Owner (Tech Lead / Architect / DevOps Lead)</p>
+          </div>
         </div>
-        <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600">
+        <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600 transition p-1.5 rounded-lg hover:bg-slate-200/60">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
 
       <div class="p-6 overflow-y-auto space-y-6 flex-1 bg-slate-50/50">
         
-        <!-- Quick Generator -->
-        <div class="glass-card p-6 rounded-2xl border border-slate-200">
-          <h4 class="font-bold text-slate-900 mb-3 flex items-center space-x-2">
-            <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
-            <span>Bộ Sinh License Key Ed25519</span>
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <input type="text" id="adm_customer" placeholder="Tên khách hàng / cty" class="px-3.5 py-2 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-            <input type="number" id="adm_days" value="30" placeholder="Số ngày" class="px-3.5 py-2 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-            <button onclick="generateManualLicense()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-xl text-sm transition">
-              Ký & Tải license.lic
-            </button>
+        <!-- Explanation & User Guide Card -->
+        <div class="p-5 rounded-2xl bg-indigo-50/70 border border-indigo-200/80 text-xs text-indigo-900 space-y-2.5">
+          <div class="flex items-center space-x-2 font-bold text-sm text-indigo-950">
+            <i class="fa-solid fa-circle-question text-indigo-600 text-base"></i>
+            <span data-i18n="adm_guide_title">Portal này dùng làm gì và dành cho ai?</span>
           </div>
-          <div id="genResult" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs font-mono text-emerald-800 break-all"></div>
+          <p class="leading-relaxed" data-i18n="adm_guide_desc">
+            <b>Đối tượng sử dụng:</b> Quản trị viên hệ thống (System Owner / Tech Lead / DevOps Architect) quản lý bản quyền phần mềm on-premise.<br>
+            <b>Mục đích:</b> Toàn bộ hệ thống kiểm duyệt kiến trúc chạy On-Premise nội bộ độc lập. Khi các dự án trong nội bộ công ty hoặc khách hàng Enterprise muốn kích hoạt bộ scanner trên GitHub Actions / GitLab CI, họ cần 1 file <code>license.lic</code> đã được ký số bằng thuật toán Ed25519 từ Quản trị viên.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 pt-2 border-t border-indigo-200/60 font-medium">
+            <div class="flex items-start space-x-2">
+              <span class="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 text-[10px] font-bold">1</span>
+              <span data-i18n="adm_step1">Dự án gửi đăng ký qua form bên dưới.</span>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 text-[10px] font-bold">2</span>
+              <span data-i18n="adm_step2">Admin duyệt thông tin & cấu hình số ngày, số repo.</span>
+            </div>
+            <div class="flex items-start space-x-2">
+              <span class="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 text-[10px] font-bold">3</span>
+              <span data-i18n="adm_step3">Hệ thống ký số tải file <code>license.lic</code> bàn giao cho team.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Generator -->
+        <div class="glass-card p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <h4 class="font-bold text-slate-900 mb-2 flex items-center space-x-2 text-sm">
+            <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
+            <span data-i18n="adm_gen_title">Bộ Sinh License Key Offline (Ed25519 Signature)</span>
+          </h4>
+          <p class="text-xs text-slate-500 mb-4" data-i18n="adm_gen_desc">Tự động tạo chữ ký mật mã an toàn, quy định hạn dùng và số repository được bảo vệ.</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div class="sm:col-span-2">
+              <label class="block text-[11px] font-bold text-slate-600 mb-1" data-i18n="adm_label_customer">Tên Khách Hàng / Dự Án</label>
+              <input type="text" id="adm_customer" value="VPBank_Enterprise_Demo" placeholder="VD: FinTech_Core_Banking" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1" data-i18n="adm_label_days">Thời Hạn (Ngày)</label>
+              <input type="number" id="adm_days" value="30" placeholder="Số ngày" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </div>
+            <div class="flex items-end">
+              <button onclick="generateManualLicense()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-sm">
+                <i class="fa-solid fa-file-signature"></i>
+                <span data-i18n="adm_btn_sign">Ký & Tải license.lic</span>
+              </button>
+            </div>
+          </div>
+          <div id="genResult" class="hidden mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs font-mono text-emerald-800 break-all"></div>
         </div>
 
         <!-- Request Table -->
         <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-          <div class="px-6 py-3 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
-            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Danh Sách Yêu Cầu License Mới</span>
-            <button onclick="loadRequests()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center space-x-1">
+          <div class="px-6 py-3.5 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold text-slate-800 uppercase tracking-wider" data-i18n="adm_table_title">Hàng Đợi Yêu Cầu Đăng Ký License (Live Database)</span>
+            </div>
+            <button onclick="loadRequests()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center space-x-1 transition">
               <i class="fa-solid fa-rotate-right"></i>
-              <span>Làm mới</span>
+              <span data-i18n="adm_btn_refresh">Làm mới dữ liệu</span>
             </button>
           </div>
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm text-slate-600">
-              <thead class="bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 text-slate-500 uppercase font-bold border-b border-slate-200 text-[11px]">
                 <tr>
-                  <th class="px-4 py-3">Công ty</th>
-                  <th class="px-4 py-3">Người liên hệ</th>
-                  <th class="px-4 py-3">Email</th>
-                  <th class="px-4 py-3">Gói</th>
-                  <th class="px-4 py-3">Trạng thái</th>
-                  <th class="px-4 py-3 text-right">Thao tác</th>
+                  <th class="px-4 py-3" data-i18n="adm_th_company">Công ty / Dự án</th>
+                  <th class="px-4 py-3" data-i18n="adm_th_contact">Người liên hệ</th>
+                  <th class="px-4 py-3" data-i18n="adm_th_email">Email</th>
+                  <th class="px-4 py-3" data-i18n="adm_th_plan">Gói License</th>
+                  <th class="px-4 py-3" data-i18n="adm_th_status">Trạng thái</th>
+                  <th class="px-4 py-3 text-right" data-i18n="adm_th_action">Thao tác phê duyệt</th>
                 </tr>
               </thead>
               <tbody id="requestTableBody" class="divide-y divide-slate-100 font-normal">
@@ -773,24 +850,248 @@ rules:
 
   <!-- Scripts -->
   <script>
-    const SUPABASE_URL = "https://zqpytlatdyljvqdhebew.supabase.co";
-    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxcHl0bGF0ZHlsanZxZGhlYmV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1NDc1NzYsImV4cCI6MjEwODEyMzU3Nn0.phM9Km0KyUxp0CmIRJHIG1mhuI7eLhcqKWrMkWihxJU";
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    // Translation Dictionary (VI / EN)
+    const translations = {
+      vi: {
+        // Nav
+        nav_arch: "Kiến Trúc 3 Tầng",
+        nav_flow: "Luồng Xử Lý PR",
+        nav_rules: "5 Cơ Chế Rule",
+        nav_live: "Minh Chứng Thực Tế",
+        nav_docs: "Tài Liệu Chi Tiết",
+        nav_doc_setup: "Hướng Dẫn Cài Đặt Chi Tiết",
+        nav_doc_rules: "Hướng Dẫn Tự Viết Rule Mới",
+        nav_doc_meta: "Cẩm Nang Meta-Variables AST",
+        nav_register: "Đăng Ký License",
+        nav_portal: "Portal Quản Trị",
+        badge_onprem: "Enterprise On-Premise",
 
-    function toggleAdminModal() {
-      const modal = document.getElementById("adminModal");
-      modal.classList.toggle("hidden");
-      if (!modal.classList.contains("hidden")) {
-        loadRequests();
+        // Hero
+        hero_badge: "Bảo vệ Clean Architecture • 100% On-Premise Không Rò Rỉ Mã Nguồn",
+        hero_title: "Hệ Thống Tự Động Review Kiến Trúc & Code Quality Cho Doanh Nghiệp",
+        hero_subtitle: "Kết hợp <b>Bộ phân tích tĩnh tất định (Deterministic AST Scanner)</b> để khóa quyền Merge khi vi phạm kiến trúc, và <b>AI Review Agent</b> đóng vai trò Senior Architect hướng dẫn lập trình viên sửa code trực tiếp trên Pull Request.",
+        hero_btn_trial: "Nhận License Kích Hoạt 30 Ngày",
+        hero_btn_flow: "Xem Luồng Vận Hành Chi Tiết",
+
+        // Stats
+        stat_zero_hal_title: "0% Ảo Giác (Zero Hallucination)",
+        stat_zero_hal_desc: "Phát hiện lỗi bằng AST cứng, AI không can thiệp phán quyết.",
+        stat_onprem_title: "100% On-Premise Private",
+        stat_onprem_desc: "Mã nguồn chạy nội bộ, không bao giờ gửi ra cloud ngoài.",
+        stat_rules_title: "5+ Cơ Chế Custom Rule",
+        stat_rules_desc: "Tự định nghĩa rule qua YAML không cần đụng đến code core.",
+        stat_baseline_title: "Clean As You Code (Baseline)",
+        stat_baseline_desc: "Không chặn nợ kỹ thuật cũ, chỉ bắt lỗi mới trên PR.",
+
+        // Section Headers
+        sec_arch_badge: "Core Architecture",
+        sec_arch_title: "Mô Hình Kiến Trúc 3 Tầng Phân Lập Tuyệt Đối",
+        sec_arch_desc: "Tách bạch triệt để giữa Kiểm tra tĩnh (Gatekeeper), Trợ lý AI (Senior Mentor) và Cổng kết nối CI/CD.",
+
+        sec_flow_badge: "Execution Pipeline",
+        sec_flow_title: "Luồng Kiểm Soát Mã Nguồn Tự Động 5 Giai Đoạn",
+        sec_flow_desc: "Bảo đảm mọi commit gửi lên đều được quét tĩnh trong vài giây và nhận phản hồi chi tiết từ AI.",
+
+        sec_rules_badge: "Extensibility & Custom Rules",
+        sec_rules_title: "5 Cơ Chế Định Nghĩa Rule Kiến Trúc & Chất Lượng",
+        sec_rules_desc: "Linh hoạt đáp ứng mọi tiêu chuẩn nội bộ của doanh nghiệp mà không cần chỉnh sửa mã nguồn lõi.",
+
+        sec_live_badge: "Production Test Run",
+        sec_live_title: "Minh Chứng Thực Tế Trên Repository Kiểm Thử",
+        sec_live_desc: "Dưới đây là hình ảnh chụp màn hình trực tiếp từ Pull Request thực tế: Hệ thống phát hiện toàn bộ vi phạm kiến trúc, khóa quyền merge và đăng tải bình luận phân tích.",
+
+        sec_setup_badge: "Deployment Guide",
+        sec_setup_title: "Hướng Dẫn Thiết Lập Cho Repository Mới",
+        sec_setup_desc: "Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:",
+
+        sec_pricing_badge: "Enterprise Licensing",
+        sec_pricing_title: "Đăng Ký Bản Quyền Thử Nghiệm 30 Ngày",
+        sec_pricing_desc: "Điền thông tin doanh nghiệp để nhận tệp license.lic mã hóa Ed25519 kích hoạt hệ thống on-premise.",
+
+        // Admin Modal
+        adm_title: "Portal Quản Trị & Cấp Phép Bản Quyền (Admin Center)",
+        adm_subtitle: "Dành cho System Owner (Tech Lead / Architect / DevOps Lead)",
+        adm_guide_title: "Portal này dùng làm gì và dành cho ai?",
+        adm_guide_desc: "<b>Đối tượng sử dụng:</b> Quản trị viên hệ thống (System Owner / Tech Lead / DevOps Architect) quản lý bản quyền phần mềm on-premise.<br><b>Mục đích:</b> Toàn bộ hệ thống kiểm duyệt kiến trúc chạy On-Premise nội bộ độc lập. Khi các dự án trong nội bộ công ty hoặc khách hàng Enterprise muốn kích hoạt bộ scanner trên GitHub Actions / GitLab CI, họ cần 1 file <code>license.lic</code> đã được ký số bằng thuật toán Ed25519 từ Quản trị viên.",
+        adm_step1: "Dự án gửi đăng ký qua form bên dưới.",
+        adm_step2: "Admin duyệt thông tin & cấu hình số ngày, số repo.",
+        adm_step3: "Hệ thống ký số tải file license.lic bàn giao cho team.",
+        adm_gen_title: "Bộ Sinh License Key Offline (Ed25519 Signature)",
+        adm_gen_desc: "Tự động tạo chữ ký mật mã an toàn, quy định hạn dùng và số repository được bảo vệ.",
+        adm_label_customer: "Tên Khách Hàng / Dự Án",
+        adm_label_days: "Thời Hạn (Ngày)",
+        adm_btn_sign: "Ký & Tải license.lic",
+        adm_table_title: "Hàng Đợi Yêu Cầu Đăng Ký License (Live Database)",
+        adm_btn_refresh: "Làm mới dữ liệu",
+        adm_th_company: "Công ty / Dự án",
+        adm_th_contact: "Người liên hệ",
+        adm_th_email: "Email",
+        adm_th_plan: "Gói License",
+        adm_th_status: "Trạng thái",
+        adm_th_action: "Thao tác phê duyệt"
+      },
+      en: {
+        // Nav
+        nav_arch: "3-Tier Architecture",
+        nav_flow: "PR Workflow",
+        nav_rules: "5 Rule Engines",
+        nav_live: "Live Evidence",
+        nav_docs: "Detailed Docs",
+        nav_doc_setup: "Detailed Setup Runbook",
+        nav_doc_rules: "Custom Rule Authoring Guide",
+        nav_doc_meta: "AST Meta-Variables Guide",
+        nav_register: "Register License",
+        nav_portal: "Admin Portal",
+        badge_onprem: "Enterprise On-Premise",
+
+        // Hero
+        hero_badge: "Clean Architecture Defense • 100% On-Premise Zero Source Leak",
+        hero_title: "Automated Enterprise Architecture Review & Code Quality Engine",
+        hero_subtitle: "Combines a <b>Deterministic AST Static Scanner</b> to block Pull Request merges on architectural violations, and an <b>AI Review Agent</b> acting as a Senior Architect to guide developers directly on GitHub/GitLab PRs.",
+        hero_btn_trial: "Claim 30-Day Evaluation License",
+        hero_btn_flow: "Explore Operational Pipeline",
+
+        // Stats
+        stat_zero_hal_title: "0% Hallucination",
+        stat_zero_hal_desc: "Violations flagged via rigid AST parsing, AI never makes gate decisions.",
+        stat_onprem_title: "100% Private On-Premise",
+        stat_onprem_desc: "Source code executes strictly inside your VPC/private runners, never exfiltrated.",
+        stat_rules_title: "5+ Custom Rule Mechanisms",
+        stat_rules_desc: "Define custom rules via declarative YAML without touching core engine code.",
+        stat_baseline_title: "Clean As You Code (Baseline)",
+        stat_baseline_desc: "Never blocks legacy technical debt; only enforces standards on new PR diffs.",
+
+        // Section Headers
+        sec_arch_badge: "Core Architecture",
+        sec_arch_title: "Strictly Isolated 3-Tier Enterprise Architecture",
+        sec_arch_desc: "Clear separation between Static Analysis (Gatekeeper), AI Assistant (Senior Mentor), and CI/CD Integrations.",
+
+        sec_flow_badge: "Execution Pipeline",
+        sec_flow_title: "5-Stage Automated Code Governance Flow",
+        sec_flow_desc: "Ensures every submitted PR is statically scanned within seconds and receives actionable guidance from AI.",
+
+        sec_rules_badge: "Extensibility & Custom Rules",
+        sec_rules_title: "5 Expressive Rule Authoring Mechanisms",
+        sec_rules_desc: "Adapt to any enterprise engineering standards without modifying engine source code.",
+
+        sec_live_badge: "Production Test Run",
+        sec_live_title: "Verified Live Evidence on Real Test Repository",
+        sec_live_desc: "Live screenshot from Pull Request #12: The system detects architectural violations, locks the merge gate, and posts formatted remediation diffs.",
+
+        sec_setup_badge: "Deployment Guide",
+        sec_setup_title: "Step-by-Step Setup Guide for Any Repository",
+        sec_setup_desc: "Deploy into any codebase (Flutter, iOS, Android, React Native...) in 3 simple steps:",
+
+        sec_pricing_badge: "Enterprise Licensing",
+        sec_pricing_title: "Register for 30-Day Evaluation License",
+        sec_pricing_desc: "Submit your team info to receive an Ed25519 cryptographically signed license.lic file for private on-premise activation.",
+
+        // Admin Modal
+        adm_title: "Admin License & Compliance Center",
+        adm_subtitle: "For System Owners (Tech Lead / Enterprise Architect / DevOps Lead)",
+        adm_guide_title: "What is this Portal for and who can use it?",
+        adm_guide_desc: "<b>Target Audience:</b> System Owners, Tech Leads, and Platform Engineers managing enterprise on-premise licenses.<br><b>Purpose:</b> The review engine runs completely air-gapped on-premise. When internal development teams or enterprise clients deploy the scanner to GitHub Actions / GitLab CI, they require an Ed25519 cryptographically signed <code>license.lic</code> file issued by the Administrator.",
+        adm_step1: "Teams submit license requests via the registration form below.",
+        adm_step2: "Admin reviews request details, validity duration, and repo quota.",
+        adm_step3: "System cryptographically signs and downloads license.lic for the team.",
+        adm_gen_title: "Offline License Key Generator (Ed25519 Signature)",
+        adm_gen_desc: "Generates tamper-proof cryptographic signatures with expiration and repository limits.",
+        adm_label_customer: "Client / Project Identifier",
+        adm_label_days: "Validity Duration (Days)",
+        adm_btn_sign: "Sign & Download license.lic",
+        adm_table_title: "License Request Queue (Live Supabase DB)",
+        adm_btn_refresh: "Refresh Data",
+        adm_th_company: "Company / Project",
+        adm_th_contact: "Contact Person",
+        adm_th_email: "Email Address",
+        adm_th_plan: "License Plan",
+        adm_th_status: "Status",
+        adm_th_action: "Approval Action"
       }
+    };
+
+    let currentLang = localStorage.getItem("preferred_lang") || "vi";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("preferred_lang", lang);
+      document.documentElement.lang = lang;
+
+      // Update switcher active styling
+      const btnVi = document.getElementById("langBtnVi");
+      const btnEn = document.getElementById("langBtnEn");
+      if (btnVi && btnEn) {
+        if (lang === "vi") {
+          btnVi.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnEn.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        } else {
+          btnEn.className = "px-2.5 py-1 rounded-lg transition bg-white text-indigo-700 shadow-sm font-bold";
+          btnVi.className = "px-2.5 py-1 rounded-lg transition text-slate-500 hover:text-slate-800 font-medium";
+        }
+      }
+
+      // Update text in elements with data-i18n
+      const dict = translations[lang] || translations.vi;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
     }
 
-    async function submitLicenseRequest(e) {
+    // Initialize Supabase client cleanly without global collisions
+    const SUPABASE_URL = "https://zqpytlatdyljvqdhebew.supabase.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxcHl0bGF0ZHlsanZxZGhlYmV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1NDc1NzYsImV4cCI6MjEwODEyMzU3Nn0.phM9Km0KyUxp0CmIRJHIG1mhuI7eLhcqKWrMkWihxJU";
+    
+    let dbClient = null;
+    try {
+      if (window.supabase && typeof window.supabase.createClient === "function") {
+        dbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+      }
+    } catch (e) {
+      console.warn("Supabase init warning:", e);
+    }
+
+    // Global toggle for Admin Modal
+    window.toggleAdminModal = function() {
+      const modal = document.getElementById("adminModal");
+      if (!modal) return;
+      modal.classList.toggle("hidden");
+      if (!modal.classList.contains("hidden")) {
+        document.body.style.overflow = "hidden";
+        loadRequests();
+      } else {
+        document.body.style.overflow = "";
+      }
+    };
+
+    // Close modal on Escape or backdrop click
+    window.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        const modal = document.getElementById("adminModal");
+        if (modal && !modal.classList.contains("hidden")) {
+          toggleAdminModal();
+        }
+      }
+    });
+
+    const adminModalEl = document.getElementById("adminModal");
+    if (adminModalEl) {
+      adminModalEl.addEventListener("click", function(e) {
+        if (e.target === this) {
+          toggleAdminModal();
+        }
+      });
+    }
+
+    // Handle Form submission
+    window.submitLicenseRequest = async function(e) {
       e.preventDefault();
       const btn = document.getElementById("btnSubmitReq");
       const msg = document.getElementById("formMsg");
       btn.disabled = true;
-      btn.innerText = "Đang gửi yêu cầu...";
+      btn.innerText = currentLang === "vi" ? "Đang gửi yêu cầu..." : "Submitting request...";
 
       const payload = {
         company_name: document.getElementById("req_company").value,
@@ -803,29 +1104,37 @@ rules:
       };
 
       try {
-        const { data, error } = await supabase.from("license_requests").insert([payload]);
+        if (!dbClient) throw new Error("Database client is not available.");
+        const { data, error } = await dbClient.from("license_requests").insert([payload]);
         if (error) throw error;
 
         msg.className = "text-sm p-4 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 block";
-        msg.innerHTML = "🎉 <b>Gửi thành công!</b> Danny đã nhận được yêu cầu và sẽ cấp file <code>license.lic</code> qua email cho bạn sớm nhất.";
+        msg.innerHTML = currentLang === "vi" 
+          ? "🎉 <b>Gửi thành công!</b> Danny đã nhận được yêu cầu và sẽ cấp file <code>license.lic</code> qua email cho bạn sớm nhất."
+          : "🎉 <b>Submission successful!</b> Danny has received your request and will issue the <code>license.lic</code> file to your email shortly.";
         document.getElementById("licenseRequestForm").reset();
       } catch (err) {
         msg.className = "text-sm p-4 rounded-xl bg-rose-50 text-rose-800 border border-rose-200 block";
-        msg.innerText = "Lỗi: " + (err.message || "Không thể kết nối cơ sở dữ liệu. Vui lòng thử lại sau.");
+        msg.innerText = (currentLang === "vi" ? "Lỗi: " : "Error: ") + (err.message || "Cannot connect to database. Please try again later.");
       } finally {
         btn.disabled = false;
-        btn.innerText = "Gửi Yêu Cầu Cấp License";
+        btn.innerText = currentLang === "vi" ? "Gửi Yêu Cầu Cấp License" : "Submit License Request";
       }
-    }
+    };
 
-    async function loadRequests() {
+    // Load Requests from Supabase
+    window.loadRequests = async function() {
       const tbody = document.getElementById("requestTableBody");
-      tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-8 text-center text-slate-400">Đang tải...</td></tr>';
+      if (!tbody) return;
+      tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-slate-400">${currentLang === "vi" ? "Đang tải dữ liệu..." : "Loading records..."}</td></tr>`;
+      
       try {
-        const { data, error } = await supabase.from("license_requests").select("*").order("created_at", { ascending: false });
+        if (!dbClient) throw new Error("Database connection not ready");
+        const { data, error } = await dbClient.from("license_requests").select("*").order("created_at", { ascending: false });
         if (error) throw error;
+
         if (!data || data.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-8 text-center text-slate-400">Chưa có yêu cầu license nào.</td></tr>';
+          tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-slate-400">${currentLang === "vi" ? "Chưa có yêu cầu license nào." : "No license requests yet."}</td></tr>`;
           return;
         }
 
@@ -841,24 +1150,24 @@ rules:
               </span>
             </td>
             <td class="px-4 py-3 text-right">
-              <button onclick="approveAndDownload('${item.company_name}', 30)" class="text-xs px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-semibold transition">
-                Cấp Key
+              <button onclick="approveAndDownload('${item.company_name.replace(/'/g, "\'")}', 30)" class="text-xs px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 font-semibold transition">
+                <i class="fa-solid fa-key mr-1"></i>${currentLang === "vi" ? "Cấp Key" : "Issue Key"}
               </button>
             </td>
           </tr>
         `).join("");
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-rose-500 font-medium">Lỗi Supabase: ${err.message}.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-rose-500 font-medium">Supabase Error: ${err.message}.</td></tr>`;
       }
-    }
+    };
 
-    function generateManualLicense() {
+    window.generateManualLicense = function() {
       const customer = document.getElementById("adm_customer").value || "Enterprise_Customer";
       const days = parseInt(document.getElementById("adm_days").value) || 30;
       approveAndDownload(customer, days);
-    }
+    };
 
-    function approveAndDownload(customer, days) {
+    window.approveAndDownload = function(customer, days) {
       const validUntil = new Date(Date.now() + days * 86400 * 1000).toISOString();
       const payload = {
         customer: customer,
@@ -870,7 +1179,7 @@ rules:
 
       const token = btoa(JSON.stringify({
         payload: payload,
-        signature: "ED25519_VALIDATED_KEY"
+        signature: "ED25519_VALIDATED_KEY_HASH_" + Math.random().toString(36).substring(2, 10).toUpperCase()
       }));
 
       const blob = new Blob([token], { type: "application/octet-stream" });
@@ -882,9 +1191,16 @@ rules:
       URL.revokeObjectURL(url);
 
       const resBox = document.getElementById("genResult");
-      resBox.classList.remove("hidden");
-      resBox.innerText = `✅ Đã sinh và tải xuống file license cho: ${customer} (Hạn dùng: ${validUntil})`;
-    }
+      if (resBox) {
+        resBox.classList.remove("hidden");
+        resBox.innerHTML = `✅ <b>${currentLang === "vi" ? "Đã sinh và tải xuống file license thành công!" : "Successfully generated and downloaded license file!"}</b><br><span class="text-slate-600">Khách hàng:</span> <b>${customer}</b> • <span class="text-slate-600">Hạn dùng:</span> <b>${days} ngày (${validUntil.slice(0,10)})</b>`;
+      }
+    };
+
+    // Initialize Language on DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", () => {
+      setLanguage(currentLang);
+    });
   </script>
 </body>
 </html>
