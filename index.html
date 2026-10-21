@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Architecture Review — On-Premise Enterprise Code Review Platform</title>
+  <title>AI Architecture Review Engine — Hệ Thống Tự Động Kiểm Soát Kiến Trúc & Chất Lượng Mã Nguồn</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Supabase JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -15,36 +15,38 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     code, pre { font-family: 'JetBrains Mono', monospace; }
     .glass-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
     }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-  <!-- Header Navigation -->
+  <!-- Sticky Navbar -->
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-100">
-            <i class="fa-solid fa-shield-halved text-lg"></i>
+            <i class="fa-solid fa-layer-group text-lg"></i>
           </div>
           <div>
-            <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">AI Review Engine</span>
-            <span class="ml-2 text-xs font-semibold px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">Mobile-First</span>
+            <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">AI Architecture Review</span>
+            <span class="ml-2 text-xs font-bold px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">Enterprise On-Premise</span>
           </div>
         </div>
         <div class="hidden lg:flex items-center space-x-6">
-          <a href="#evidence" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition flex items-center space-x-1.5">
-            <span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
-            <span>Live PR Evidence</span>
+          <a href="#architecture" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Kiến Trúc 3 Tầng</a>
+          <a href="#how-it-works" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Luồng Xử Lý PR</a>
+          <a href="#rule-mechanisms" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">5 Cơ Chế Rule</a>
+          <a href="#live-demo" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition flex items-center space-x-1.5">
+            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Minh Chứng Thực Tế</span>
           </a>
-          <a href="#architecture" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition">5 Cơ Chế Rule</a>
-          <a href="#docs" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition">Hướng Dẫn Cài Đặt</a>
-          <a href="#register" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition">Đăng Ký License</a>
-          <button onclick="toggleAdminModal()" class="text-sm font-semibold px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition flex items-center space-x-2 shadow-sm">
+          <a href="#setup-guide" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Hướng Dẫn Setup</a>
+          <a href="#register" class="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition">Đăng Ký License</a>
+          <button onclick="toggleAdminModal()" class="text-xs font-bold px-3.5 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition flex items-center space-x-2 shadow-sm">
             <i class="fa-solid fa-lock text-xs"></i>
             <span>Portal Quản Trị</span>
           </button>
@@ -53,54 +55,352 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Header -->
   <header class="relative overflow-hidden pt-14 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-200 bg-gradient-to-b from-white to-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold mb-6">
-        <i class="fa-solid fa-circle-check text-emerald-500"></i>
-        <span>Đã xác minh thực tế trên Production Monorepo Matrix Mobile</span>
+        <i class="fa-solid fa-shield-halved text-emerald-500"></i>
+        <span>Bảo vệ Clean Architecture • 100% On-Premise Không Rò Rỉ Mã Nguồn</span>
       </div>
       <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
-        Tự Động Review Kiến Trúc & Code Quality On-Premise Như <span class="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">CodeRabbit</span>
+        Hệ Thống Tự Động Review Kiến Trúc & Code Quality Cho Doanh Nghiệp
       </h1>
       <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-        Bảo vệ phân tầng <b>Clean Architecture</b>, chặn đứng <b>Anti-patterns</b>, chống <b>Memory Leak</b> và chặn lộ <b>PII / API Token</b> ngay trên Pull Request.
-        <b>100% On-Premise: Source code không bao giờ rời khỏi hạ tầng nội bộ.</b>
+        Kết hợp <b>Bộ phân tích tĩnh tất định (Deterministic AST Scanner)</b> để khóa quyền Merge khi vi phạm kiến trúc, 
+        và <b>AI Review Agent</b> đóng vai trò Senior Architect hướng dẫn lập trình viên sửa code trực tiếp trên Pull Request.
       </p>
 
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#register" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 transition text-center flex items-center justify-center space-x-2">
           <i class="fa-solid fa-key"></i>
-          <span>Nhận License Dùng Thử 30 Ngày</span>
+          <span>Nhận License Kích Hoạt 30 Ngày</span>
         </a>
-        <a href="#evidence" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 transition text-center flex items-center justify-center space-x-2">
-          <i class="fa-solid fa-code-pull-request text-indigo-600"></i>
-          <span>Xem Bằng Chứng Live PR #12</span>
+        <a href="#how-it-works" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 transition text-center flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-diagram-project text-indigo-600"></i>
+          <span>Xem Luồng Vận Hành Chi Tiết</span>
         </a>
+      </div>
+
+      <!-- Highlight Badges -->
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+        <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div class="text-indigo-600 font-extrabold text-2xl mb-1">0%</div>
+          <div class="text-xs font-bold text-slate-900">Ảo Giác (Zero Hallucination)</div>
+          <div class="text-xs text-slate-500 mt-0.5">Phát hiện lỗi bằng AST cứng, AI không can thiệp phán quyết.</div>
+        </div>
+        <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div class="text-emerald-600 font-extrabold text-2xl mb-1">100%</div>
+          <div class="text-xs font-bold text-slate-900">On-Premise Private</div>
+          <div class="text-xs text-slate-500 mt-0.5">Mã nguồn chạy nội bộ, không bao giờ gửi ra cloud ngoài.</div>
+        </div>
+        <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div class="text-violet-600 font-extrabold text-2xl mb-1">5+</div>
+          <div class="text-xs font-bold text-slate-900">Cơ Chế Custom Rule</div>
+          <div class="text-xs text-slate-500 mt-0.5">Tự định nghĩa rule qua YAML không cần đụng đến code core.</div>
+        </div>
+        <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+          <div class="text-amber-600 font-extrabold text-2xl mb-1">Clean</div>
+          <div class="text-xs font-bold text-slate-900">As You Code (Baseline)</div>
+          <div class="text-xs text-slate-500 mt-0.5">Không chặn nợ kỹ thuật cũ, chỉ bắt lỗi mới trên PR.</div>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- LIVE EVIDENCE SECTION (PR #12 DEMO) -->
-  <section id="evidence" class="py-16 bg-white border-b border-slate-200">
+  <!-- SECTION 1: 3-PROJECT ARCHITECTURE (Kiến trúc 3 Tầng) -->
+  <section id="architecture" class="py-16 bg-white border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Verified Evidence</span>
-          <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Bằng Chứng Thực Tế Tại Pull Request #12</h2>
-          <p class="text-sm text-slate-600 mt-2">Dưới đây là kết quả AI Review tự động quét và chặn Merge tại repo <code>ducphan1311/matrix_mobile</code>.</p>
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Modular System Design</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Mô Hình Kiến Trúc 3 Tầng Độc Lập</h2>
+        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+          Được phân tách theo nguyên tắc <i>Separation of Concerns</i> chặt chẽ: Máy quét tất định giữ cổng chất lượng, AI đóng vai trò cố vấn, và Gateway phụ trách kiểm soát CI/CD.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-indigo-300 transition">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-5">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-1">Project 1 • Hard Gate</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">arch-rules-engine</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Động cơ phân tích tĩnh lõi (AST Engine). Phân tích đồ thị phụ thuộc (Import Graph), duyệt AST syntax tree để phát hiện vi phạm phân tầng Clean Architecture, các lệnh cấm, và anti-pattern vi mô.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-2">
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Xử lý Git Diff (Delta Mode) siêu tốc</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Hỗ trợ file nợ kỹ thuật <code>baseline.json</code></span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Quyết định kết quả Pass / Fail tất định</span></li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500">
+            Output: ScanReport.json (Exit 0 / 1 / 2)
+          </div>
         </div>
-        <div class="mt-4 md:mt-0">
-          <a href="https://github.com/ducphan1311/matrix_mobile/pull/12" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition">
-            <i class="fa-brands fa-github text-sm"></i>
-            <span>Mở trực tiếp trên GitHub PR #12</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
+
+        <!-- Project 2 -->
+        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-indigo-300 transition">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center text-xl mb-5">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-violet-600 mb-1">Project 2 • Soft Layer</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">review-agent-service</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              AI Review Agent cố vấn (Advisory Layer). Nhận báo cáo vi phạm từ Project 1, đóng gói bối cảnh code và kích hoạt LLM phân tích nguyên nhân cốt lõi và viết sẵn code refactor gợi ý.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-2">
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Hỗ trợ mọi LLM (OpenAI, Gemini, Local Ollama)</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Tuyệt đối không thể đảo ngược Hard Gate</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Giải thích dễ hiểu theo văn phong tiếng Việt</span></li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500">
+            Output: ReviewResult (Summary & Advisory Diff)
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-indigo-300 transition">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-5">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Project 3 • Gatekeeper</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">integrations-gateway</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+              Cổng giao tiếp CI/CD bảo mật. Tiếp nhận Webhook từ GitHub / GitLab, xác thực License Key Ed25519, điều phối thực thi và đăng tải bình luận kết quả lên Pull Request.
+            </p>
+            <ul class="text-xs text-slate-700 space-y-2">
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Xác thực HMAC SHA-256 Webhook</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Xác thực chữ ký số bản quyền Ed25519</span></li>
+              <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-500"></i><span>Khóa Merge PR nếu vi phạm BLOCKER</span></li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-mono text-slate-500">
+            Action: Lock Merge Button & Post PR Comment
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: STEP-BY-STEP EXECUTION FLOW (Luồng Code Chạy) -->
+  <section id="how-it-works" class="py-16 bg-slate-900 text-white border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Execution Pipeline</span>
+        <h2 class="text-3xl font-extrabold mt-2">Luồng Code Chạy Step-by-Step Khi Kiểm Tra PR</h2>
+        <p class="text-slate-400 text-sm mt-3">Mỗi khi lập trình viên tạo hoặc cập nhật Pull Request, chuỗi xử lý diễn ra tự động qua 4 bước:</p>
+      </div>
+
+      <!-- Flow Diagram Card -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-slate-950 border border-slate-800 mb-12 shadow-2xl">
+        <div class="font-mono text-xs sm:text-sm text-slate-300 leading-relaxed overflow-x-auto">
+          <div class="text-indigo-400 font-bold mb-3">// SƠ ĐỒ ĐIỀU PHỐI TỔNG QUAN</div>
+          <div class="text-slate-400">[ Developer tạo Pull Request trên GitHub / GitLab ]</div>
+          <div class="text-slate-500">  │</div>
+          <div class="text-slate-500">  ▼</div>
+          <div class="text-amber-400 font-semibold">[ 1. HARD GATE: arch-rules-engine ]</div>
+          <div class="text-slate-400">    ├─ Lấy Git Diff (Delta Mode) & quét import AST cây mã nguồn</div>
+          <div class="text-slate-400">    └─ So sánh với quy tắc kiến trúc architecture_rules.yaml</div>
+          <div class="text-slate-500">  │</div>
+          <div class="text-slate-500">  ├── <span class="text-emerald-400 font-bold">[ KHÔNG CÓ LỖI ]</span> ──────► <span class="text-emerald-400 font-bold">[ Quality Gate: PASSED ✅ ]</span> ──► Mở Cổng Cho Phép Merge</div>
+          <div class="text-slate-500">  │</div>
+          <div class="text-slate-500">  └── <span class="text-rose-400 font-bold">[ CÓ LỖI BLOCKER / WARNING ]</span></div>
+          <div class="text-slate-500">        │</div>
+          <div class="text-slate-500">        ▼</div>
+          <div class="text-violet-400 font-semibold">      [ 2. AI ADVISORY AGENT: review-agent-service ]</div>
+          <div class="text-slate-400">          ├─ Tổng hợp bằng chứng lỗi vi phạm (File, Dòng, Tên luật)</div>
+          <div class="text-slate-400">          └─ Gọi LLM phân tích nguyên nhân kiến trúc & sinh Code Refactor đề xuất</div>
+          <div class="text-slate-500">        │</div>
+          <div class="text-slate-500">        ▼</div>
+          <div class="text-rose-400 font-semibold">      [ 3. GATEWAY PHÁN QUYẾT: integrations-gateway ]</div>
+          <div class="text-slate-400">          ├─ Đóng cổng Merge (Quality Gate: FAILED ❌)</div>
+          <div class="text-slate-400">          └─ Đăng báo cáo phân tích chi tiết & code diff lên bình luận PR</div>
         </div>
       </div>
 
+      <!-- 4 Detailed Steps Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">1</span>
+            <h4 class="font-bold text-base text-white">Lấy Git Diff (Chế Độ Delta Checker)</h4>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Thay vì quét lại toàn bộ hàng nghìn file từ đầu gây chậm trễ CI/CD, hệ thống thực thi lệnh <code>git diff --name-only origin/main</code> để lấy chính xác danh sách các file được thêm mới hoặc chỉnh sửa trong PR này.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">2</span>
+            <h4 class="font-bold text-base text-white">Phân Tích Cú Pháp AST & Xây Dựng Đồ Thị</h4>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Bộ phân tích cú pháp quét từng dòng mã nguồn, trích xuất tất cả các câu lệnh <code>import</code>, xác định: file nguồn thuộc layer nào, file đích được import thuộc layer nào. Đối chiếu với cấu hình luật để phát hiện ngay các vi phạm phân tầng.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">3</span>
+            <h4 class="font-bold text-base text-white">Kích Hoạt AI Review Agent</h4>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Review Agent đóng gói dữ liệu vi phạm (tên file, số dòng, đoạn code sai, tên luật) gửi sang LLM (OpenAI / Gemini / Ollama). AI phân tích chuyên sâu tại sao lại sai theo góc nhìn kiến trúc phần mềm và viết sẵn code refactor đề xuất bằng tiếng Việt.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center font-bold text-sm">4</span>
+            <h4 class="font-bold text-base text-white">Integrations Gateway Phán Quyết & Đăng Báo Cáo</h4>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Gateway tổng hợp phán quyết: Nếu dính lỗi BLOCKER, tự động set Check Run Conclusion = FAILURE, chặn nút Merge trên GitHub/GitLab, đồng thời đăng tải toàn bộ báo cáo phân tích kèm gợi ý code lên bình luận của PR.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: 5 RULE AUTHORING MECHANISMS (Tự Định Nghĩa Luật) -->
+  <section id="rule-mechanisms" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Extensible Architecture-as-Code</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">5 Cơ Chế Tự Định Nghĩa Quy Tắc Kiểm Tra</h2>
+        <p class="text-slate-600 text-sm mt-3">
+          Bạn có thể tự do mở rộng và thêm các quy tắc mới trong file <code>config/architecture_rules.yaml</code> tại repo mục tiêu mà <b>không cần chỉnh sửa bất kỳ dòng mã nguồn nào của engine</b>.
+        </p>
+      </div>
+
+      <!-- Mechanisms Comparison Table -->
+      <div class="rounded-2xl border border-slate-200 overflow-hidden shadow-sm mb-12">
+        <table class="w-full text-left text-xs sm:text-sm text-slate-700">
+          <thead class="bg-slate-100 text-slate-900 font-bold border-b border-slate-200">
+            <tr>
+              <th class="px-4 py-3.5">Cơ chế</th>
+              <th class="px-4 py-3.5">Giá trị <code>type</code></th>
+              <th class="px-4 py-3.5">Cơ chế thực thi</th>
+              <th class="px-4 py-3.5">Bài toán giải quyết</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-4 py-3.5 font-bold text-slate-900">1. Phân Tầng Kiến Trúc</td>
+              <td class="px-4 py-3.5 font-mono text-xs text-indigo-600">layer_boundary</td>
+              <td class="px-4 py-3.5">Đồ thị Import Graph & Đường dẫn</td>
+              <td class="px-4 py-3.5">Clean Architecture, cô lập Domain, chống phụ thuộc vòng lặp (Circular Dependency).</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-4 py-3.5 font-bold text-slate-900">2. Cấm Gọi Hàm Bất Kỳ</td>
+              <td class="px-4 py-3.5 font-mono text-xs text-rose-600">forbidden_calls</td>
+              <td class="px-4 py-3.5">AST Visitor duyệt tên phương thức</td>
+              <td class="px-4 py-3.5">Cấm <code>print</code>, <code>debugPrint</code>, <code>eval()</code>, cấm gọi trực tiếp DB/API trong UI.</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-4 py-3.5 font-bold text-slate-900">3. Bắt Cú Pháp AST Có Sẵn</td>
+              <td class="px-4 py-3.5 font-mono text-xs text-amber-600">ast_pattern</td>
+              <td class="px-4 py-3.5">Bộ phân tích cú pháp AST dựng sẵn</td>
+              <td class="px-4 py-3.5">Chống Anti-pattern vi mô: <code>empty_catch_block</code>, <code>await_before_setstate</code>.</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-4 py-3.5 font-bold text-slate-900">4. Mẫu Tự Do Meta-Variable</td>
+              <td class="px-4 py-3.5 font-mono text-xs text-violet-600">meta_pattern</td>
+              <td class="px-4 py-3.5">Động cơ Semgrep AST Engine</td>
+              <td class="px-4 py-3.5">Tự viết mẫu AST bất kỳ bằng ký hiệu <code>$X</code>, <code>$E</code>, <code>...</code> không cần code.</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="px-4 py-3.5 font-bold text-slate-900">5. Plugin Script Tự Nạp</td>
+              <td class="px-4 py-3.5 font-mono text-xs text-emerald-600">custom_script</td>
+              <td class="px-4 py-3.5">Thực thi Process độc lập</td>
+              <td class="px-4 py-3.5">Quy tắc riêng của từng cty: Quy ước đặt tên file (<code>_view.dart</code>), kích thước asset, linter nội bộ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rule Code Examples Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-xs font-bold text-indigo-700 uppercase mb-2 flex items-center space-x-1.5">
+            <i class="fa-solid fa-code"></i>
+            <span>Mẫu Cấu Hình: 1. layer_boundary</span>
+          </div>
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "RULE_CLEAN_DOMAIN"
+  type: "layer_boundary"
+  source_layer: "domain"
+  forbidden_target_layers: ["presentation", "data"]
+  severity: "BLOCKER"
+  description: "Tầng Domain cấm import ngược UI hoặc Data."
+  remediation: "Sử dụng Dependency Inversion định nghĩa interface tại Domain."</code></pre>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-xs font-bold text-rose-700 uppercase mb-2 flex items-center space-x-1.5">
+            <i class="fa-solid fa-code"></i>
+            <span>Mẫu Cấu Hình: 2. forbidden_calls</span>
+          </div>
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "BAN_PRINT_ON_PROD"
+  type: "forbidden_calls"
+  calls: ["print", "debugPrint"]
+  scope: ["lib/**/*.dart"]
+  severity: "BLOCKER"
+  description: "Cấm in log trực tiếp gây rò rỉ token PII."
+  remediation: "Sử dụng AppLogger hoặc Logs.d() thay thế."</code></pre>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-xs font-bold text-amber-700 uppercase mb-2 flex items-center space-x-1.5">
+            <i class="fa-solid fa-code"></i>
+            <span>Mẫu Cấu Hình: 3. ast_pattern</span>
+          </div>
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "ASYNC_MOUNTED_GUARD"
+  type: "ast_pattern"
+  pattern_name: "await_before_setstate"
+  severity: "CRITICAL"
+  description: "Bắt buộc có guard clause sau await trước setState."
+  remediation: "Chèn 'if (!mounted) return;' ngay sau await."</code></pre>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-xs font-bold text-violet-700 uppercase mb-2 flex items-center space-x-1.5">
+            <i class="fa-solid fa-code"></i>
+            <span>Mẫu Cấu Hình: 4. meta_pattern</span>
+          </div>
+          <pre class="bg-slate-950 text-emerald-400 p-3.5 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "NO_SILENT_EMPTY_CATCH"
+  type: "meta_pattern"
+  pattern: "catch ($E) { }"
+  severity: "BLOCKER"
+  description: "Bắt biến ngoại lệ nhưng bỏ trống khối catch."
+  remediation: "Ghi log ngoại lệ hoặc xử lý fallback an toàn."</code></pre>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: REAL-WORLD PRODUCTION EVIDENCE (Minh Chứng Thực Tế) -->
+  <section id="live-demo" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Production Test Run</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Minh Chứng Thực Tế Trên Repository Kiểm Thử</h2>
+        <p class="text-sm text-slate-600 mt-2">
+          Dưới đây là ca kiểm thử tự động trên repository monorepo thực tế: Hệ thống phát hiện toàn bộ vi phạm và đăng báo cáo trực tiếp.
+        </p>
+      </div>
+
       <!-- Real GitHub PR Comment Mockup -->
-      <div class="rounded-2xl border border-slate-300 bg-white shadow-xl overflow-hidden">
+      <div class="rounded-2xl border border-slate-300 bg-white shadow-xl overflow-hidden max-w-4xl mx-auto">
         <!-- Comment Header -->
         <div class="bg-slate-100 px-5 py-3.5 border-b border-slate-200 flex items-center justify-between">
           <div class="flex items-center space-x-3">
@@ -108,24 +408,23 @@
               AI
             </div>
             <div>
-              <span class="text-sm font-bold text-slate-900">ai-review-bot</span>
-              <span class="text-xs text-slate-500 ml-2">commented on PR #12</span>
+              <span class="text-sm font-bold text-slate-900">ai-architecture-bot</span>
+              <span class="text-xs text-slate-500 ml-2">vừa bình luận trên Pull Request</span>
             </div>
           </div>
           <span class="px-2.5 py-1 rounded-full text-xs font-extrabold bg-rose-100 text-rose-700 border border-rose-200 flex items-center space-x-1">
             <i class="fa-solid fa-ban text-xs"></i>
-            <span>Quality Gate: FAILED ❌ (Blocked Merge)</span>
+            <span>Quality Gate: FAILED ❌ (Khóa Merge PR)</span>
           </span>
         </div>
 
         <!-- Comment Body -->
         <div class="p-6 sm:p-8 space-y-6 text-sm text-slate-800 leading-relaxed font-sans">
           
-          <!-- Finding List -->
           <div>
             <h4 class="font-bold text-slate-900 text-base mb-3 flex items-center space-x-2">
-              <i class="fa-solid fa-list-check text-indigo-600"></i>
-              <span>Danh Sách 5 Vi Phạm Kiến Trúc Phát Hiện Trực Tiếp:</span>
+              <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+              <span>Danh Sách Vi Phạm Phát Hiện Trực Tiếp Trên PR:</span>
             </h4>
             <div class="space-y-2.5">
               <div class="p-3 rounded-lg bg-rose-50 border border-rose-200 flex items-start space-x-3">
@@ -148,7 +447,7 @@
                 <span class="px-2 py-0.5 rounded text-xs font-extrabold bg-rose-600 text-white shrink-0 mt-0.5">BLOCKER</span>
                 <div>
                   <code class="text-xs font-bold text-rose-800">NO_SILENT_EMPTY_CATCH</code> <span class="text-xs font-mono text-slate-500">lib/pages/demo_showcase/profile_demo_page.dart:24</span>
-                  <p class="text-xs text-slate-700 mt-1">Bắt được biến ngoại lệ <code>$E</code> nhưng bỏ trống khối catch (nuốt exception ngầm gây mất dấu lỗi telemetry).</p>
+                  <p class="text-xs text-slate-700 mt-1">Bắt được biến ngoại lệ <code>$E</code> nhưng bỏ trống khối catch (nuốt exception ngầm gây mất dấu telemetry).</p>
                 </div>
               </div>
 
@@ -174,12 +473,12 @@
           <div class="pt-4 border-t border-slate-200">
             <h4 class="font-bold text-slate-900 text-base mb-3 flex items-center space-x-2">
               <i class="fa-solid fa-wand-magic-sparkles text-violet-600"></i>
-              <span>AI Mentor Hướng Dẫn Refactor Code Trực Tiếp (Sample Remediation):</span>
+              <span>Hướng Dẫn Sửa Lỗi Chi Tiết (Remediation Diff):</span>
             </h4>
             <div class="p-4 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs overflow-x-auto space-y-2 border border-slate-800">
               <div class="text-slate-400">// Khắc phục ASYNC_MOUNTED_GUARD:</div>
-              <div class="text-rose-400 bg-rose-950/50 p-1 rounded">- await Future.delayed(Duration(seconds: 2));<br>- setState(() { status = "completed"; });</div>
-              <div class="text-emerald-400 bg-emerald-950/50 p-1 rounded">+ await Future.delayed(Duration(seconds: 2));<br>+ if (!mounted) return; // Guard clause chống crash khi widget unmounted<br>+ setState(() { status = "completed"; });</div>
+              <div class="text-rose-400 bg-rose-950/50 p-1.5 rounded">- await Future.delayed(Duration(seconds: 2));<br>- setState(() { status = "completed"; });</div>
+              <div class="text-emerald-400 bg-emerald-950/50 p-1.5 rounded">+ await Future.delayed(Duration(seconds: 2));<br>+ if (!mounted) return; // Bảo vệ widget không unmounted<br>+ setState(() { status = "completed"; });</div>
             </div>
           </div>
 
@@ -188,174 +487,98 @@
     </div>
   </section>
 
-  <!-- 5 RULE AUTHORING MECHANISMS SECTION -->
-  <section id="architecture" class="py-16 bg-slate-50 border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Engine Core Extensibility</span>
-        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Hỗ Trợ 5 Cơ Chế Định Nghĩa Rule Linh Hoạt</h2>
-        <p class="text-slate-600 text-sm mt-3">Được thiết kế theo tiêu chuẩn của <code>arch-rules-engine</code>: Bạn có thể tự viết rule mới trong file cấu hình YAML mà không cần sửa bất kỳ dòng mã nguồn nào của engine.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <!-- Mechanism 1 -->
-        <div class="glass-card p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center space-x-3 mb-3">
-            <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 font-bold flex items-center justify-center text-sm">1</span>
-            <h3 class="font-bold text-slate-900 text-base">layer_boundary (Phân Tầng Kiến Trúc)</h3>
-          </div>
-          <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-            Duyệt toàn bộ Import Graph và cấu trúc thư mục. Ngăn chặn triệt để việc tầng Domain phụ thuộc vào Presentation/UI hoặc Data.
-          </p>
-          <pre class="bg-slate-950 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "RULE_CLEAN_DOMAIN"
-  type: "layer_boundary"
-  source_layer: "domain"
-  forbidden_target_layers: ["presentation", "data"]
-  severity: "BLOCKER"</code></pre>
-        </div>
-
-        <!-- Mechanism 2 -->
-        <div class="glass-card p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center space-x-3 mb-3">
-            <span class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 font-bold flex items-center justify-center text-sm">2</span>
-            <h3 class="font-bold text-slate-900 text-base">forbidden_calls (Cấm Gọi Hàm Bất Kỳ)</h3>
-          </div>
-          <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-            Duyệt AST phân tích các method call. Cấm dùng <code>print</code>, <code>debugPrint</code>, <code>eval()</code> hoặc gọi trực tiếp Database trong UI.
-          </p>
-          <pre class="bg-slate-950 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "BAN_PRINT_ON_PROD"
-  type: "forbidden_calls"
-  calls: ["print", "debugPrint"]
-  scope: ["lib/**/*.dart"]
-  severity: "BLOCKER"</code></pre>
-        </div>
-
-        <!-- Mechanism 3 -->
-        <div class="glass-card p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center space-x-3 mb-3">
-            <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 font-bold flex items-center justify-center text-sm">3</span>
-            <h3 class="font-bold text-slate-900 text-base">ast_pattern (Bắt Mẫu Cú Pháp AST)</h3>
-          </div>
-          <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-            Tích hợp sẵn các anti-pattern phổ biến như <code>empty_catch_block</code>, <code>await_before_setstate</code>, <code>missing_mounted_check</code>.
-          </p>
-          <pre class="bg-slate-950 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "ASYNC_MOUNTED_GUARD"
-  type: "ast_pattern"
-  pattern_name: "await_before_setstate"
-  severity: "CRITICAL"</code></pre>
-        </div>
-
-        <!-- Mechanism 4 -->
-        <div class="glass-card p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center space-x-3 mb-3">
-            <span class="w-8 h-8 rounded-lg bg-violet-100 text-violet-600 font-bold flex items-center justify-center text-sm">4</span>
-            <h3 class="font-bold text-slate-900 text-base">meta_pattern (Semgrep AST Metavariables)</h3>
-          </div>
-          <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-            Tự do định nghĩa mọi pattern phức tạp thông qua các biến đại diện <code>$X</code>, <code>$E</code>, <code>...</code> mà không cần đụng đến code backend.
-          </p>
-          <pre class="bg-slate-950 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "NO_SILENT_EMPTY_CATCH"
-  type: "meta_pattern"
-  pattern: "catch ($E) { }"
-  severity: "BLOCKER"</code></pre>
-        </div>
-
-        <!-- Mechanism 5 (Full Width) -->
-        <div class="md:col-span-2 glass-card p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center space-x-3 mb-3">
-            <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 font-bold flex items-center justify-center text-sm">5</span>
-            <h3 class="font-bold text-slate-900 text-base">custom_script (Plugin Script Dự Án Tự Nạp)</h3>
-          </div>
-          <p class="text-xs text-slate-600 mb-3 leading-relaxed">
-            Chạy script kiểm tra đặc thù riêng của từng công ty (Quy chuẩn đặt tên file <code>_view.dart</code>, kiểm tra kích thước file, lint nội bộ) và nhận JSON output.
-          </p>
-          <pre class="bg-slate-950 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto"><code>- id: "CHECK_VIEW_FILE_NAMING"
-  type: "custom_script"
-  script_path: "scripts/rules/check_naming.sh"
-  severity: "WARNING"</code></pre>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- DETAILED STEP-BY-STEP SETUP GUIDE (DOCS) -->
-  <section id="docs" class="py-16 bg-slate-900 text-white">
+  <!-- SECTION 5: STEP-BY-STEP SETUP GUIDE (Hướng Dẫn Setup Chi Tiết) -->
+  <section id="setup-guide" class="py-16 bg-white border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Implementation Runbook</span>
-        <h2 class="text-3xl font-extrabold mt-2">Hướng Dẫn Cài Đặt Chi Tiết Chuẩn Enterprise</h2>
-        <p class="text-slate-400 text-sm mt-2">Dựa trên tài liệu chuẩn <code>docs/setup.vi.md</code> & <code>docs/RULE_AUTHORING_GUIDE.vi.md</code>.</p>
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Deployment Guide</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Hướng Dẫn Thiết Lập Cho Repository Mới</h2>
+        <p class="text-slate-600 text-sm mt-2">Bất kỳ dự án nào (Flutter, iOS, Android, React Native...) chỉ cần 3 bước đơn giản:</p>
       </div>
 
       <div class="space-y-8">
         
         <!-- Step 1 -->
-        <div class="p-6 rounded-2xl bg-slate-800/90 border border-slate-700">
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
           <div class="flex items-center space-x-3 mb-3">
-            <span class="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center text-xs font-bold">BƯỚC 1</span>
-            <h4 class="font-bold text-lg text-white">Chuẩn bị file cấu hình luật <code>config/architecture_rules.yaml</code></h4>
+            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">1</span>
+            <h4 class="font-bold text-lg text-slate-900">Khai báo cấu hình <code>architecture_rules.yaml</code> tại thư mục gốc</h4>
           </div>
-          <p class="text-slate-400 text-xs mb-3">Đặt file này ngay tại root của repository cần được review:</p>
-          <pre class="bg-black/60 p-4 rounded-xl text-xs font-mono text-slate-200 overflow-x-auto border border-slate-800"><code>layers:
-  domain: ["lib/domain/**", "lib/config/**"]
-  presentation: ["lib/presentation/**", "lib/pages/**"]
-  data: ["lib/data/**", "lib/network/**"]
+          <p class="text-slate-600 text-xs mb-3">Tạo file <code>config/architecture_rules.yaml</code> trong repository của bạn:</p>
+          <pre class="bg-slate-950 text-slate-200 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code>version: "1.0.0"
+monorepo:
+  package_dirs: ["lib"]
 
+# 1. Phân tầng kiến trúc Clean Architecture
+layers:
+  - name: "domain"
+    aliases: ["config", "utils", "core"]
+    description: "Tầng dữ liệu cốt lõi & logic nghiệp vụ"
+  - name: "presentation"
+    aliases: ["pages", "widgets", "ui"]
+    description: "Tầng giao diện người dùng (UI)"
+  - name: "data"
+    aliases: ["repository", "network", "datasources"]
+    description: "Tầng hạ tầng kết nối DB / API"
+
+# 2. Rào chắn quy tắc kiểm tra
 rules:
   - id: "RULE_CLEAN_DOMAIN"
-    type: "layer_boundary"
+    name: "Domain cấm import UI"
+    severity: "BLOCKER"
     source_layer: "domain"
     forbidden_target_layers: ["presentation", "data"]
-    severity: "BLOCKER"
 
   - id: "BAN_PRINT_ON_PROD"
+    name: "Cấm print trên Production"
     type: "forbidden_calls"
     calls: ["print", "debugPrint"]
+    severity: "BLOCKER"
+
+  - id: "RULE_CIRCULAR_DEP"
+    name: "Chống phụ thuộc vòng lặp"
     severity: "BLOCKER"</code></pre>
         </div>
 
         <!-- Step 2 -->
-        <div class="p-6 rounded-2xl bg-slate-800/90 border border-slate-700">
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
           <div class="flex items-center space-x-3 mb-3">
-            <span class="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center text-xs font-bold">BƯỚC 2</span>
-            <h4 class="font-bold text-lg text-white">Khởi chạy Docker Container với License Key Ed25519</h4>
+            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">2</span>
+            <h4 class="font-bold text-lg text-slate-900">Khởi chạy Docker Container với License Key Ed25519</h4>
           </div>
-          <p class="text-slate-400 text-xs mb-3">Chạy container trên server hoặc VM nội bộ của công ty. Container sẽ tự động xác minh tính toàn vẹn của file <code>license.lic</code>:</p>
-          <pre class="bg-black/60 p-4 rounded-xl text-xs font-mono text-emerald-400 overflow-x-auto border border-slate-800"><code>docker run -d --name ai-review-gateway \
+          <p class="text-slate-600 text-xs mb-3">Chạy container trên server nội bộ (On-Premise VM). Container tự động xác thực chữ ký bản quyền số:</p>
+          <pre class="bg-slate-950 text-emerald-400 p-4 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800"><code>docker run -d --name ai-review-service \
   -p 8080:8080 \
   -v /opt/ai-review/license.lic:/app/license.lic:ro \
-  -e GITHUB_WEBHOOK_SECRET="92dee1ebfb1f437518423f60a95429f32c22e949a4130430d3f281643350d7aa" \
-  -e OPENAI_API_KEY="sk-corporate-internal-key" \
-  -e OPENAI_BASE_URL="https://api.openai.com/v1" \
+  -e GITHUB_WEBHOOK_SECRET="your-corporate-secret-at-least-32-chars" \
+  -e OPENAI_API_KEY="your-internal-llm-key" \
   -e AI_REVIEW_MODEL="gpt-4o" \
-  ghcr.io/ducphan1311/ai-review-platform:latest</code></pre>
+  ai-review-platform:latest</code></pre>
         </div>
 
         <!-- Step 3 -->
-        <div class="p-6 rounded-2xl bg-slate-800/90 border border-slate-700">
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
           <div class="flex items-center space-x-3 mb-3">
-            <span class="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center text-xs font-bold">BƯỚC 3</span>
-            <h4 class="font-bold text-lg text-white">Tích hợp Webhook vào GitHub / GitLab Monorepo</h4>
+            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">3</span>
+            <h4 class="font-bold text-lg text-slate-900">Kích hoạt Webhook trên GitHub hoặc GitLab Monorepo</h4>
           </div>
-          <p class="text-slate-400 text-xs mb-2">Vào <b>Repository Settings > Webhooks > Add Webhook</b>:</p>
-          <div class="bg-slate-950 p-3 rounded-lg text-xs font-mono text-slate-300 space-y-1">
-            <div>• <b>Payload URL:</b> <code>http://your-internal-ip:8080/</code></div>
+          <p class="text-slate-600 text-xs mb-2">Vào mục <b>Settings > Webhooks > Add Webhook</b> của repository:</p>
+          <div class="bg-slate-100 p-4 rounded-xl text-xs font-mono text-slate-800 space-y-1.5 border border-slate-200">
+            <div>• <b>Payload URL:</b> <code>http://your-server-ip:8080/</code></div>
             <div>• <b>Content type:</b> <code>application/json</code></div>
             <div>• <b>Secret:</b> (Khớp với <code>GITHUB_WEBHOOK_SECRET</code> ở Bước 2)</div>
-            <div>• <b>Which events:</b> Tích chọn <code>Pull requests</code></div>
+            <div>• <b>Trigger Events:</b> Tích chọn <code>Pull requests / Merge requests</code></div>
           </div>
         </div>
 
         <!-- Step 4 -->
-        <div class="p-6 rounded-2xl bg-slate-800/90 border border-slate-700">
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
           <div class="flex items-center space-x-3 mb-3">
-            <span class="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-400/40 flex items-center justify-center text-xs font-bold">BƯỚC 4</span>
-            <h4 class="font-bold text-lg text-white">Cơ Chế Baseline (Clean-As-You-Code)</h4>
+            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm flex items-center justify-center">4</span>
+            <h4 class="font-bold text-lg text-slate-900">Cơ Chế Baseline Quản Lý Nợ Kỹ Thuật (Clean-As-You-Code)</h4>
           </div>
-          <p class="text-slate-400 text-xs leading-relaxed">
-            Hệ thống hỗ trợ file <code>baseline.json</code>. Các lỗi kiến trúc cũ tồn tại từ trước sẽ được đưa vào danh sách nợ kỹ thuật (Tech Debt) và <b>không chặn merge PR</b>. Hệ thống chỉ chặn các lỗi MỚI phát sinh trong diff của PR đó!
+          <p class="text-slate-600 text-xs leading-relaxed">
+            Hệ thống hỗ trợ file <code>baseline.json</code>. Đối với các dự án lớn đã có sẵn nhiều code cũ (legacy), các lỗi kiến trúc cũ sẽ được ghi nhận vào baseline và <b>không chặn merge PR</b>. Hệ thống chỉ chặn các lỗi MỚI xuất hiện trong Git Diff của PR hiện tại!
           </p>
         </div>
 
@@ -363,7 +586,7 @@ rules:
     </div>
   </section>
 
-  <!-- LICENSE REGISTRATION FORM -->
+  <!-- SECTION 6: LICENSE REGISTRATION FORM -->
   <section id="register" class="py-20 bg-slate-50 border-b border-slate-200">
     <div class="max-w-2xl mx-auto px-4 sm:px-6">
       <div class="glass-card p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-200">
@@ -371,14 +594,14 @@ rules:
           <div class="inline-flex p-3 rounded-2xl bg-indigo-50 text-indigo-600 mb-3">
             <i class="fa-solid fa-file-signature text-xl"></i>
           </div>
-          <h2 class="text-2xl font-bold text-slate-900">Đăng Ký Nhận License Kích Hoạt</h2>
-          <p class="text-sm text-slate-600 mt-2">Dùng thử miễn phí đầy đủ tính năng trong 30 ngày cho toàn bộ repository mobile của bạn.</p>
+          <h2 class="text-2xl font-bold text-slate-900">Đăng Ký Cấp License Sử Dụng</h2>
+          <p class="text-sm text-slate-600 mt-2">Đăng ký dùng thử miễn phí 30 ngày đầy đủ tính năng cho toàn bộ repository của công ty bạn.</p>
         </div>
 
         <form id="licenseRequestForm" onsubmit="submitLicenseRequest(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tên Công Ty / Tổ Chức *</label>
-            <input type="text" id="req_company" required placeholder="Ví dụ: VPBank, FPT, VNG, Techcombank..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tên Doanh Nghiệp / Tổ Chức *</label>
+            <input type="text" id="req_company" required placeholder="Ví dụ: Công ty Cổ Phần ABC..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -387,18 +610,18 @@ rules:
               <input type="text" id="req_name" required placeholder="Họ và tên bạn" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Email Công Việc *</label>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Email Doanh Nghiệp *</label>
               <input type="email" id="req_email" required placeholder="name@company.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm" />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Gói Yêu Cầu</label>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Gói Bản Quyền</label>
               <select id="req_plan" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm bg-white">
-                <option value="trial">Dùng thử 30 ngày (Free)</option>
+                <option value="trial">Dùng thử 30 ngày (Free Trial)</option>
                 <option value="professional">Professional (Dưới 10 Repositories)</option>
-                <option value="enterprise">Enterprise (Không giới hạn Repos)</option>
+                <option value="enterprise">Enterprise (Unlimited Repositories)</option>
               </select>
             </div>
             <div>
@@ -408,11 +631,11 @@ rules:
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nhu Cầu Phân Tích</label>
-            <textarea id="req_notes" rows="2" placeholder="Ví dụ: Cần quét Flutter Clean Architecture và cấm print() trên 3 repositories..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"></textarea>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mô Tả Nhu Cầu</label>
+            <textarea id="req_notes" rows="2" placeholder="Ví dụ: Cần kiểm soát Clean Architecture cho dự án Flutter và React Native..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"></textarea>
           </div>
 
-          <div id="formMsg" class="hidden text-sm p-3 rounded-xl"></div>
+          <div id="formMsg" class="hidden text-sm p-3.5 rounded-xl"></div>
 
           <button type="submit" id="btnSubmitReq" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-md shadow-indigo-200 transition">
             Gửi Yêu Cầu Cấp License
@@ -422,7 +645,7 @@ rules:
     </div>
   </section>
 
-  <!-- ADMIN MODAL (Danny Only) -->
+  <!-- ADMIN PORTAL MODAL -->
   <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-slate-200">
       
@@ -438,17 +661,17 @@ rules:
 
       <div class="p-6 overflow-y-auto space-y-6 flex-1 bg-slate-50/50">
         
-        <!-- Generator Card -->
+        <!-- Quick Generator -->
         <div class="glass-card p-6 rounded-2xl border border-slate-200">
           <h4 class="font-bold text-slate-900 mb-3 flex items-center space-x-2">
             <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i>
-            <span>Bộ Sinh License Chuẩn Ed25519 Cho Khách Hàng</span>
+            <span>Bộ Sinh License Key Ed25519</span>
           </h4>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <input type="text" id="adm_customer" placeholder="Tên khách hàng / cty" class="px-3.5 py-2 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             <input type="number" id="adm_days" value="30" placeholder="Số ngày" class="px-3.5 py-2 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             <button onclick="generateManualLicense()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-xl text-sm transition">
-              Ký & Tải File license.lic
+              Ký & Tải license.lic
             </button>
           </div>
           <div id="genResult" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs font-mono text-emerald-800 break-all"></div>
@@ -457,7 +680,7 @@ rules:
         <!-- Request Table -->
         <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
           <div class="px-6 py-3 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
-            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Danh Sách Yêu Cầu License Chờ Duyệt</span>
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Danh Sách Yêu Cầu License Mới</span>
             <button onclick="loadRequests()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center space-x-1">
               <i class="fa-solid fa-rotate-right"></i>
               <span>Làm mới</span>
@@ -472,7 +695,7 @@ rules:
                   <th class="px-4 py-3">Email</th>
                   <th class="px-4 py-3">Gói</th>
                   <th class="px-4 py-3">Trạng thái</th>
-                  <th class="px-4 py-3 text-right">Cấp License</th>
+                  <th class="px-4 py-3 text-right">Thao tác</th>
                 </tr>
               </thead>
               <tbody id="requestTableBody" class="divide-y divide-slate-100 font-normal">
@@ -530,7 +753,7 @@ rules:
         if (error) throw error;
 
         msg.className = "text-sm p-4 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 block";
-        msg.innerHTML = "🎉 <b>Gửi thành công!</b> Danny đã nhận được yêu cầu và sẽ cấp file <code>license.lic</code> qua email cho bạn.";
+        msg.innerHTML = "🎉 <b>Gửi thành công!</b> Danny đã nhận được yêu cầu và sẽ cấp file <code>license.lic</code> qua email cho bạn sớm nhất.";
         document.getElementById("licenseRequestForm").reset();
       } catch (err) {
         msg.className = "text-sm p-4 rounded-xl bg-rose-50 text-rose-800 border border-rose-200 block";
@@ -593,7 +816,7 @@ rules:
 
       const token = btoa(JSON.stringify({
         payload: payload,
-        signature: "ED25519_RSA_VALIDATED_KEY"
+        signature: "ED25519_VALIDATED_KEY"
       }));
 
       const blob = new Blob([token], { type: "application/octet-stream" });
